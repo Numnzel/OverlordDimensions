@@ -1,0 +1,5 @@
+CREDITS:
+	MememTwo Font: Jimmy, Memento Mori 2 team
+	MememTwo Monospace Edit: Jimmy
+	Optimisation in Ammo Bar code: argv
+	Everything Else: Gutawer

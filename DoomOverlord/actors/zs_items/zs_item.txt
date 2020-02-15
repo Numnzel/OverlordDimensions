@@ -1,0 +1,4 @@
+
+#include "actors/zs_items/zs_item_ammo_mana.txt"
+#include "actors/zs_items/zs_item_ammo_manaorb.txt"
+#include "actors/zs_items/zs_item_ammo_maxmanaorb.txt"

@@ -1,0 +1,29 @@
+class spellkeytwo : yggdrasilspell {
+
+	default {
+		weapon.slotnumber 2;
+		
+		yggdrasilspell.SpellOne 30;
+		yggdrasilspell.SpellTwo 60;
+		yggdrasilspell.SpellThree 20;
+		yggdrasilspell.SpellOneCD "spellkeytwoCD1";
+		yggdrasilspell.SpellTwoCD "spellkeytwoCD2";
+		yggdrasilspell.SpellThreeCD "spellkeytwoCD3";
+	}
+}
+
+class spellkeythree : yggdrasilspell {
+
+	default {
+		weapon.slotnumber 3;
+		
+		yggdrasilspell.SpellOne 110;
+		yggdrasilspell.SpellTwo 130;
+		yggdrasilspell.SpellThree 100;
+		yggdrasilspell.SpellOneCD "spellkeythreeCD1";
+		yggdrasilspell.SpellTwoCD "spellkeythreeCD2";
+		yggdrasilspell.SpellThreeCD "spellkeythreeCD3";
+	}
+}
+
+

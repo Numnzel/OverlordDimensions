@@ -1,0 +1,86 @@
+class momonga : PlayerPawn {
+
+	Class<Inventory> cooldown;
+
+	default {
+	
+		health 300;
+		player.maxhealth 300;
+		mass 300;
+		player.DisplayName "momonga";
+		player.ViewHeight 56;
+		player.AirCapacity 0;
+		player.FallingScreamSpeed 100.0,110.0;
+		player.ForwardMove 1, 0.6;
+		player.SideMove 1, 0.6;
+		
+		Player.WeaponSlot 1, "spookyspell", "spookymelee";
+		Player.WeaponSlot 2, "spellkeytwo";
+		Player.WeaponSlot 3, "spellkeythree";
+		
+		Player.StartItem "mana", 500;
+		Player.StartItem "maxmana", 500;
+		Player.StartItem "spookymelee", 1;
+		Player.StartItem "spellkeytwo", 1;
+		Player.StartItem "spellkeythree", 1;
+		Player.StartItem "spellid", 0;
+		
+		damagefactor "Fire", 3.0;
+		damagefactor "Holy", 5.0;
+		damagefactor "Poison", 0.0;
+		damagefactor "PoisonCloud", 0.0;
+		damagefactor "Bio", 0.0;
+		damagefactor "Death", 0.0;
+		damagefactor "Drowning", 0.0;
+		damagefactor 0.1;
+		painthreshold 10;
+		
+		+NOBLOOD;
+		+DONTDRAIN;
+		+NOTELEFRAG;
+		+NOICEDEATH;
+		+DONTGIB;
+		+PLAYERPAWN.NOTHRUSTWHENINVUL;
+	}
+	
+	action void MyFunc() {
+		if (true) {
+			A_GiveInventory("manaunit", 1);
+		}
+	}
+	
+	states {
+	
+		Spawn:
+			#### # 70 MyFunc(); //A_SetHealth(health+1);
+			goto Super::Spawn;
+			loop;
+		See:
+			#### # 70;
+			goto Super::See;
+			loop;
+	}
+}
+
+/*
+class ExamplePlayer : DoomPlayer
+{
+    override int OnDrain (Actor victim, int damage, Name dmgtype)
+    {
+        // If the victim is a boss, i.e has the BOSS flag, cut the drained health by half.
+        if(victim.bBoss)
+        {
+            damage /= 2;
+        }
+
+        // If the damage type of the attack is ice, boost the drained health by 50%.
+        if(dmgtype == 'Ice')
+        {
+            damage = int(damage * 1.5);
+        }
+
+        return damage;
+    }
+}
+https://zdoom.org/wiki/ZScript_virtual_functions
+*/

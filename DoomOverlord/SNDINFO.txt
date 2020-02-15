@@ -1,0 +1,4 @@
+// Spell: Lightning
+
+	Spell/Lightning1 				LIGHTNIN
+	$Volume Spell/Lightning1 		1.0

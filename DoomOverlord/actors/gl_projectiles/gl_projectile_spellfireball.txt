@@ -1,0 +1,10 @@
+pointlight spellfireball {
+
+	color 1.0 0.5 0.0
+	size 128
+}
+
+object magicfireball {
+
+	frame FBAL { light spellfireball }
+}
