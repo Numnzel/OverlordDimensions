@@ -35,6 +35,8 @@ class yggdrasilspell : Weapon abstract {
 	
 	action void SetManaCost() {
 		// This function rotates through the spells of the spell slot and stores the selected spell cooldown.
+		// Every spell (weapon) sends its linked cooldown powerup class to the player(owner), so the main
+		// spell weapon reads it and knows the correct cooldown powerup to give.
 		let ownr = momonga(invoker.owner);
 		if (ownr) {
 			

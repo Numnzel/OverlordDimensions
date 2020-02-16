@@ -280,7 +280,9 @@ Class MinimalStatusBar : BaseStatusBar {
 	
 	struct spell {
 		int id;
+		int du;
 		string tx;
+		string cd;
 		int xpos;
 	};
 	/*
@@ -375,7 +377,7 @@ Class MinimalStatusBar : BaseStatusBar {
 			for(int i = 0; i < PowerupStrings.size(); i++) {
 			
 				
-				DrawString(mMM2BigFont, PowerupStrings[i], (99, (-13*i)-48), tAlign);
+				DrawString(mMM2BigFont, PowerupStrings[i], (99, (-13*i)-58), tAlign);
 			}
 			
 			//DrawPowerups();
@@ -388,9 +390,9 @@ Class MinimalStatusBar : BaseStatusBar {
 			int manaXpos = 35;
 			int manaXsiz = 300;
 			int manaYsiz = 16;
-			int manaAmount = CPlayer.mo.FindInventory("mana").Amount;
-			int manaCost = CPlayer.mo.FindInventory("spellid").Amount;
-			int manaMax = CPlayer.mo.FindInventory("maxmana").Amount;
+			int manaAmount = pmo.FindInventory("mana").Amount;
+			int manaCost = pmo.FindInventory("spellid").Amount;
+			int manaMax = pmo.FindInventory("maxmana").Amount;
 			int manaCapability = manaAmount-manaCost;
 			Color manaColorCostG1 = Color(255, 160, 16, 255);
 			Color manaColorCostG2 = Color(255, 0, 255, 255);
@@ -408,7 +410,7 @@ Class MinimalStatusBar : BaseStatusBar {
 			
 			//DrawHudBoxCol("HBCORN", "HBEDGE", Color(128, 0, 0, 0), (manaXpos, -72), (manaXsiz, 64), DI_SCREEN_CENTER_BOTTOM, alphaSetting);
 			DrawString(mMM2SmallFont, "MANA", (99, -64), tAlign);
-			//DrawString(mMM2BigFont, FormatNumber(manaInterpolated, 0, 9), (99, -48), tAlign);
+			DrawString(mMM2BigFont, FormatNumber(manaInterpolated, 0, 9), (99, -48), tAlign);
 			DrawHudBoxCol("SBCORN", "SBEDGE", Color(64, 0, 0, 0), (manaXpos+13, -25), (manaXsiz-26, manaYsiz+2), DI_SCREEN_CENTER_BOTTOM);
 			
 			if (manaCost > manaAmount) {
@@ -424,9 +426,7 @@ Class MinimalStatusBar : BaseStatusBar {
 			
 			
 			// spells
-			int spellSlots = 10;
-			int separation = 64;
-			int separate[10];
+			
 			
 			spell momongaSpells[10][3];
 			
@@ -490,33 +490,115 @@ Class MinimalStatusBar : BaseStatusBar {
 			momongaSpells[9][0].tx = "SPELLA0";
 			momongaSpells[9][1].tx = "SPELLA0";
 			momongaSpells[9][2].tx = "SPELLA0";
+			momongaSpells[0][0].cd = "spellkeyoneCD1";
+			momongaSpells[0][1].cd = "spellkeyoneCD2";
+			momongaSpells[0][2].cd = "spellkeyoneCD3";
+			momongaSpells[1][0].cd = "spellkeytwoCD1";
+			momongaSpells[1][1].cd = "spellkeytwoCD2";
+			momongaSpells[1][2].cd = "spellkeytwoCD3";
+			momongaSpells[2][0].cd = "spellkeythreeCD1";
+			momongaSpells[2][1].cd = "spellkeythreeCD2";
+			momongaSpells[2][2].cd = "spellkeythreeCD3";
+			momongaSpells[3][0].cd = "spellkeyfourCD1";
+			momongaSpells[3][1].cd = "spellkeyfourCD2";
+			momongaSpells[3][2].cd = "spellkeyfourCD3";
+			momongaSpells[4][0].cd = "spellkeyfiveCD1";
+			momongaSpells[4][1].cd = "spellkeyfiveCD2";
+			momongaSpells[4][2].cd = "spellkeyfiveCD3";
+			momongaSpells[5][0].cd = "spellkeysixCD1";
+			momongaSpells[5][1].cd = "spellkeysixCD2";
+			momongaSpells[5][2].cd = "spellkeysixCD3";
+			momongaSpells[6][0].cd = "spellkeysevenCD1";
+			momongaSpells[6][1].cd = "spellkeysevenCD2";
+			momongaSpells[6][2].cd = "spellkeysevenCD3";
+			momongaSpells[7][0].cd = "spellkeyeightCD1";
+			momongaSpells[7][1].cd = "spellkeyeightCD2";
+			momongaSpells[7][2].cd = "spellkeyeightCD3";
+			momongaSpells[8][0].cd = "spellkeynineCD1";
+			momongaSpells[8][1].cd = "spellkeynineCD2";
+			momongaSpells[8][2].cd = "spellkeynineCD3";
+			momongaSpells[9][0].cd = "spellkeyzeroCD1";
+			momongaSpells[9][1].cd = "spellkeyzeroCD2";
+			momongaSpells[9][2].cd = "spellkeyzeroCD3";
+			momongaSpells[0][0].du = 15;
+			momongaSpells[0][1].du = 20;
+			momongaSpells[0][2].du = 15;
+			momongaSpells[1][0].du = 15;
+			momongaSpells[1][1].du = 20;
+			momongaSpells[1][2].du = 15;
+			momongaSpells[2][0].du = 30;
+			momongaSpells[2][1].du = 60;
+			momongaSpells[2][2].du = 30;
+			momongaSpells[3][0].du = 30;
+			momongaSpells[3][1].du = 60;
+			momongaSpells[3][2].du = 30;
+			momongaSpells[4][0].du = 60;
+			momongaSpells[4][1].du = 90;
+			momongaSpells[4][2].du = 60;
+			momongaSpells[5][0].du = 60;
+			momongaSpells[5][1].du = 90;
+			momongaSpells[5][2].du = 60;
+			momongaSpells[6][0].du = 90;
+			momongaSpells[6][1].du = 120;
+			momongaSpells[6][2].du = 90;
+			momongaSpells[7][0].du = 90;
+			momongaSpells[7][1].du = 120;
+			momongaSpells[7][2].du = 90;
+			momongaSpells[8][0].du = 90;
+			momongaSpells[8][1].du = 60;
+			momongaSpells[8][2].du = 90;
+			momongaSpells[9][0].du = 300;
+			momongaSpells[9][1].du = 300;
+			momongaSpells[9][2].du = 300;
+			
+			int spellSlots = 10;
+			int separation = 64;
+			int separate[10];
 			
 			for (int i = 0; i < spellSlots; i++) {
 				
 				separate[i] = separation*i;
 			}
 			
-			//separate[i] = i * separation * (i%2 * -1)
+			int imageSize = 256;
+			int spellsXoffs = 8;
+			int spellsYoffs = 34;
 			
-			for (int i = 0; i < spellSlots; i++) {
-				
-				int imageSize = 256;
-				int whaaat = CreatePercent(healthCurrent, 300, imageSize);
-				
-				// Draw spell icons
-				DrawImageBar(momongaSpells[i][0].tx, whaaat, imageSize, separate[i]-(separate[spellSlots-1]/2), -82, 100, 0, 1.0, (-1,-1), (0.16,0.16));
-				DrawImageBar(momongaSpells[i][1].tx, whaaat, imageSize, separate[i]-(separate[spellSlots-1]/2)+8, -82-34, 100, 0, 1.0, (-1,-1), (0.16,0.16));
-				DrawImageBar(momongaSpells[i][2].tx, whaaat, imageSize, separate[i]-(separate[spellSlots-1]/2)+16, -82-68, 100, 0, 1.0, (-1,-1), (0.16,0.16));
-				
-				// Draw spell selector icon
-				if (manaCost == momongaSpells[i][0].id) {
-					DrawImageBar("SELEA0", imageSize, imageSize, separate[i]-(separate[spellSlots-1]/2), -82, 100, 0, 1.0, (-1,-1), (0.16,0.16));
-				}
-				if (manaCost == momongaSpells[i][1].id) {
-					DrawImageBar("SELEA0", imageSize, imageSize, separate[i]-(separate[spellSlots-1]/2)+8, -82-34, 100, 0, 1.0, (-1,-1), (0.16,0.16));
-				}
-				if (manaCost == momongaSpells[i][2].id) {
-					DrawImageBar("SELEA0", imageSize, imageSize, separate[i]-(separate[spellSlots-1]/2)+16, -82-68, 100, 0, 1.0, (-1,-1), (0.16,0.16));
+			
+			//separate[i] = i * separation * (i%2 * -1)
+			for (int k = 0; k < 3; k++) {
+				for (int i = 0; i < spellSlots; i++) {
+					
+					let inv2 = Powerup(pmo.FindInventory(momongaSpells[i][k].cd));
+					
+					int spellsXpos = separate[i]-(separate[spellSlots-1]/2)+(spellsXoffs*k);
+					int spellsYpos = -82-(spellsYoffs*k);
+					
+					
+					// Draw spells icons
+					DrawImageBar(momongaSpells[i][k].tx, imageSize, imageSize, spellsXpos, spellsYpos, 100, 0, 0.6, (-1,-1), (0.16,0.16)); // Scale works better with multiples of 2
+					
+					// Draw cooldown icons
+					if(inv2 && inv2.EffectTics > 0) {
+						
+						int spellCDduration = momongaSpells[i][k].du;// int, int GetEffectTicsForItem(class<Inventory> item) const ... inv2.maxtics;
+						int spellCDtime = inv2.EffectTics/Thinker.TICRATE;
+						string spellCDtimeS = string.format("%d", spellCDtime);
+						int monitorCD = CreatePercent(spellCDtime, spellCDduration, imageSize);
+						
+						DrawString(mMM2SmallFont, spellCDtimeS, (spellsXpos, spellsYpos-16), tAlign);
+						DrawImageBar("CDWN00", monitorCD, imageSize, spellsXpos, spellsYpos, 100, 0, 0.9, (-1,-1), (0.16,0.16));
+						DrawString(mMM2SmallFont, spellCDtimeS, (spellsXpos, spellsYpos-16), tAlign);
+						//DrawString(mMM2SmallFont, spellCDtimeS, (spellsXpos, spellsYpos-16), tAlign);
+						//string s = string.format("%s: %02d:%02d",StringTable.Localize(PowerupDisplay[i]),inv2.EffectTics/Thinker.TICRATE/60, inv2.EffectTics/Thinker.TICRATE%60);
+						//PowerupStrings.push(z);
+						//powerlength = max(powerlength, fnt.StringWidth(s));
+					}
+					
+					// Draw spell selector icon over selected spell
+					if (manaCost == momongaSpells[i][k].id) {
+						DrawImageBar("SELEA0", imageSize, imageSize, spellsXpos, spellsYpos, 100, 0, 1.0, (-1,-1), (0.16,0.16));
+					}
 				}
 			}
 			

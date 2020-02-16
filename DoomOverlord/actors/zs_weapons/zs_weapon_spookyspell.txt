@@ -19,9 +19,9 @@ class spookyspell : Weapon {
 	
 		invoker.jumpstat = "ready";
 		
-		if 		(spellid == 130 && CountInv("spellkeythreeCD2") == 0) invoker.jumpstat = "attacklightning";
-		else if (spellid == 110 && CountInv("spellkeythreeCD1") == 0) invoker.jumpstat = "attackfireball";
-		else if (spellid == 100 && CountInv("spellkeythreeCD3") == 0) invoker.jumpstat = "attackseethrough";
+		if 		(spellid == 130 && CountInv("spellkeytwoCD2") == 0) invoker.jumpstat = "attacklightning";
+		else if (spellid == 110 && CountInv("spellkeytwoCD1") == 0) invoker.jumpstat = "attackfireball";
+		else if (spellid == 100 && CountInv("spellkeytwoCD3") == 0) invoker.jumpstat = "attackseethrough";
 		else {
 			return 255;
 		}
@@ -48,7 +48,7 @@ class spookyspell : Weapon {
 		fire:
 			// If not enough mana or no spell is selected, return to ready.
 			AINZ A 0 A_JumpIf(CountInv("spellid") <= 0 || CountInv("mana") < CountInv("spellid"), "ready");
-			// Identify current selected spell. Skip fire if there's an active cooldown.
+			// Identify current selected spell and stores the specific fire state to jump. Skip fire if there's an active cooldown.
 			AINZ A 0 A_Jump(CheckSpell(CountInv("spellid")), "ready");
 			// Everything ok at this point; Take mana, apply (give) cooldown and jump to fire state.
 			AINZ A 0 {
