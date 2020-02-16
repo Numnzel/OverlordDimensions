@@ -17,6 +17,13 @@ class momonga : PlayerPawn {
 		Player.WeaponSlot 1, "spookyspell", "spookymelee", "spellkeyone";
 		Player.WeaponSlot 2, "spellkeytwo";
 		Player.WeaponSlot 3, "spellkeythree";
+		Player.WeaponSlot 4, "spellkeyfour";
+		Player.WeaponSlot 5, "spellkeyfive";
+		Player.WeaponSlot 6, "spellkeysix";
+		Player.WeaponSlot 7, "spellkeyseven";
+		Player.WeaponSlot 8, "spellkeyeight";
+		Player.WeaponSlot 9, "spellkeynine";
+		Player.WeaponSlot 0, "spellkeyzero";
 		
 		Player.StartItem "mana", 500;
 		Player.StartItem "maxmana", 500;
@@ -24,6 +31,13 @@ class momonga : PlayerPawn {
 		Player.StartItem "spellkeyone", 1;
 		Player.StartItem "spellkeytwo", 1;
 		Player.StartItem "spellkeythree", 1;
+		Player.StartItem "spellkeyfour", 1;
+		Player.StartItem "spellkeyfive", 1;
+		Player.StartItem "spellkeysix", 1;
+		Player.StartItem "spellkeyseven", 1;
+		Player.StartItem "spellkeyeight", 1;
+		Player.StartItem "spellkeynine", 1;
+		Player.StartItem "spellkeyzero", 1;
 		Player.StartItem "spellid", 0;
 		
 		damagefactor "Fire", 3.0;

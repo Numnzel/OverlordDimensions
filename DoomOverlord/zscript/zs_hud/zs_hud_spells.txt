@@ -40,12 +40,12 @@ mixin Class SpellPropertiesList {
 			momongaSpells[7][0].id = 1000;
 			momongaSpells[7][1].id = 1600;
 			momongaSpells[7][2].id = 380;
-			momongaSpells[8][0].id = 1400;
+			momongaSpells[8][0].id = 1320;
 			momongaSpells[8][1].id = 1700;
 			momongaSpells[8][2].id = 1180;
-			momongaSpells[9][0].id = 1;
-			momongaSpells[9][1].id = 2;
-			momongaSpells[9][2].id = 3;
+			momongaSpells[9][0].id = 10001;
+			momongaSpells[9][1].id = 10002;
+			momongaSpells[9][2].id = 10003;
 			momongaSpells[0][0].tx = "SPELLA0";
 			momongaSpells[0][1].tx = "SPELLA0";
 			momongaSpells[0][2].tx = "SPELLA0";

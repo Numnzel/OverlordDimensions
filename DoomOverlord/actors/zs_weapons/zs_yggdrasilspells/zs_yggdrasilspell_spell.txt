@@ -84,7 +84,7 @@ class spellid : Inventory {
 	
 	default {
 		inventory.Amount 1;
-		inventory.MaxAmount 10000;
+		inventory.MaxAmount 10050;
 		
 		+INVENTORY.INVBAR;
 	}
