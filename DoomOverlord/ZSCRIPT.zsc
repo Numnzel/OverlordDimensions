@@ -463,7 +463,7 @@ Class MinimalStatusBar : BaseStatusBar {
 			momongaSpells[0][0].tx = "SPELLA0";
 			momongaSpells[0][1].tx = "SPELLA0";
 			momongaSpells[0][2].tx = "SPELLA0";
-			momongaSpells[1][0].tx = "SPELLA0";
+			momongaSpells[1][0].tx = "SPELL21";
 			momongaSpells[1][1].tx = "SPELLA0";
 			momongaSpells[1][2].tx = "SPELLA0";
 			momongaSpells[2][0].tx = "SPELLA0";
