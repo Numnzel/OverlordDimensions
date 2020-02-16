@@ -1,0 +1,42 @@
+
+mixin Class PowerupValues {
+	
+	Array<String> PowerupNames;   // Actual Name of the powerup
+	Array<String> PowerupDisplay; // Name to display on stats
+	// =============================
+	// Get Powerup Names and Strings
+	// =============================
+	// Special thanks to Tekish's Levelinfo, since this saved me a lot of time
+	void setPowerupNames()
+	{
+		if (PowerupNames.Size() == 0) {
+			let pclass = CPlayer.mo.GetClassName();
+			string s; // Use this to avoid error on startup
+
+			// Doom
+			// PowerupNames.Push("PowerStrength");     PowerupDisplay.Push("$FULLHUD_POWERUP_BERSERK");  // Berserk (Doom)
+			PowerupNames.Push("PowerInvisibility");  PowerupDisplay.Push("$FULLHUD_POWERUP_INVIS");    // BlurSphere (Doom)
+			PowerupNames.Push("PowerLightamp");      PowerupDisplay.Push("$FULLHUD_POWERUP_LIGHT");    // Infrared (Doom)
+			PowerupNames.Push("PowerIronfeet");      PowerupDisplay.Push("$FULLHUD_POWERUP_SUIT");     // Radsuit (Doom)
+			// Heretic
+			PowerupNames.Push("PowerGhost");         PowerupDisplay.Push("$FULLHUD_POWERUP_GHOST");    // ArtiInvisibility (Heretic)
+			PowerupNames.Push("PowerWeaponlevel2");  PowerupDisplay.Push("$FULLHUD_POWERUP_TOMED");    // ArtiTomeOfPower (Heretic)
+			// Hexen
+			PowerupNames.Push("PowerMinotaur");      PowerupDisplay.Push("$FULLHUD_POWERUP_ALLY");     // ArtiDarkServant (Hexen)
+			PowerupNames.Push("PowerSpeed");         PowerupDisplay.Push("$FULLHUD_POWERUP_SPEED");    // ArtiSpeedBoots (Hexen)
+			// Strife
+			PowerupNames.Push("PowerShadow");        PowerupDisplay.Push("$FULLHUD_POWERUP_SHADOW");   // ShadowArmor (Strife)
+			PowerupNames.Push("PowerMask");          PowerupDisplay.Push("$FULLHUD_POWERUP_SUIT");     // EnvironmentalSuit (Strife)
+			PowerupNames.Push("PowerTargeter");      PowerupDisplay.Push("$FULLHUD_POWERUP_TARGETER"); // Targeter (Strife)
+			PowerupNames.Push("PowerScanner");       PowerupDisplay.Push("$FULLHUD_POWERUP_SCANNER");  // Scanner (Strife)
+			// Shared
+			PowerupNames.Push("PowerInvulnerable");  PowerupDisplay.Push("$FULLHUD_POWERUP_INVUL"); // InvulnerabilitySphere (Doom), ArtiInvulnerability/ArtiInvulnerability2 (Heretic/Hexen)
+			if(!level.infinite_flight)
+			{
+				PowerupNames.Push("PowerFlight");    PowerupDisplay.Push("$FULLHUD_POWERUP_FLY"); // ArtiFly (Heretic/Hexen)
+			}
+			PowerupNames.Push("PowerTorch");         PowerupDisplay.Push("$FULLHUD_POWERUP_TORCH"); // ArtiTorch (Heretic/Hexen)
+			return;
+		}
+	}
+}

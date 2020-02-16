@@ -1,70 +1,9 @@
-version "4.3.0"
+#include "zscript/zs_hud/zs_hud_fonts.txt"
+#include "zscript/zs_hud/zs_hud_powerups.txt"
+#include "zscript/zs_hud/zs_hud_spells.txt"
 
-mixin Class StatFonts
-{
-	enum FontValues
-	{
-		OLDFONT = 0,
-		NEWCONFONT = 1,
-		STATREPORT = 2,
-		MEMENTWO = 3
-	}
-	
-	struct StatFont
-	{
-		Font fnt; // The Font
-		int tHeight; // Height from top (for top-left and top-right)
-		int[2] bHeightL; // Height from bottom on left (for bottom-left and bottom-right). [0] is for unsplit, [1] is for split
-		int[2] bHeightR; // Height from bottom on right (for bottom-left and bottom-right). [0] is for unsplit, [1] is for split
-		int sPush; // Push from edge of screen
-		vector2 scale; // Scaling for the text; larger x-values shrink horizontally, larger y-values shrink vertically
-		int padding; // Space padding to add
-		int vspace; // Space between stats
-		int armsOffset; // Offset if arms are displayed
-	}
-}
 
-mixin Class PowerupValues {
-	
-	Array<String> PowerupNames;   // Actual Name of the powerup
-	Array<String> PowerupDisplay; // Name to display on stats
-	// =============================
-	// Get Powerup Names and Strings
-	// =============================
-	// Special thanks to Tekish's Levelinfo, since this saved me a lot of time
-	void setPowerupNames()
-	{
-		if (PowerupNames.Size() == 0) {
-			let pclass = CPlayer.mo.GetClassName();
-			string s; // Use this to avoid error on startup
 
-			// Doom
-			// PowerupNames.Push("PowerStrength");     PowerupDisplay.Push("$FULLHUD_POWERUP_BERSERK");  // Berserk (Doom)
-			PowerupNames.Push("PowerInvisibility");  PowerupDisplay.Push("$FULLHUD_POWERUP_INVIS");    // BlurSphere (Doom)
-			PowerupNames.Push("PowerLightamp");      PowerupDisplay.Push("$FULLHUD_POWERUP_LIGHT");    // Infrared (Doom)
-			PowerupNames.Push("PowerIronfeet");      PowerupDisplay.Push("$FULLHUD_POWERUP_SUIT");     // Radsuit (Doom)
-			// Heretic
-			PowerupNames.Push("PowerGhost");         PowerupDisplay.Push("$FULLHUD_POWERUP_GHOST");    // ArtiInvisibility (Heretic)
-			PowerupNames.Push("PowerWeaponlevel2");  PowerupDisplay.Push("$FULLHUD_POWERUP_TOMED");    // ArtiTomeOfPower (Heretic)
-			// Hexen
-			PowerupNames.Push("PowerMinotaur");      PowerupDisplay.Push("$FULLHUD_POWERUP_ALLY");     // ArtiDarkServant (Hexen)
-			PowerupNames.Push("PowerSpeed");         PowerupDisplay.Push("$FULLHUD_POWERUP_SPEED");    // ArtiSpeedBoots (Hexen)
-			// Strife
-			PowerupNames.Push("PowerShadow");        PowerupDisplay.Push("$FULLHUD_POWERUP_SHADOW");   // ShadowArmor (Strife)
-			PowerupNames.Push("PowerMask");          PowerupDisplay.Push("$FULLHUD_POWERUP_SUIT");     // EnvironmentalSuit (Strife)
-			PowerupNames.Push("PowerTargeter");      PowerupDisplay.Push("$FULLHUD_POWERUP_TARGETER"); // Targeter (Strife)
-			PowerupNames.Push("PowerScanner");       PowerupDisplay.Push("$FULLHUD_POWERUP_SCANNER");  // Scanner (Strife)
-			// Shared
-			PowerupNames.Push("PowerInvulnerable");  PowerupDisplay.Push("$FULLHUD_POWERUP_INVUL"); // InvulnerabilitySphere (Doom), ArtiInvulnerability/ArtiInvulnerability2 (Heretic/Hexen)
-			if(!level.infinite_flight)
-			{
-				PowerupNames.Push("PowerFlight");    PowerupDisplay.Push("$FULLHUD_POWERUP_FLY"); // ArtiFly (Heretic/Hexen)
-			}
-			PowerupNames.Push("PowerTorch");         PowerupDisplay.Push("$FULLHUD_POWERUP_TORCH"); // ArtiTorch (Heretic/Hexen)
-			return;
-		}
-	}
-}
 
 Class MinimalStatusBar : BaseStatusBar {
 
@@ -78,6 +17,7 @@ Class MinimalStatusBar : BaseStatusBar {
 	int manaInterpolated;
 	int manaInterpolationPile;
 	mixin PowerupValues;
+	mixin SpellPropertiesList;
 	
 	// not used
 	void DrawUnitBarImage(String unit, String overUnit, int monitor, Vector2 pos, int length, int flags = 0, double alpha = 1.0, Vector2 box = (-1, -1), Vector2 scale = (1, 1)) {		
@@ -182,7 +122,7 @@ Class MinimalStatusBar : BaseStatusBar {
 			 size.x - (tlCornerSize.x + trCornerSize.x), size.y - (tlCornerSize.y + blCornerSize.y), flags);
 	}
 
-	override void Init() {	
+	override void Init() {
 		Super.Init();
 		// this has to be done, even if the HUD is fullscreen, it prevents a crash
 		SetSize(0, 320, 200);
@@ -214,7 +154,8 @@ Class MinimalStatusBar : BaseStatusBar {
 		if (CPlayer) {
 		
 			setPowerupNames();
-		
+			setSpellProperties();
+			
 			for (let inv = CPlayer.mo.Inv; inv; inv = inv.Inv) {
 				// [argv] look through the player pawn's inventory for weapons
 				if (inv is "Weapon") {
@@ -266,7 +207,7 @@ Class MinimalStatusBar : BaseStatusBar {
 		}
 	}
 	
-	void DrawImageBar(string image, int imageH, int imageW, int posX, int posY, int monitor = 100, int flags = 0, double alpha = 1.0, Vector2 box = (-1,-1), Vector2 scale = (1.0,1.0)) {
+	void DrawImageBar(string image, int imageH, int imageW, int posX, int posY, int flags = 0, double alpha = 1.0, Vector2 box = (-1,-1), Vector2 scale = (1.0,1.0)) {
 		
 		// check that scale is not 0....
 		
@@ -274,17 +215,11 @@ Class MinimalStatusBar : BaseStatusBar {
 		int imageHeightEnd = imageH / round(1.0/scale.y);
 		
 		SetClipRect(posX+(-imageWidthEnd/2), posY-imageHeightEnd, imageWidthEnd, imageHeightEnd, DI_SCREEN_CENTER_BOTTOM);
-		DrawImage(image, (posX, posY), DI_SCREEN_CENTER_BOTTOM | flags, alpha, box, scale); //DrawUnitBarImage(image, image, monitor, (posX, posY), 1, DI_SCREEN_CENTER_BOTTOM, alpha, box, (scale.x,scale.y));
+		DrawImage(image, (posX, posY), DI_SCREEN_CENTER_BOTTOM | flags, alpha, box, scale);
 		ClearClipRect();
 	}
 	
-	struct spell {
-		int id;
-		int du;
-		string tx;
-		string cd;
-		int xpos;
-	};
+
 	/*
 	int topRightTotal; // This is global to make this convenient
 	override void DrawPowerups ()
@@ -334,12 +269,14 @@ Class MinimalStatusBar : BaseStatusBar {
 			int tAlign = DI_TEXT_ALIGN_CENTER | DI_SCREEN_CENTER_BOTTOM;
 			// alpha setting for the boxes, clamped between 1 and 0 or else everything goes wrong
 			double alphaSetting = Clamp(CVar.GetCVar("gzs_boxalpha", CPlayer).GetFloat(), 0, 1);
+			// player data
+			let pmo = CPlayer.mo;
 			
 			// health
 			int healthXsiz = 300;
 			int healthYsiz = 16;
 			int healthXpos = -35-healthXsiz;
-			int healthCurrent = CPlayer.mo.health;
+			int healthCurrent = pmo.health;
 			
 			InterpolateValue(healthCurrent, healthInterpolated, healthInterpolationPile); // [numnzel] added interpolation
 			
@@ -349,24 +286,19 @@ Class MinimalStatusBar : BaseStatusBar {
 			//DrawString(mMM2BigFont, FormatNumber(CPlayer.health, 0, 9), (-99, -48), tAlign);
 			DrawHudBoxCol("SBCORN", "SBEDGE", Color(64, 0, 0, 0), (healthXpos+13, -25), (healthXsiz-26, healthYsiz+2), DI_SCREEN_CENTER_BOTTOM);
 			DrawUnitBarGrad(Color(255, 255, 0, 0), Color(255, 64, 0, 0), Color(255, 255, 208, 0), Color(255, 64, 48, 0),
-							healthInterpolated, CPlayer.mo.GetMaxHealth(TRUE), (healthXpos+14, -24), (healthXsiz-28, healthYsiz), DI_SCREEN_CENTER_BOTTOM, TRUE);
-			
-			// Cooldowns
+							healthInterpolated, pmo.GetMaxHealth(TRUE), (healthXpos+14, -24), (healthXsiz-28, healthYsiz), DI_SCREEN_CENTER_BOTTOM, TRUE);
 			
 			
-			// Powerups
+			// powerups
 			Array<String> PowerupStrings;
 			int powerlength = 0;
-			let pmo = CPlayer.mo;
-			
-			
 			
 			//DrawString(mMM2BigFont, FormatNumber(PowerupNames.size(), 0, 9), (99, -48), tAlign);
 			
 			for(int i = 0; i < PowerupNames.size(); i++) {
 				let inv = Powerup(pmo.FindInventory(PowerupNames[i]));
 				
-				if( inv && inv.EffectTics > 0) {
+				if(inv && inv.EffectTics > 0) {
 					
 					string s = string.format("%d", inv.EffectTics/Thinker.TICRATE);
 					//string s = string.format("%s: %02d:%02d",StringTable.Localize(PowerupDisplay[i]),inv.EffectTics/Thinker.TICRATE/60, inv.EffectTics/Thinker.TICRATE%60);
@@ -379,8 +311,6 @@ Class MinimalStatusBar : BaseStatusBar {
 				
 				DrawString(mMM2BigFont, PowerupStrings[i], (99, (-13*i)-58), tAlign);
 			}
-			
-			//DrawPowerups();
 			
 			// doomguy
 			DrawHudBoxCol("HBCORN", "HBEDGE", Color(128, 0, 0, 0), (-27, -72), (54, 64), DI_SCREEN_CENTER_BOTTOM, alphaSetting);
@@ -426,131 +356,6 @@ Class MinimalStatusBar : BaseStatusBar {
 			
 			
 			// spells
-			
-			
-			spell momongaSpells[10][3];
-			
-			momongaSpells[0][0].id = 30;
-			momongaSpells[0][1].id = 60;
-			momongaSpells[0][2].id = 20;
-			momongaSpells[1][0].id = 110;
-			momongaSpells[1][1].id = 130;
-			momongaSpells[1][2].id = 100;
-			momongaSpells[2][0].id = 210;
-			momongaSpells[2][1].id = 350;
-			momongaSpells[2][2].id = 120;
-			momongaSpells[3][0].id = 250;
-			momongaSpells[3][1].id = 400;
-			momongaSpells[3][2].id = 200;
-			momongaSpells[4][0].id = 180;
-			momongaSpells[4][1].id = 480;
-			momongaSpells[4][2].id = 1100;
-			momongaSpells[5][0].id = 900;
-			momongaSpells[5][1].id = 1400;
-			momongaSpells[5][2].id = 500;
-			momongaSpells[6][0].id = 690;
-			momongaSpells[6][1].id = 1550;
-			momongaSpells[6][2].id = 650;
-			momongaSpells[7][0].id = 1000;
-			momongaSpells[7][1].id = 1600;
-			momongaSpells[7][2].id = 380;
-			momongaSpells[8][0].id = 1400;
-			momongaSpells[8][1].id = 1700;
-			momongaSpells[8][2].id = 1180;
-			momongaSpells[9][0].id = 1;
-			momongaSpells[9][1].id = 2;
-			momongaSpells[9][2].id = 3;
-			momongaSpells[0][0].tx = "SPELLA0";
-			momongaSpells[0][1].tx = "SPELLA0";
-			momongaSpells[0][2].tx = "SPELLA0";
-			momongaSpells[1][0].tx = "SPELL21";
-			momongaSpells[1][1].tx = "SPELLA0";
-			momongaSpells[1][2].tx = "SPELLA0";
-			momongaSpells[2][0].tx = "SPELLA0";
-			momongaSpells[2][1].tx = "SPELLA0";
-			momongaSpells[2][2].tx = "SPELLA0";
-			momongaSpells[3][0].tx = "SPELLA0";
-			momongaSpells[3][1].tx = "SPELLA0";
-			momongaSpells[3][2].tx = "SPELLA0";
-			momongaSpells[4][0].tx = "SPELLA0";
-			momongaSpells[4][1].tx = "SPELLA0";
-			momongaSpells[4][2].tx = "SPELLA0";
-			momongaSpells[5][0].tx = "SPELLA0";
-			momongaSpells[5][1].tx = "SPELLA0";
-			momongaSpells[5][2].tx = "SPELLA0";
-			momongaSpells[6][0].tx = "SPELLA0";
-			momongaSpells[6][1].tx = "SPELLA0";
-			momongaSpells[6][2].tx = "SPELLA0";
-			momongaSpells[7][0].tx = "SPELLA0";
-			momongaSpells[7][1].tx = "SPELLA0";
-			momongaSpells[7][2].tx = "SPELLA0";
-			momongaSpells[8][0].tx = "SPELLA0";
-			momongaSpells[8][1].tx = "SPELLA0";
-			momongaSpells[8][2].tx = "SPELLA0";
-			momongaSpells[9][0].tx = "SPELLA0";
-			momongaSpells[9][1].tx = "SPELLA0";
-			momongaSpells[9][2].tx = "SPELLA0";
-			momongaSpells[0][0].cd = "spellkeyoneCD1";
-			momongaSpells[0][1].cd = "spellkeyoneCD2";
-			momongaSpells[0][2].cd = "spellkeyoneCD3";
-			momongaSpells[1][0].cd = "spellkeytwoCD1";
-			momongaSpells[1][1].cd = "spellkeytwoCD2";
-			momongaSpells[1][2].cd = "spellkeytwoCD3";
-			momongaSpells[2][0].cd = "spellkeythreeCD1";
-			momongaSpells[2][1].cd = "spellkeythreeCD2";
-			momongaSpells[2][2].cd = "spellkeythreeCD3";
-			momongaSpells[3][0].cd = "spellkeyfourCD1";
-			momongaSpells[3][1].cd = "spellkeyfourCD2";
-			momongaSpells[3][2].cd = "spellkeyfourCD3";
-			momongaSpells[4][0].cd = "spellkeyfiveCD1";
-			momongaSpells[4][1].cd = "spellkeyfiveCD2";
-			momongaSpells[4][2].cd = "spellkeyfiveCD3";
-			momongaSpells[5][0].cd = "spellkeysixCD1";
-			momongaSpells[5][1].cd = "spellkeysixCD2";
-			momongaSpells[5][2].cd = "spellkeysixCD3";
-			momongaSpells[6][0].cd = "spellkeysevenCD1";
-			momongaSpells[6][1].cd = "spellkeysevenCD2";
-			momongaSpells[6][2].cd = "spellkeysevenCD3";
-			momongaSpells[7][0].cd = "spellkeyeightCD1";
-			momongaSpells[7][1].cd = "spellkeyeightCD2";
-			momongaSpells[7][2].cd = "spellkeyeightCD3";
-			momongaSpells[8][0].cd = "spellkeynineCD1";
-			momongaSpells[8][1].cd = "spellkeynineCD2";
-			momongaSpells[8][2].cd = "spellkeynineCD3";
-			momongaSpells[9][0].cd = "spellkeyzeroCD1";
-			momongaSpells[9][1].cd = "spellkeyzeroCD2";
-			momongaSpells[9][2].cd = "spellkeyzeroCD3";
-			momongaSpells[0][0].du = 15;
-			momongaSpells[0][1].du = 20;
-			momongaSpells[0][2].du = 15;
-			momongaSpells[1][0].du = 15;
-			momongaSpells[1][1].du = 20;
-			momongaSpells[1][2].du = 15;
-			momongaSpells[2][0].du = 30;
-			momongaSpells[2][1].du = 60;
-			momongaSpells[2][2].du = 30;
-			momongaSpells[3][0].du = 30;
-			momongaSpells[3][1].du = 60;
-			momongaSpells[3][2].du = 30;
-			momongaSpells[4][0].du = 60;
-			momongaSpells[4][1].du = 90;
-			momongaSpells[4][2].du = 60;
-			momongaSpells[5][0].du = 60;
-			momongaSpells[5][1].du = 90;
-			momongaSpells[5][2].du = 60;
-			momongaSpells[6][0].du = 90;
-			momongaSpells[6][1].du = 120;
-			momongaSpells[6][2].du = 90;
-			momongaSpells[7][0].du = 90;
-			momongaSpells[7][1].du = 120;
-			momongaSpells[7][2].du = 90;
-			momongaSpells[8][0].du = 90;
-			momongaSpells[8][1].du = 60;
-			momongaSpells[8][2].du = 90;
-			momongaSpells[9][0].du = 300;
-			momongaSpells[9][1].du = 300;
-			momongaSpells[9][2].du = 300;
-			
 			int spellSlots = 10;
 			int separation = 64;
 			int separate[10];
@@ -576,7 +381,7 @@ Class MinimalStatusBar : BaseStatusBar {
 					
 					
 					// Draw spells icons
-					DrawImageBar(momongaSpells[i][k].tx, imageSize, imageSize, spellsXpos, spellsYpos, 100, 0, 0.6, (-1,-1), (0.16,0.16)); // Scale works better with multiples of 2
+					DrawImageBar(momongaSpells[i][k].tx, imageSize, imageSize, spellsXpos, spellsYpos, 0, 0.5, (-1,-1), (0.16,0.16)); // Scale works better with multiples of 2
 					
 					// Draw cooldown icons
 					if(inv2 && inv2.EffectTics > 0) {
@@ -587,7 +392,7 @@ Class MinimalStatusBar : BaseStatusBar {
 						int monitorCD = CreatePercent(spellCDtime, spellCDduration, imageSize);
 						
 						DrawString(mMM2SmallFont, spellCDtimeS, (spellsXpos, spellsYpos-16), tAlign);
-						DrawImageBar("CDWN00", monitorCD, imageSize, spellsXpos, spellsYpos, 100, 0, 0.9, (-1,-1), (0.16,0.16));
+						DrawImageBar("CDWN00", monitorCD, imageSize, spellsXpos, spellsYpos, 0, 1.0, (-1,-1), (0.16,0.16));
 						DrawString(mMM2SmallFont, spellCDtimeS, (spellsXpos, spellsYpos-16), tAlign);
 						//DrawString(mMM2SmallFont, spellCDtimeS, (spellsXpos, spellsYpos-16), tAlign);
 						//string s = string.format("%s: %02d:%02d",StringTable.Localize(PowerupDisplay[i]),inv2.EffectTics/Thinker.TICRATE/60, inv2.EffectTics/Thinker.TICRATE%60);
@@ -597,7 +402,7 @@ Class MinimalStatusBar : BaseStatusBar {
 					
 					// Draw spell selector icon over selected spell
 					if (manaCost == momongaSpells[i][k].id) {
-						DrawImageBar("SELEA0", imageSize, imageSize, spellsXpos, spellsYpos, 100, 0, 1.0, (-1,-1), (0.16,0.16));
+						DrawImageBar("SELEA0", imageSize, imageSize, spellsXpos, spellsYpos, 0, 1.0, (-1,-1), (0.16,0.16));
 					}
 				}
 			}
