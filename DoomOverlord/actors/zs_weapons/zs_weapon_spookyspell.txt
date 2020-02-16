@@ -1,67 +1,6 @@
-class spookyspell : Weapon {
-	
-	StateLabel jumpstat;
-	property jumpstate: jumpstat;
-	
-	default {
-	
-		//spookyspell.jumpstate "ready";
-		
-		weapon.slotnumber 1;
-		weapon.ammouse 0;
-		weapon.ammotype "mana";
-		
-		+WEAPON.AMMO_OPTIONAL;
-		+WEAPON.NOAUTOFIRE;
-	}
-	
-	action int CheckSpell(int spellid) {
-	
-		invoker.jumpstat = "ready";
-		
-		if 		(spellid == 130 && CountInv("spellkeytwoCD2") == 0) invoker.jumpstat = "attacklightning";
-		else if (spellid == 110 && CountInv("spellkeytwoCD1") == 0) invoker.jumpstat = "attackfireball";
-		else if (spellid == 100 && CountInv("spellkeytwoCD3") == 0) invoker.jumpstat = "attackseethrough";
-		else {
-			return 255;
-		}
-		return 0;
-	}
+class spookyspell : spookyspellbase {
 
 	states {
-	
-		ready:
-			AINZ A 0 A_TakeInventory("makeanimation");
-			AINZ A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2);
-			wait;
-		select:
-			AINZ A 0 A_JumpIfInventory("makeanimation", 1, "animatedselect");
-		selectlo:
-			AINZ A 0 A_Raise;
-			loop;
-		animatedselect:
-			AINZ A 1 A_Raise;
-			loop;
-		deselect:
-			AINZ A 0 A_Lower;
-			loop;
-		fire:
-			// If not enough mana or no spell is selected, return to ready.
-			AINZ A 0 A_JumpIf(CountInv("spellid") <= 0 || CountInv("mana") < CountInv("spellid"), "ready");
-			// Identify current selected spell and stores the specific fire state to jump. Skip fire if there's an active cooldown.
-			AINZ A 0 A_Jump(CheckSpell(CountInv("spellid")), "ready");
-			// Everything ok at this point; Take mana, apply (give) cooldown and jump to fire state.
-			AINZ A 0 {
-				let ownr = momonga(invoker.owner);
-				if (ownr) {
-					A_GiveInventory(ownr.cooldown);
-				}
-				if (invoker.jumpstat != "ready") {
-					A_TakeInventory("mana", CountInv("spellid"));
-				}
-			}
-			AINZ A 0 A_Jump(255, invoker.jumpstat);
-			goto ready;
 		attackseethrough:
 			AINZ A 1 A_GiveInventory("Infrared", 1);
 			goto ready;
@@ -84,60 +23,5 @@ class spookyspell : Weapon {
 		attackgravitymaelstrom:
 			AINZ A 01 A_FireProjectile("magicgravitymaelstrom", 0, TRUE, 8, 16);
 			goto ready;
-		reload:
-			AINZ A 1 {
-				A_GiveInventory("makeanimation", 1);
-				A_GiveInventory("spookymelee", 1);
-				A_TakeInventory("spookyspell", 1);
-			}
-			goto ready;
-		User1:
-			AINZ A 0 A_Overlay(2, "EnhancementTriplet");
-			goto ready;
-		EnhancementTriplet:
-			TNT1 A 0 {
-				if (CountInv("magicatriplet") > 0) {
-					A_TakeInventory("magicatriplet");
-				} else {
-					A_GiveInventory("magicatriplet", 1);
-				}
-			}
-			TNT1 A 8;
-			goto ready;
-		User2:
-			AINZ A 1 A_FireMissile();
-			goto ready;
-		spawn:
-			PIST A -1 nodelay;
-			stop;
-	}
-}
-
-class particlethunder : Actor {
-	
-	default {
-		speed 0;
-		RenderStyle "Add";
-		alpha 0.8;
-		scale 2.5;
-		PROJECTILE;
-		+ROLLSPRITE;
-		+FORCEXYBILLBOARD;
-		+CLIENTSIDEONLY;
-	}
-	
-	states {
-		spawn:
-			THUN A 1 NoDelay Bright A_SetScale(scaleX*0.7);
-			THUN A 0 Bright { A_SetRenderStyle(0.9, STYLE_Normal); A_SetScale(scaleX*0.7); }
-			THUN A 1 Bright { A_SetRenderStyle(0.9, STYLE_Add); A_SetScale(scaleX*0.7); }
-			THUN A 0 Bright { A_SetRenderStyle(0.9, STYLE_Normal); A_SetScale(scaleX*0.7); }
-			THUN A 1 Bright { A_SetRenderStyle(0.9, STYLE_Add); A_SetScale(scaleX*0.7); }
-			THUN A 0 Bright { A_SetRenderStyle(0.9, STYLE_Normal); A_SetScale(scaleX*0.7); }
-			THUN A 1 Bright { A_SetRenderStyle(0.9, STYLE_Add); A_SetScale(scaleX*0.7); }
-			THUN A 8 Bright;
-		fade:
-			THUN A 1 Bright A_FadeOut(0.3);
-			Loop;
 	}
 }
