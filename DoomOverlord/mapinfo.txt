@@ -1,0 +1,14 @@
+GameInfo {
+	statusbarclass = "MinimalStatusBar"
+}
+
+gameinfo {
+
+	playerclasses = "momonga"
+}
+
+doomednums {
+
+	2007 = maxmanaorb // Replace Clip
+	2014 = maxmanaorb // Replace HealthBonus
+}

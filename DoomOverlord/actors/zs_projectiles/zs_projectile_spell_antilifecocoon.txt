@@ -20,21 +20,17 @@ class magicantilifecocoon : Actor {
 	default {
 		
 		Health 1000;
-		vspeed -1024;
-		gravity 9000;
-		RenderStyle "Add";
-		Alpha 0.0;
+		RenderStyle "Stencil";
+		Alpha 0.6;
 		
-		+BRIGHT;
-		+MOVEWITHSECTOR;
+		//+BRIGHT;
 		+NOTRIGGER;
-		+FLATSPRITE;
 		+SHOOTABLE;
 		+DONTTHRUST;
 		+NOTELEPORT;
 		+NOTELESTOMP;
-		+FLOORHUGGER;
-		Scale 0.5;
+		+NOGRAVITY;
+		+VISIBILITYPULSE;
 	}
 	
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle) {
@@ -92,7 +88,7 @@ class magicantilifecocoon : Actor {
 		Spawn:
 			ALCN A 0;
 			ALCN A 0 SpawnSphere("magicantilifecrystal", 256.0, 3, FALSE);
-			ALCN A 1 A_FadeIn(0.02);
+			ALCN A 1 //SetShade("FF0000");//A_FadeIn(0.02);
 			wait;
 		Death:
 			ALCN A 0;
@@ -106,9 +102,10 @@ class magicantilifecrystal : Actor {
 	default {
 	
 		Health 1000;
-		Radius 16;
-		Height 32;
+		Radius 4;
+		Height 8;
 		RenderStyle "Add";
+		Alpha 0.0;
 		+BRIGHT;
 		+SOLID;
 		+MISSILE;
@@ -121,7 +118,9 @@ class magicantilifecrystal : Actor {
 		+NOTELESTOMP;
 		+DONTDRAIN;
 		+DONTTHRUST;
-		+VISIBILITYPULSE;
+		+NOBLOOD;
+		+INVISIBLE;
+		//+VISIBILITYPULSE;
 	}
 	
 	override bool CanCollideWith(Actor other, bool passive) {
