@@ -1,4 +1,4 @@
-class particlethunder : Actor {
+class magicparticlethunder : Actor {
 	
 	default {
 		speed 0;

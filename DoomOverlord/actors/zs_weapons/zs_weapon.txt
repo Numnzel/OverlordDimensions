@@ -9,7 +9,6 @@ class makeanimation : Inventory {
 
 #include "actors/zs_weapons/zs_weapon_spookymelee.txt"
 #include "actors/zs_weapons/zs_weapon_spookyspell_base.txt"
-#include "actors/zs_weapons/zs_weapon_spookyspell_actors.txt"
 #include "actors/zs_weapons/zs_weapon_spookyspell.txt"
 
 #include "actors/zs_weapons/zs_yggdrasilspells/zs_yggdrasilspell.txt"
