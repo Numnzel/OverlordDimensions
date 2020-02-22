@@ -19,10 +19,11 @@ class spookyspellbase : Weapon abstract {
 	
 		invoker.jumpstat = "ready";
 		
-		if 		(spellid == 130 && CountInv("spellkeytwoCD2") == 0) invoker.jumpstat = "attacklightning";
+		if (spellid == 240 && CountInv("spellkeyfourCD3") == 0) invoker.jumpstat = "attackantilifecocoon";
+		else if (spellid == 200 && CountInv("spellkeythreeCD3") == 0) invoker.jumpstat = "attackfly";
+		else if (spellid == 130 && CountInv("spellkeytwoCD2") == 0) invoker.jumpstat = "attacklightning";
 		else if (spellid == 110 && CountInv("spellkeytwoCD1") == 0) invoker.jumpstat = "attackfireball";
-		else if (spellid == 100 && CountInv("spellkeytwoCD3") == 0) invoker.jumpstat = "attackseethrough";
-		else if (spellid == 120 && CountInv("spellkeythreeCD3") == 0) invoker.jumpstat = "attackantilifecocoon";
+		else if (spellid == 100 && CountInv("spellkeytwoCD3") == 0) invoker.jumpstat = "attackseethrough";		
 		else {
 			return 255;
 		}

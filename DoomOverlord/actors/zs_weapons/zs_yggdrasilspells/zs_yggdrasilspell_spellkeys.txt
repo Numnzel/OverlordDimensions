@@ -33,7 +33,7 @@ class spellkeythree : yggdrasilspell {
 		
 		yggdrasilspell.SpellOne 210;
 		yggdrasilspell.SpellTwo 350;
-		yggdrasilspell.SpellThree 120;
+		yggdrasilspell.SpellThree 200;
 		yggdrasilspell.SpellOneCD "spellkeythreeCD1";
 		yggdrasilspell.SpellTwoCD "spellkeythreeCD2";
 		yggdrasilspell.SpellThreeCD "spellkeythreeCD3";
@@ -47,7 +47,7 @@ class spellkeyfour : yggdrasilspell {
 		
 		yggdrasilspell.SpellOne 250;
 		yggdrasilspell.SpellTwo 400;
-		yggdrasilspell.SpellThree 200;
+		yggdrasilspell.SpellThree 240;
 		yggdrasilspell.SpellOneCD "spellkeyfourCD1";
 		yggdrasilspell.SpellTwoCD "spellkeyfourCD2";
 		yggdrasilspell.SpellThreeCD "spellkeyfourCD3";

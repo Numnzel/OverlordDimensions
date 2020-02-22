@@ -1,0 +1,1 @@
+#include "actors/zs_powerups/zs_powerup_magicfly.txt"

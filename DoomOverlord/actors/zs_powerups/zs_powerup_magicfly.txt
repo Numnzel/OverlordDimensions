@@ -1,0 +1,21 @@
+/*class magicfly : PowerupGiver {
+
+	default {
+		inventory.Amount 1;
+		powerup.type Flight;
+		powerup.duration -40;
+	}
+	
+	states {
+		spawn:
+			TNT1 A 1;
+			loop;
+	}
+}*/
+
+class magicfly : powerflight {
+
+	default {
+		powerup.duration -40;
+	}
+}

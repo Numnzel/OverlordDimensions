@@ -2,7 +2,7 @@
 class cooldownTimer : Powerup abstract {
 	
 	default {
-		Powerup.Color "None", 0.0;
+		Powerup.Color "000000", 0.0;
 		Powerup.Duration 0;
 		
 		+INVENTORY.UNDROPPABLE;

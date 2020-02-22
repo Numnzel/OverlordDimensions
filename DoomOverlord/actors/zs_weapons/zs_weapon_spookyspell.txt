@@ -18,6 +18,10 @@ class spookyspell : spookyspellbase {
 			AINZ A 0 A_FireProjectile("magicfireball", -8, FALSE, 8, 16);
 			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, 8, 16);
 			goto ready;
+		attackfly:
+			AINZ A 0;
+			AINZ A 1 A_GiveInventory("magicfly", 1);
+			goto ready;
 		attackantilifecocoon:
 			AINZ A 0;
 			//AINZ A 1 A_FireBullets(0, 0, 1, 0, "magicantilifecocoon", FBF_NOFLASH|FBF_NORANDOM|FBF_NORANDOMPUFFZ);
