@@ -1,4 +1,9 @@
 // Spell: Lightning
 
-	Spell/Lightning1 				LIGHTNIN
+	Spell/Lightning1 				sounds/snd_weapons/snd_yggdrasilspells/lightning.ogg
 	$Volume Spell/Lightning1 		1.0
+	
+// Spell: TimeStop
+
+	Spell/TimeStopOn 				sounds/snd_weapons/snd_yggdrasilspells/zawarudo.ogg
+	$Volume Spell/TimeStopOn 		1.0

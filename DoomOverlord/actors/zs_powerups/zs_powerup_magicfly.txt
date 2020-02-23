@@ -13,9 +13,11 @@
 	}
 }*/
 
-class magicfly : powerflight {
+class magicfly : PowerFlight {
 
 	default {
 		powerup.duration -40;
+		
+		+INVENTORY.NOSCREENBLINK;
 	}
 }

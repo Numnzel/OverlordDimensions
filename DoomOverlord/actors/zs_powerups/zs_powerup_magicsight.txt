@@ -1,0 +1,8 @@
+class magicsight : PowerTorch {
+
+	default {
+		powerup.duration -30;
+		
+		+INVENTORY.NOSCREENBLINK;
+	}
+}

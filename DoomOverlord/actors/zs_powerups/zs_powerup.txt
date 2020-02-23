@@ -1,1 +1,3 @@
+#include "actors/zs_powerups/zs_powerup_magicsight.txt"
 #include "actors/zs_powerups/zs_powerup_magicfly.txt"
+#include "actors/zs_powerups/zs_powerup_magictimestop.txt"
