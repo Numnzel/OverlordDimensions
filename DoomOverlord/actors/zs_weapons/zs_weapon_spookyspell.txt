@@ -36,5 +36,9 @@ class spookyspell : spookyspellbase {
 			AINZ A 1;
 			AINZ A 1 A_GiveInventory("magictimestop", 1);
 			goto ready;
+		attackblackhole:
+			AINZ A 1;
+			AINZ A 8 A_FireProjectile("magicblackholelaunch", 0, FALSE, 8, 16);
+			goto ready;
 	}
 }

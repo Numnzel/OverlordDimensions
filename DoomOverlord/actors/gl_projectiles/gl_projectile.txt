@@ -1,2 +1,3 @@
 
 #include "actors/gl_projectiles/gl_projectile_spellfireball.txt"
+#include "actors/gl_projectiles/gl_projectile_spellblackhole.txt"

@@ -5,6 +5,6 @@
 #include "actors/zs_projectiles/zs_projectile_spell_detectmagica.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_antilifecocoon.txt"
 
-
+#include "actors/zs_projectiles/zs_projectile_spell_blackhole.txt"
 
 #include "actors/zs_projectiles/zs_projectile_spell_gravitymaelstrom.txt"

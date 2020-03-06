@@ -6,7 +6,7 @@ class momonga : PlayerPawn {
 	
 		health 300;
 		player.maxhealth 300;
-		mass 300;
+		mass 500;
 		player.DisplayName "momonga";
 		player.ViewHeight 56;
 		player.AirCapacity 0;
@@ -25,7 +25,7 @@ class momonga : PlayerPawn {
 		Player.WeaponSlot 9, "spellkeynine";
 		Player.WeaponSlot 0, "spellkeyzero";
 		
-		Player.StartItem "mana", 500;
+		Player.StartItem "mana", 5000;
 		Player.StartItem "maxmana", 500;
 		Player.StartItem "spookymelee", 1;
 		Player.StartItem "spellkeyone", 1;

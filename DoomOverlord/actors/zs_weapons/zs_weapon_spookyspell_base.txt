@@ -19,20 +19,14 @@ class spookyspellbase : Weapon abstract {
 	
 		invoker.jumpstat = "ready";
 		
-<<<<<<< 683d00b7013b97f267472fbe3efc79ff86ddf1c7
-		if 		(spellid == 130 && CountInv("spellkeytwoCD2") == 0) invoker.jumpstat = "attacklightning";
-		else if (spellid == 110 && CountInv("spellkeytwoCD1") == 0) invoker.jumpstat = "attackfireball";
-		else if (spellid == 100 && CountInv("spellkeytwoCD3") == 0) invoker.jumpstat = "attackseethrough";
-		else if (spellid == 120 && CountInv("spellkeythreeCD3") == 0) invoker.jumpstat = "attackantilifecocoon";
-=======
-		if (spellid == 1180 && CountInv("spellkeynineCD3") == 0) invoker.jumpstat = "attacktimestop";
+		if (spellid == 1550 && CountInv("spellkeysevenCD2") == 0) invoker.jumpstat = "attackblackhole";
+		else if (spellid == 1180 && CountInv("spellkeynineCD3") == 0) invoker.jumpstat = "attacktimestop";
 		else if (spellid == 240 && CountInv("spellkeyfourCD3") == 0) invoker.jumpstat = "attackantilifecocoon";
 		else if (spellid == 200 && CountInv("spellkeythreeCD3") == 0) invoker.jumpstat = "attackfly";
 		else if (spellid == 130 && CountInv("spellkeytwoCD2") == 0) invoker.jumpstat = "attacklightning";
 		else if (spellid == 110 && CountInv("spellkeytwoCD1") == 0) invoker.jumpstat = "attackfireball";
 		else if (spellid == 100 && CountInv("spellkeytwoCD3") == 0) invoker.jumpstat = "attackseethrough";
 		
->>>>>>> Added time-stop spell
 		else {
 			return 255;
 		}

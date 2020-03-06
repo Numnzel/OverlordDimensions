@@ -1,10 +1,14 @@
-GameInfo {
-	statusbarclass = "MinimalStatusBar"
-}
-
 gameinfo {
 
+	statusbarclass = "MinimalStatusBar"
 	playerclasses = "momonga"
+}
+
+damagetype Death {
+
+	Factor = 1.0
+	NoArmor
+	ReplaceFactor
 }
 
 doomednums {

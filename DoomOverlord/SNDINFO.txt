@@ -7,3 +7,8 @@
 
 	Spell/TimeStopOn 				sounds/snd_weapons/snd_yggdrasilspells/zawarudo.ogg
 	$Volume Spell/TimeStopOn 		1.0
+	
+// Spell: TimeStop
+
+	Spell/BlackHole 				sounds/snd_weapons/snd_yggdrasilspells/blackhole.ogg
+	$Volume Spell/BlackHole 		1.0

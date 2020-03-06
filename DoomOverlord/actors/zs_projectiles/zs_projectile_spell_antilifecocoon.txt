@@ -84,7 +84,7 @@ class magicantilifecocoon : Actor {
 	}
 	
 	States {
-	
+		
 		Spawn:
 			ALCN A 0;
 			ALCN A 0 SpawnSphere("magicantilifecrystal", 256.0, 3, FALSE);
@@ -100,12 +100,13 @@ class magicantilifecocoon : Actor {
 class magicantilifecrystal : Actor {
 
 	default {
-	
+		
 		Health 1000;
 		Radius 4;
 		Height 8;
 		RenderStyle "Add";
 		Alpha 0.0;
+		
 		+BRIGHT;
 		+SOLID;
 		+MISSILE;
@@ -136,9 +137,9 @@ class magicantilifecrystal : Actor {
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle) {
 		
 		Actor ptr = master;
-		if (ptr) {
+		if (ptr)
 			A_DamageMaster(damage);
-		}
+		
 		//GetPointer(master).health -= damage;
 		Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
 		return damage;

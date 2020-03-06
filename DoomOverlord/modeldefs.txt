@@ -9,3 +9,15 @@ Model magicantilifecocoon
 
    FrameIndex ALCN A 0 0
 }
+
+Model magicblackhole
+{
+   Path "models/antilife"
+   Model 0 "antilife.md3"
+   Skin 0 "antilife.png"
+   Model 1 "antilife_inside.md3"
+   Skin 1 "antilife.png"
+   Scale 1.0 1.0 1.2
+
+   FrameIndex ALCN A 0 0
+}
