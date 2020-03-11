@@ -12,3 +12,9 @@
 
 	Spell/BlackHole 				sounds/snd_weapons/snd_yggdrasilspells/blackhole.ogg
 	$Volume Spell/BlackHole 		1.0
+	
+// Spell: Astral Smite
+
+	Spell/AstralSmite 				sounds/snd_weapons/snd_yggdrasilspells/shards.ogg
+	$Volume Spell/AstralSmite 		1.0
+	$limit Spell/AstralSmite		0

@@ -21,3 +21,15 @@ Model magicblackhole
 
    FrameIndex ALCN A 0 0
 }
+
+Model magicastralsmite
+{
+   Path "models/antilife"
+   Model 0 "antilife.md3"
+   Skin 0 "antilife.png"
+   Model 1 "antilife_inside.md3"
+   Skin 1 "antilife.png"
+   Scale 0.8 0.02 0.02
+
+   FrameIndex ASSM A 0 0
+}
