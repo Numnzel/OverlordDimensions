@@ -40,6 +40,12 @@ class spookyspell : spookyspellbase {
 				A_FireProjectile("magicastralsmite", 0, FALSE, 6.0+frandom(-10.0,10.0), 16.0+frandom(-10.0,10.0));
 			}
 			goto ready;
+		attacknegativeburst:
+			AINZ A 0;
+			AINZ A 0 A_GiveInventory("castingSpeedSlowWeak", 1);
+			AINZ A 0 A_SpawnItemEx("magicnegativeburst", 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER);
+			AINZ A 0 A_SpawnItemEx("magicnegativeburstexplosion", 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER);
+			goto ready;
 		attackblackhole:
 			AINZ A 1;
 			AINZ A 8 A_FireProjectile("magicblackholelaunch", 0, FALSE, 6.0, 16.0);
