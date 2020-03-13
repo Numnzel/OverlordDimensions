@@ -50,6 +50,37 @@ class spookyspell : spookyspellbase {
 			AINZ A 1;
 			AINZ A 8 A_FireProjectile("magicblackholelaunch", 0, FALSE, 6.0, 16.0);
 			goto ready;
+		attacksummonundead10th:
+			AINZ A 1;
+			AINZ A 8 {
+				
+				FLineTraceData RemoteRay;
+				LineTrace(
+				   angle,
+				   256,
+				   pitch,
+				   flags: TRF_ALLACTORS,
+				   offsetz: height-12,
+				   data: RemoteRay
+				);
+				
+				if (RemoteRay.HitType == TRACE_HitActor) {
+					
+					if (RemoteRay.HitActor.bCorpse) {
+						
+						RemoteRay.HitActor.SetState(Null);
+						Actor deathknight = Spawn("revenant", RemoteRay.HitLocation);
+						
+						if (deathknight) {
+							
+							deathknight.bFriendly = TRUE;
+							deathknight.health = 1000;
+							A_Log("A deathknight rises to your side.");
+						}
+					}
+				}
+			}
+			goto ready;
 		attacktimestop:
 			AINZ A 0;
 			AINZ A 1 { A_StartSound("Spell/TimeStopOn", -1, CHANF_OVERLAP|ATTN_NONE|CHANF_NOPAUSE); }
