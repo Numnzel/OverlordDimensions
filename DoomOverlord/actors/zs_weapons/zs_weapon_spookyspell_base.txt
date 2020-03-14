@@ -24,6 +24,7 @@ class spookyspellbase : Weapon abstract {
 		else if (spellid == 1180 && CountInv("spellkeynineCD3") == 0) invoker.jumpstat = "attacktimestop";
 		else if (spellid == 900 && CountInv("spellkeysixCD1") == 0) invoker.jumpstat = "attackastralsmite";
 		else if (spellid == 500 && CountInv("spellkeysixCD3") == 0) invoker.jumpstat = "attacknegativeburst";
+		else if (spellid == 350 && CountInv("spellkeythreeCD2") == 0) invoker.jumpstat = "attackexplodemine";
 		else if (spellid == 240 && CountInv("spellkeyfourCD3") == 0) invoker.jumpstat = "attackantilifecocoon";
 		else if (spellid == 200 && CountInv("spellkeythreeCD3") == 0) invoker.jumpstat = "attackfly";
 		else if (spellid == 130 && CountInv("spellkeytwoCD2") == 0) invoker.jumpstat = "attacklightning";
@@ -60,7 +61,7 @@ class spookyspellbase : Weapon abstract {
 			AINZ A 0 A_JumpIf(CountInv("spellid") <= 0 || CountInv("mana") < CountInv("spellid"), "ready");
 			// Identify current selected spell and stores the specific fire state to jump. Skip fire if there's an active cooldown.
 			AINZ A 0 A_Jump(CheckSpell(CountInv("spellid")), "ready");
-			// Everything ok at this point; Take mana, apply (give) cooldown and jump to fire state.
+			// Everything ok at this point; Take mana, apply (give) cooldown and jump to fire state. // TODO: This should be moved, is the spell code that has to check when to take mana and apply CD.
 			AINZ A 0 {
 				let ownr = momonga(invoker.owner);
 				if (ownr) {
@@ -92,7 +93,7 @@ class spookyspellbase : Weapon abstract {
 					A_GiveInventory("magicatriplet", 1);
 				}
 			}
-			TNT1 A 8;
+			TNT1 A 16;
 			goto ready;
 		User2:
 			AINZ A 1 A_FireMissile();

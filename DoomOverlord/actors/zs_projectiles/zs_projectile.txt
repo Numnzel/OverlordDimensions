@@ -7,5 +7,6 @@
 
 #include "actors/zs_projectiles/zs_projectile_spell_negativeburst.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_blackhole.txt"
+#include "actors/zs_projectiles/zs_projectile_spell_explodemine.txt"
 
 #include "actors/zs_projectiles/zs_projectile_spell_detectmagica.txt"
