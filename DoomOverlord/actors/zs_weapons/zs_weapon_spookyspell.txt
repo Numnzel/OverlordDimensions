@@ -112,6 +112,10 @@ class spookyspell : spookyspellbase {
 				}
 			}
 			goto ready;
+		attackbodyofrefulgentberyl:
+			AINZ A 1;
+			AINZ A 0 A_GiveInventory("magicbodyofrefulgentberyl", 1);
+			goto ready;
 		attacktimestop:
 			AINZ A 0;
 			AINZ A 1 { A_StartSound("Spell/TimeStopOn", -1, CHANF_OVERLAP|ATTN_NONE|CHANF_NOPAUSE); }
