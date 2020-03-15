@@ -4,11 +4,11 @@ class spookyspell : spookyspellbase {
 		
 		attackfireball:
 			AINZ A 1 A_JumpIfInventory("magicatriplet", 1, 2);
-			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, 6.0, 16.0);
+			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, 6.0, 12.0);
 			goto ready;
-			AINZ A 0 A_FireProjectile("magicfireball", 8, FALSE, 6.0, 16.0);
-			AINZ A 0 A_FireProjectile("magicfireball", -8, FALSE, 6.0, 16.0);
-			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, 6.0, 16.0);
+			AINZ A 0 A_FireProjectile("magicfireball", 8, FALSE, 6.0, 12.0);
+			AINZ A 0 A_FireProjectile("magicfireball", -8, FALSE, 6.0, 12.0);
+			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, 6.0, 12.0);
 			goto ready;
 		attacklightning:
 			AINZ A 0 A_Light(9);
@@ -24,7 +24,7 @@ class spookyspell : spookyspellbase {
 			AINZ A 1 A_GiveInventory("magicfly", 1);
 			goto ready;
 		attackgravitymaelstrom:
-			AINZ A 1 A_FireProjectile("magicgravitymaelstrom", 0, FALSE, 6.0, 16.0);
+			AINZ A 1 A_FireProjectile("magicgravitymaelstrom", 0, FALSE, 6.0, 12.0);
 			goto ready;
 		attackantilifecocoon:
 			AINZ A 0;
@@ -48,7 +48,7 @@ class spookyspell : spookyspellbase {
 			goto ready;
 		attackblackhole:
 			AINZ A 1;
-			AINZ A 8 A_FireProjectile("magicblackholelaunch", 0, FALSE, 6.0, 16.0);
+			AINZ A 8 A_FireProjectile("magicblackholelaunch", 0, FALSE, 6.0, 12.0);
 			goto ready;
 		attacksummonundead10th:
 			AINZ A 1;
@@ -83,11 +83,11 @@ class spookyspell : spookyspellbase {
 			goto ready;
 		attackexplodemine:
 			AINZ A 1 A_JumpIfInventory("magicatriplet", 1, 2);
-			AINZ A 1 A_FireProjectile("magicexplodemineproj", 0, FALSE, 6.0, 16.0, FPF_NOAUTOAIM, 0);
+			AINZ A 1 A_FireProjectile("magicexplodemineproj", 0, FALSE, 6.0, 12.0, FPF_NOAUTOAIM, 0);
 			goto ready;
-			AINZ A 0 A_FireProjectile("magicexplodemineproj", 32, FALSE, 6.0, 16.0, FPF_NOAUTOAIM, 30);
-			AINZ A 0 A_FireProjectile("magicexplodemineproj", -32, FALSE, 6.0, 16.0, FPF_NOAUTOAIM, 30);
-			AINZ A 1 A_FireProjectile("magicexplodemineproj", 0, FALSE, 6.0, 16.0, FPF_NOAUTOAIM, 0);
+			AINZ A 0 A_FireProjectile("magicexplodemineproj", 32, FALSE, 6.0, 12.0, FPF_NOAUTOAIM, 30);
+			AINZ A 0 A_FireProjectile("magicexplodemineproj", -32, FALSE, 6.0, 12.0, FPF_NOAUTOAIM, 30);
+			AINZ A 1 A_FireProjectile("magicexplodemineproj", 0, FALSE, 6.0, 12.0, FPF_NOAUTOAIM, 0);
 			goto ready;
 		attackgraspheart:
 			AINZ A 1;

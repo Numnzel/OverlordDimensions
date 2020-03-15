@@ -4,28 +4,31 @@ class magicgravitymaelstrom : Actor {
 		
 		radius 6;
 		height 12;
-		speed 25;
-		damage 110;
+		speed 60;
+		damage 140;
 		ProjectileKickBack 0;
 		RenderStyle "Add";
-		Alpha 0.9;
+		Alpha 0.8;
 		SeeSound "imp/attack";
 		DeathSound "imp/shotx";
+		
 		PROJECTILE;
 		+RANDOMIZE;
-		+BLOODLESSIMPACT;
 		+ROLLSPRITE;
+		+BLOODLESSIMPACT;
 		+HITMASTER;
+		+BRIGHT;
 	}
 
 	states {
+		
 		spawn:
-			FBAL ABCD 1 {
+			PLSE A 1 NoDelay {
+				A_RadiusGive("effectgravitymaelstromforce", 512, RGF_MONSTERS); // A_RadiusThrust(100, 512, 16);
 				A_SetRoll(random(0,359),SPF_INTERPOLATE);
 			}
 			Loop;
 		death:
-			BAL1 C 0;
 			BAL1 C 0 A_GiveInventory("effectgravitymaelstrom", 1, AAPTR_MASTER);
 			BAL1 CDE 6 A_SetScale(1.2);
 			Stop;
@@ -33,6 +36,24 @@ class magicgravitymaelstrom : Actor {
 }
 
 class effectgravitymaelstrom : CustomInventory {
+	
+	default {
+		
+		inventory.amount 1;
+		+INVENTORY.AUTOACTIVATE;
+	}
+	
+	states {
+		
+		pickup:
+			TNT1 A 0;
+			TNT1 A 0; //A_Gravity();
+			TNT1 A 0 A_DamageSelf(700/mass); // A_SetGravity(30000);
+			stop;
+	}
+}
+
+class effectgravitymaelstromforce : CustomInventory {
 
 	default {
 		
@@ -41,11 +62,22 @@ class effectgravitymaelstrom : CustomInventory {
 	}
 	
 	states {
-	
+		
 		pickup:
 			TNT1 A 0;
-			TNT1 A 0 A_Gravity();
-			TNT1 A 0 A_SetGravity(30000);
+			TNT1 A 0 {
+				
+				CheckProximity("magicgravitymaelstrom", 512, 1, CPXF_CHECKSIGHT|CPXF_SETMASTER|CPXF_CLOSEST);
+				
+				if (master != null) {
+					
+					// XY Thrust
+					double dist = Distance2D(master);
+					double force = 90000.0/(dist*dist)+1; // Force increases when close to XY coords.
+					
+					Thrust(-force, AngleTo(master));
+				}
+			}
 			stop;
 	}
 }
