@@ -37,7 +37,7 @@ class magicbodyofrefulgentberylexit : Powerup {
 				
 				if (owner.alpha >= 1.0) {
 					
-					owner.A_SetRenderStyle(1.0, STYLE_Normal);
+					owner.A_SetRenderStyle(1.0, STYLE_Normal); // TODO: Test: owner.RestoreRenderStyle();
 					owner.A_TakeInventory("magicbodyofrefulgentberylexit");
 					return;
 					

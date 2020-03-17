@@ -18,8 +18,25 @@ class magicgravitymaelstrom : Actor {
 		+BLOODLESSIMPACT;
 		+HITMASTER;
 		+BRIGHT;
+		//+RIPPER;
 	}
-
+	
+	/* // This doesn't work.
+	override int SpecialMissileHit(Actor victim) {
+		
+		if (victim.GetClassName() == "momonga")
+			return 1;
+		
+		if (victim.InStateSequence(victim.CurState, victim.ResolveState("Death")) || victim.InStateSequence(victim.CurState, victim.ResolveState("XDeath")))
+			SetState(null);
+		
+		//let stat = victim.CurState;
+		//A_Log(stat);
+		
+		return -1;
+	}
+	*/
+	
 	states {
 		
 		spawn:
@@ -29,8 +46,8 @@ class magicgravitymaelstrom : Actor {
 			}
 			Loop;
 		death:
-			BAL1 C 0 A_GiveInventory("effectgravitymaelstrom", 1, AAPTR_MASTER);
-			BAL1 CDE 6 A_SetScale(1.2);
+			PLSE A 0 A_GiveInventory("effectgravitymaelstrom", 1, AAPTR_MASTER);
+			PLSE AAA 6 A_SetScale(1.2);
 			Stop;
 	}
 }

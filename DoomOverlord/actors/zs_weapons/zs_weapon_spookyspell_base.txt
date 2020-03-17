@@ -25,6 +25,7 @@ class spookyspellbase : Weapon abstract {
 		else if (spellid == 1000 && CountInv("spellkeyeightCD1") == 0)	invoker.jumpstat = "attackgraspheart";
 		else if (spellid == 900 && CountInv("spellkeysixCD1") == 0)		invoker.jumpstat = "attackastralsmite";
 		else if (spellid == 500 && CountInv("spellkeysixCD3") == 0)		invoker.jumpstat = "attacknegativeburst";
+		else if (spellid == 400 && CountInv("spellkeyfourCD2") == 0)	invoker.jumpstat = "attackwallofskeleton";
 		else if (spellid == 380 && CountInv("spellkeyeightCD3") == 0)	invoker.jumpstat = "attackbodyofrefulgentberyl";
 		else if (spellid == 350 && CountInv("spellkeythreeCD2") == 0)	invoker.jumpstat = "attackexplodemine";
 		else if (spellid == 250 && CountInv("spellkeyfourCD1") == 0)	invoker.jumpstat = "attackgravitymaelstrom";
