@@ -11,6 +11,13 @@ damagetype Death {
 	ReplaceFactor
 }
 
+damagetype Radiation {
+
+	Factor = 0.2
+	NoArmor
+	ReplaceFactor
+}
+
 doomednums {
 
 	2007 = maxmanaorb // Replace Clip

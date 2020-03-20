@@ -190,7 +190,7 @@ Class MinimalStatusBar : BaseStatusBar {
 	void DrawMainBar(double TicFrac) {
 	}
 	
-	void InterpolateValue(int value, out int interpolatedValue, out int pile, int speed = 2, int accel = 10) {
+	void InterpolateValue(int value, out int interpolatedValue, out int pile, int speed = 1, int accel = 5) { // safe values: speed = 2, accel = 10;
 	
 		int diff = max(interpolatedValue, value) - min(interpolatedValue, value);
 		int curve = clamp((diff / max(1,accel)), 1, 4);

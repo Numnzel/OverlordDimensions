@@ -93,6 +93,9 @@ class spookyspell : spookyspellbase {
 			AINZ A 0 A_FireProjectile("magicexplodemineproj", -32, FALSE, 6.0, 12.0, FPF_NOAUTOAIM, 30);
 			AINZ A 1 A_FireProjectile("magicexplodemineproj", 0, FALSE, 6.0, 12.0, FPF_NOAUTOAIM, 0);
 			goto ready;
+		attacknuclearblast:
+			AINZ A 1 A_RailAttack(0, 0, FALSE, "", "", RGF_SILENT|RGF_NORANDOMPUFFZ, 0, "magicnuclearblastspawn");
+			goto ready;
 		attackgraspheart:
 			AINZ A 1;
 			AINZ A 8 {
