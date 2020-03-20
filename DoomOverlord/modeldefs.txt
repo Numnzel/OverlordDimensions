@@ -5,9 +5,36 @@ Model magicantilifecocoon
    Skin 0 "antilife.png"
    Model 1 "antilife_inside.md3"
    Skin 1 "antilife.png"
+
    Scale 2.0 2.0 2.4
 
    FrameIndex ALCN A 0 0
+}
+
+Model magicantilifecocoonsfx
+{
+   Path "models/antilife"
+   Model 0 "antilifesfx.md3"
+   Skin 0 "antilifesfx.png"
+   Model 1 "antilifesfx_inside.md3"
+   Skin 1 "antilifesfx.png"
+   
+   Scale 2.0 2.0 2.4
+
+   FrameIndex TFOG G 0 0
+}
+
+Model magicantilifecocoonsfx2
+{
+   Path "models/antilife"
+   Model 0 "antilifesfx.md3"
+   Skin 0 "antilifesfx.png"
+   Model 1 "antilifesfx_inside.md3"
+   Skin 1 "antilifesfx.png"
+   
+   Scale 2.0 2.0 2.4
+
+   FrameIndex TFOG G 0 0
 }
 
 Model magicblackhole
