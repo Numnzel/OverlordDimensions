@@ -114,7 +114,7 @@ class spookyspell : spookyspellbase {
 					
 					if (!RemoteRay.HitActor.bCorpse && RemoteRay.HitActor.SpawnHealth() < 5000) {
 						
-						RemoteRay.HitActor.SetStateLabel("Death");
+						RemoteRay.HitActor.A_Die();
 					}
 				}
 			}
