@@ -13,11 +13,22 @@
 	}
 }*/
 
-class magicfly : PowerFlight {
+class magicfly : PowerupGiver {
 
 	default {
-		powerup.duration -40;
 		
+		+INVENTORY.AUTOACTIVATE;
+		+INVENTORY.ALWAYSPICKUP;
 		+INVENTORY.NOSCREENBLINK;
+		inventory.maxamount 0;
+		powerup.type "magicflypower";
+	}
+}
+
+class magicflypower : PowerFlight {
+
+	default {
+		
+		powerup.duration -40;
 	}
 }
