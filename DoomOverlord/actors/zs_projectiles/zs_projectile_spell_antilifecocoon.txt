@@ -5,7 +5,6 @@ class magicantilifepuff : BulletPuff {
 		+ALLOWTHRUFLAGS;
 		+THRUACTORS;
 		+ALWAYSPUFF;
-		-PUFFONACTORS; //remove unnecessary flags...
 	}
 	
 	States {
@@ -23,7 +22,6 @@ class magicantilifecocoon : Actor {
 		RenderStyle "Add";
 		Alpha 0.4;
 		
-		//+BRIGHT;
 		+NOTRIGGER;
 		+SHOOTABLE;
 		+DONTTHRUST;
