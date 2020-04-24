@@ -1,7 +1,20 @@
-"blackhole.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org, Modified by Numnzel.
-
 CREDITS:
+
+Main Author: Numnzel
+
+Everything not specified in the next list has been made by me.
+
+
+
+"blackhole.ogg" by InspectorJ (www.jshaw.co.uk) of Freesound.org, Modified by Numnzel.
+//lightning.ogg
+//shards-metal.ogg
+//shards.ogg
+//zawarudo.ogg
+
+	Gore Blood: Nash (Extracted from Stronghold : Edge of Chaos and modified)
 	MememTwo Font: Jimmy, Memento Mori 2 team
 	MememTwo Monospace Edit: Jimmy
 	Optimisation in Ammo Bar code: argv
 	Everything Else: Gutawer
+

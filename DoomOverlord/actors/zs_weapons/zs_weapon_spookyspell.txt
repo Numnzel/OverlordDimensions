@@ -52,6 +52,9 @@ class spookyspell : spookyspellbase {
 	
 	states {
 		
+		attackacidarrow:
+			AINZ A 1 A_FireProjectile("magicacidarrow", 0, FALSE, 6.0, 12.0);
+			goto ready;
 		attackfireball:
 			AINZ A 1 A_JumpIfInventory("magicatriplet", 1, 2);
 			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, 6.0, 12.0);

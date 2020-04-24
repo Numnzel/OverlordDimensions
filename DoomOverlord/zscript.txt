@@ -2,6 +2,7 @@ version "4.3.0"
 
 #include "actors/zs_weapons/zs_weapon.txt"
 #include "actors/zs_projectiles/zs_projectile.txt"
+#include "actors/zs_sfx/zs_sfx.txt"
 #include "actors/zs_items/zs_item.txt"
 #include "actors/zs_others/zs_other.txt"
 #include "actors/zs_powerups/zs_powerup.txt"
