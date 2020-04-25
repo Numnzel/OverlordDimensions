@@ -48,6 +48,7 @@ class momonga : PlayerPawn {
 		damagefactor "Death", 0.0;
 		damagefactor "Drowning", 0.0;
 		damagefactor "Radiation", 1.0;
+		damagefactor "Dark", 0.0;
 		damagefactor 0.1;
 		painthreshold 10;
 		

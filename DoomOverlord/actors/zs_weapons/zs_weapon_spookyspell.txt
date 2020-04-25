@@ -160,6 +160,32 @@ class spookyspell : spookyspellbase {
 		attacknuclearblast:
 			AINZ A 1 A_RailAttack(0, 0, FALSE, "", "", RGF_SILENT|RGF_NORANDOMPUFFZ, 0, "magicnuclearblastspawn");
 			goto ready;
+		attacktruedark:
+			AINZ A 1 {
+				
+				actor dark;
+				bool unused;
+				
+				FLineTraceData RemoteRay;
+				LineTrace(
+				   angle,
+				   2048,
+				   pitch,
+				   flags: TRF_ALLACTORS,
+				   offsetz: height-12,
+				   data: RemoteRay
+				);
+				
+				if (RemoteRay.HitType == TRACE_HitActor) {
+					
+					if (!RemoteRay.HitActor.bCorpse && RemoteRay.HitActor.bISMONSTER && RemoteRay.HitActor.SpawnHealth() > 0 && RemoteRay.HitActor.Health > 0) {
+						
+						[unused, dark] = RemoteRay.HitActor.A_SpawnItemEx("magictruedark");
+						dark.target = RemoteRay.HitActor;
+					}
+				}
+			}
+			goto ready;
 		attackgraspheart:
 			AINZ A 1;
 			AINZ A 8 {
