@@ -1,11 +1,18 @@
 class spookyspellbase : Weapon abstract {
 	
 	StateLabel jumpstat;
+	float shootingz;
+	float shootingy;
+	
 	property jumpstate: jumpstat;
+	property shootz: shootingz;
+	property shooty: shootingy;
 	
 	default {
-	
+		
 		//spookyspell.jumpstate "ready";
+		spookyspellbase.shootz 0;
+		spookyspellbase.shooty 0;
 		
 		weapon.slotnumber 1;
 		weapon.ammouse 0;
@@ -16,7 +23,7 @@ class spookyspellbase : Weapon abstract {
 	}
 	
 	action int CheckSpell(int spellid) {
-	
+		
 		invoker.jumpstat = "ready";
 		
 		if (spellid == 1600 && CountInv("spellkeyeightCD2") == 0)		invoker.jumpstat = "attacknuclearblast";
@@ -38,6 +45,7 @@ class spookyspellbase : Weapon abstract {
 		else if (spellid == 110 && CountInv("spellkeytwoCD1") == 0)		invoker.jumpstat = "attackfireball";
 		else if (spellid == 100 && CountInv("spellkeytwoCD3") == 0)		invoker.jumpstat = "attackseethrough";
 		else if (spellid == 60 && CountInv("spellkeyoneCD2") == 0)		invoker.jumpstat = "attackacidarrow";
+		else if (spellid == 30 && CountInv("spellkeyoneCD1") == 0)		invoker.jumpstat = "attackmagicarrow";
 		
 		else {
 			return 255;

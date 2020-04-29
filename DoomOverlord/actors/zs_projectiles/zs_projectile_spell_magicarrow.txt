@@ -1,0 +1,37 @@
+
+class magicarrow : actor {
+	
+	default {
+		
+		speed 35;
+		vspeed 100;
+		damage 20;
+		scale 0.25;
+		Translation "FadeToYellow";
+		
+		PROJECTILE;
+		+BRIGHT;
+		+SEEKERMISSILE;
+	}
+	
+	states {
+		
+		spawn:
+			APBX EEEEEEEEEEEEE 1 {
+				A_SeekerMissile(0, 2, SMF_PRECISE|SMF_CURSPEED);
+				A_ScaleVelocity(0.75);
+			}
+			APBX EEEEEEEEEEEEE 1 {
+				A_SeekerMissile(0, 2, SMF_PRECISE|SMF_CURSPEED);
+				A_ScaleVelocity(1.35);
+			}
+			APBX E 1 {
+				A_SeekerMissile(0, 2, SMF_PRECISE|SMF_CURSPEED);
+				A_ScaleVelocity(1.05);
+			}
+			wait;
+		death:
+			APBX E 0;
+			stop;
+	}
+}
