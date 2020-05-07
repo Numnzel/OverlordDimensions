@@ -86,3 +86,13 @@ Model magicarrow {
 	FrameIndex APBX E 0 0
 	
 }
+
+Model magiccutterspawner {
+	
+	Path "models/realityslash"
+	Model 0 "slash.obj"
+	PITCHFROMMOMENTUM
+	USEACTORROLL
+	
+	FrameIndex BFS1 A 0 0
+}

@@ -47,6 +47,7 @@ class momonga : PlayerPawn {
 		damagefactor "Bio", 0.0;
 		damagefactor "Death", 0.0;
 		damagefactor "Drowning", 0.0;
+		damagefactor "RealitySlash", 0.0;
 		damagefactor "Radiation", 1.0;
 		damagefactor "Dark", 0.0;
 		damagefactor 0.1;
@@ -60,6 +61,10 @@ class momonga : PlayerPawn {
 		+PLAYERPAWN.NOTHRUSTWHENINVUL;
 	}
 	
+	override void CheckFOV() {
+		return;
+	}
+	
 	action void MyFunc() {
 		if (true) {
 			A_GiveInventory("manaunit", 1);
@@ -67,7 +72,7 @@ class momonga : PlayerPawn {
 	}
 	
 	states {
-	
+		
 		Spawn:
 			#### # 70 MyFunc(); //A_SetHealth(health+1);
 			goto Super::Spawn;

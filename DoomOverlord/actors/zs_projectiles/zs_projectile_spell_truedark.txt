@@ -49,7 +49,6 @@ class magictruedark : actor {
 				A_RadiusDamageSelf(dmg/140, 128);
 				A_Warp(AAPTR_TARGET, 0, 0, 0, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
 				A_CountDown();
-				
 			}
 			wait;
 		death:

@@ -2,7 +2,7 @@ class spookyspell : spookyspellbase {
 	
 	default {
 		
-		spookyspellbase.shootz 20.0; //24.0 is screen center
+		spookyspellbase.shootz 20.0; //24.0 is screen center with A_FireProjectile
 		spookyspellbase.shooty 2.0;
 	}
 	
@@ -189,6 +189,18 @@ class spookyspell : spookyspellbase {
 						}
 					}
 				}
+			}
+			goto ready;
+		attackrealityslash:
+			AINZ A 1 {
+				// TODO: Make the camera immobile while shooting. (Investigate: A_ZoomFactor, CVars...)
+				//PlayerInfo p;
+				//p = players[consoleplayer];
+				//CVar attacksetting = CVar.FindCVar('mouse_sensitivity');
+				//CVar attacksetting = Cvar.GetCVar("vid_defwidth", p);
+				//attacksetting.SetFloat(0.0);
+				
+				A_FireProjectile("magiccutterspawner", 0, FALSE, 0, 24.0, FPF_NOAUTOAIM);
 			}
 			goto ready;
 		attackexplodemine:
