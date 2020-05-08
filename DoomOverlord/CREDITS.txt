@@ -2,19 +2,32 @@ CREDITS:
 
 Main Author: Numnzel
 
-Everything not specified in the next list has been made by me.
+This is a resources used list.
+Everything not specified here has been made by me.
+Let me know if I forgot something.
 
 
+Sounds:
+	"blackhole.ogg" by InspectorJ (www.jshaw.co.uk) of Freesound.org, Modified by Numnzel.
+	//lightning.ogg
+	//shards-metal.ogg
+	//shards.ogg
+	//zawarudo.ogg
 
-"blackhole.ogg" by InspectorJ (www.jshaw.co.uk) of Freesound.org, Modified by Numnzel.
-//lightning.ogg
-//shards-metal.ogg
-//shards.ogg
-//zawarudo.ogg
+Gore Blood:
+	Author: Nash
+	Notes: Extracted from Stronghold : Edge of Chaos and modified.
 
-	Gore Blood: Nash (Extracted from Stronghold : Edge of Chaos and modified)
+Zscript HUD:
+	Author: Numnzel
+	Notes: Code based on another zscript hud, but heavily modified.
+
+Original zscript HUD:
 	MememTwo Font: Jimmy, Memento Mori 2 team
 	MememTwo Monospace Edit: Jimmy
 	Optimisation in Ammo Bar code: argv
 	Everything Else: Gutawer
 
+Smooth fire 2.0:
+	Author: Mikk
+	Notes: Made some edits.

@@ -11,6 +11,7 @@ class magicfireball : Actor {
 		Alpha 0.9;
 		SeeSound "imp/attack";
 		DeathSound "imp/shotx";
+		
 		PROJECTILE;
 		+RANDOMIZE;
 		+BLOODLESSIMPACT;
@@ -26,7 +27,11 @@ class magicfireball : Actor {
 			}
 			Loop;
 		death:
-			BAL1 C 0 A_Explode(130, 80, XF_HURTSOURCE, TRUE, 0, 0, 0, "", "Fire");
+			BAL1 C 0 {
+				A_Explode(130, 80, XF_HURTSOURCE, TRUE, 0, 0, 0, "", "Fire");
+				for (int i = random(0,2); i < 6; i++)
+					A_SpawnItemEx("magicfireballender", 0, 0, 0, frandom(0.5,5.0), 0, frandom(0.0,2.0), random(0,359));
+			}
 			BAL1 CDE 6 Bright A_SetScale(1.2);
 			Stop;
 	}
@@ -38,6 +43,7 @@ class magicfireballtrail : Actor {
 		speed 0;
 		alpha 0.9;
 		scale 0.9;
+		
 		PROJECTILE;
 		+ROLLSPRITE;
 		+CLIENTSIDEONLY;
@@ -50,14 +56,14 @@ class magicfireballtrail : Actor {
 				A_FadeOut(0.09);
 				A_SetScale(1.1);
 			}
-			Loop;
+			loop;
 	}
 }
 
 class magicfireballtrailblack : magicfireballtrail {
 
 	default {
-		Alpha 0.05;
+		alpha 0.05;
 	}
 
 	states {
@@ -74,6 +80,52 @@ class magicfireballtrailblack : magicfireballtrail {
 				A_SetRenderStyle(alpha, STYLE_Shaded);
 				A_SetScale(1.1);
 			}
-			Loop;
+			loop;
+	}
+}
+
+// simple test class to demonstrate how warping works.
+class testSoul : lostSoul {
+	
+	override void postBeginPlay () {
+		super.postBeginPlay();
+		
+		let fire = mk_BaseFire(spawn("mk_SmallFire"));
+		
+		if (fire) {
+			fire.follower = true;
+			fire.master = self;
+			fire.setShade("FF8B53");
+		}
+	}
+}
+
+class magicfireballender : actor {
+	
+	default {
+		radius 1;
+		height 2;
+		gravity 0.8;
+	}
+	
+	override void postBeginPlay () {
+		
+		super.postBeginPlay();
+		
+		let fire = mk_BaseFire(spawn("mk_SmallFire"));
+		
+		if (fire) {
+			double firescale = frandom(0.5,0.8);
+			fire.A_SetScale(firescale, firescale);
+			fire.follower = true;
+			fire.master = self;
+			fire.setShade("FF8B53");
+		}
+	}
+	
+	states {
+		spawn:
+			TNT1 A random(35,105);
+			stop;
 	}
 }
