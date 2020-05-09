@@ -13,14 +13,23 @@ class mk_BaseFire : actor abstract {
 	// a boolean to check if the fire needs to follow and check status of Master. 
 	bool follower;
 	
+	// selected renderstyle
+	int style;
+	string type; property firetype: type;
+	string type2; property firetype2: type2;
+	
+	bool unused;
+	
 	default {
 		RenderStyle "None";
 		
 		+NOGRAVITY;
 		+NOBLOCKMAP;
-		+NOTIMEFREEZE;
+		//+NOTIMEFREEZE;
 		
 		mk_BaseFire.lightScale 48;
+		mk_BaseFire.firetype "mk_Flame";
+		mk_BaseFire.firetype2 "mk_FlameShadow";
 	}
 	
 	override void postBeginPlay () {
@@ -35,7 +44,7 @@ class mk_BaseFire : actor abstract {
 				light.args[DYNAMICLIGHT.LIGHT_RED] 					= fillColor.r;
 				light.args[DYNAMICLIGHT.LIGHT_GREEN] 				= fillColor.g;
 				light.args[DYNAMICLIGHT.LIGHT_BLUE] 				= fillColor.b;
-					
+				
 				light.args[DYNAMICLIGHT.LIGHT_INTENSITY]			= lightScale*scale.x;
 				light.args[DYNAMICLIGHT.LIGHT_SECONDARY_INTENSITY]	= lightScale*scale.x;
 				
@@ -58,12 +67,8 @@ class mk_BaseFire : actor abstract {
 		if (bDORMANT)
 			return;
 		
-		bool a;
 		actor flame;
-		
-		bool b;
 		actor ember;
-		
 		actor light;
 		
 		if (follower) {
@@ -80,10 +85,15 @@ class mk_BaseFire : actor abstract {
 		}
 		
 		// spawn the visual flame actor.
-		[a, flame] = A_SpawnItemEx ("mk_Flame",	xofs: frandom (-3.0,3.0),
-												zvel: frandom (0.1,1.3),
-												angle: random (0,359),
-												flags: SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERTRANSLATION|SXF_TRANSFERSCALE);
+		string firespawn = type;
+		if (style == 1 && random(0,4) == 0)
+			firespawn = type2;
+		
+		
+		[unused, flame] = A_SpawnItemEx (firespawn,	xofs: frandom (-3.0,3.0),
+													zvel: frandom (0.1,1.3),
+													angle: random (0,359),
+													flags: SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERTRANSLATION|SXF_TRANSFERSCALE);
 		
 		// set the flame actor's colour to match the defined colour.
 		if (flame) {
@@ -101,15 +111,15 @@ class mk_BaseFire : actor abstract {
 		
 		// if Spawn embers is non-zero, attempt to spawn embers.
 		if (args[spawn_ember]) {
-			[b, ember] = A_SpawnItemEx ("mk_Ember",		frandom (1.0,4.0),
-														0.0,
-														frandom (24.0, 32.0) * scale.x,
-														frandom (0.25,1.25),
-														0.0,
-														frandom (0.5,3.0),
-														random (0,359),
-														SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERSPECIAL|SXF_TRANSFERSCALE,
-														255-args[spawn_ember]); // 0 = no embers, 255 = embers every tick
+			[unused, ember] = A_SpawnItemEx ("mk_Ember",		frandom (1.0,4.0),
+																0.0,
+																frandom (24.0, 32.0) * scale.x,
+																frandom (0.25,1.25),
+																0.0,
+																frandom (0.5,3.0),
+																random (0,359),
+																SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERSPECIAL|SXF_TRANSFERSCALE,
+																255-args[spawn_ember]); // 0 = no embers, 255 = embers every tick
 			
 			// set the ember to match the colour.
 			if (ember)
@@ -156,7 +166,7 @@ class mk_SmallFire : mk_BaseFire {
 		//$Arg3Type 11
 		//$Arg3Enum { 0 = "No"; 1 = "Yes  (Perfomance Warning!)"; }
 	}
-		
+	
 	states {
 		Spawn:
 			TNT1 A 0 noDelay A_Jump(255, random(0,11));
@@ -203,7 +213,7 @@ class mk_Flame : actor {
 
 	default {
 		+BRIGHT;
-		+NOTIMEFREEZE;
+		//+NOTIMEFREEZE;
 		+NOBLOCKMAP;
 		+NOGRAVITY;
 		+ROLLSPRITE;
@@ -234,6 +244,14 @@ class mk_Flame : actor {
 	}
 }
 
+class mk_FlameShadow : mk_Flame {
+
+	default {
+		
+		Renderstyle "Shadow";
+	}
+}
+
 class mk_Smoke : actor {
 
 	default {
@@ -241,7 +259,7 @@ class mk_Smoke : actor {
 		+NOBLOCKMAP;
 		+ROLLSPRITE;
 		+ROLLCENTER;
-		+NOTIMEFREEZE;
+		//+NOTIMEFREEZE;
 		+NOCLIP;
 		+FORCEXYBILLBOARD;
 		
@@ -293,7 +311,7 @@ Class mk_Ember : actor {
 		+NOBLOCKMAP;
 		+NOCLIP;
 		+NOGRAVITY;
-		+NOTIMEFREEZE;
+		//+NOTIMEFREEZE;
 		+FORCEXYBILLBOARD;
 		
 		RADIUS 1;

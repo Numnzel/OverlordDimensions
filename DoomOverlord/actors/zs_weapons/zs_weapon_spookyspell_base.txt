@@ -29,6 +29,7 @@ class spookyspellbase : Weapon abstract {
 		if (spellid == 1700 && CountInv("spellkeynineCD2") == 0)		invoker.jumpstat = "attackrealityslash";
 		else if (spellid == 1600 && CountInv("spellkeyeightCD2") == 0)	invoker.jumpstat = "attacknuclearblast";
 		else if (spellid == 1550 && CountInv("spellkeysevenCD2") == 0)	invoker.jumpstat = "attackblackhole";
+		else if (spellid == 1400 && CountInv("spellkeysixCD2") == 0)	invoker.jumpstat = "attackhellflame";
 		else if (spellid == 1320 && CountInv("spellkeynineCD1") == 0)	invoker.jumpstat = "attacksummonundead10th";
 		else if (spellid == 1180 && CountInv("spellkeynineCD3") == 0)	invoker.jumpstat = "attacktimestop";
 		else if (spellid == 1000 && CountInv("spellkeyeightCD1") == 0)	invoker.jumpstat = "attackgraspheart";

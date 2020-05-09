@@ -96,8 +96,6 @@ class effectacid : powerup {
 			if (owner)
 				owner.A_SpawnItemEx("effectacidsfx", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176); // that if is necessary, don't ask me why.
 		}
-		
-		return;
 	}
 	
 	override void DetachFromOwner() {
@@ -105,8 +103,6 @@ class effectacid : powerup {
 		if (owner)
 			if (owner.health > 0)
 				owner.A_SetTranslation("Restore");
-		
-		return;
 	}
 }
 

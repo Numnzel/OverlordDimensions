@@ -28,6 +28,7 @@ class magicfireball : Actor {
 			Loop;
 		death:
 			BAL1 C 0 {
+				A_SetTranslation("FadeToOrange");
 				A_Explode(130, 80, XF_HURTSOURCE, TRUE, 0, 0, 0, "", "Fire");
 				for (int i = random(0,2); i < 6; i++)
 					A_SpawnItemEx("magicfireballender", 0, 0, 0, frandom(0.5,5.0), 0, frandom(0.0,2.0), random(0,359));
@@ -84,28 +85,15 @@ class magicfireballtrailblack : magicfireballtrail {
 	}
 }
 
-// simple test class to demonstrate how warping works.
-class testSoul : lostSoul {
-	
-	override void postBeginPlay () {
-		super.postBeginPlay();
-		
-		let fire = mk_BaseFire(spawn("mk_SmallFire"));
-		
-		if (fire) {
-			fire.follower = true;
-			fire.master = self;
-			fire.setShade("FF8B53");
-		}
-	}
-}
-
 class magicfireballender : actor {
+	
+	int ttl;
 	
 	default {
 		radius 1;
 		height 2;
 		gravity 0.8;
+		+NODAMAGETHRUST;
 	}
 	
 	override void postBeginPlay () {
@@ -120,12 +108,22 @@ class magicfireballender : actor {
 			fire.follower = true;
 			fire.master = self;
 			fire.setShade("FF8B53");
+			fire.args[spawn_ember] = true;
+			fire.args[spawn_smoke] = true;
 		}
 	}
 	
 	states {
 		spawn:
-			TNT1 A random(35,105);
-			stop;
+			TNT1 A 0 NoDelay {
+				ttl = random(2,7);
+			}
+			TNT1 A 15 {
+				
+				A_Explode(random(4,6), 48, 0, false);
+				if (--ttl < 0)
+					SetState(null);
+			}
+			wait;
 	}
 }

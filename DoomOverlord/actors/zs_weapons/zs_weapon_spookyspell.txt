@@ -150,6 +150,9 @@ class spookyspell : spookyspellbase {
 				A_FireProjectile("magicastralsmite", 0, FALSE, invoker.shootingy+frandom(-10.0,10.0), invoker.shootingz+frandom(-10.0,10.0));
 			}
 			goto ready;
+		attackhellflame:
+			AINZ A 1 A_FireProjectile("magichellflame", 0, FALSE, invoker.shootingy, invoker.shootingz);
+			goto ready;
 		attacknegativeburst:
 			AINZ A 0;
 			AINZ A 0 A_GiveInventory("castingSpeedSlowWeak", 1);
