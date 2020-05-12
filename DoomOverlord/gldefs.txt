@@ -10,3 +10,10 @@ HardwareShader PostProcess Scene
 	Uniform float offsy
 	Uniform float angle
 }
+
+HardwareShader PostProcess Scene
+{
+	Shader	"GLSL/shader_fallendown.txt" 330
+	Name	"fallendown"
+	Uniform float timer
+}

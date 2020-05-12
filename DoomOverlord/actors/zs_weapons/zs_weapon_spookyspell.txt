@@ -1,5 +1,7 @@
 class spookyspell : spookyspellbase {
 	
+	
+	
 	default {
 		
 		spookyspellbase.shootz 20.0; //24.0 is screen center with A_FireProjectile
@@ -82,6 +84,8 @@ class spookyspell : spookyspellbase {
 		
 		return 0;
 	}
+	
+	
 	
 	states {
 		
@@ -168,14 +172,7 @@ class spookyspell : spookyspellbase {
 			AINZ A 8 {
 				
 				FLineTraceData RemoteRay;
-				LineTrace(
-				   angle,
-				   256,
-				   pitch,
-				   flags: TRF_ALLACTORS,
-				   offsetz: height-invoker.shootingz,
-				   data: RemoteRay
-				);
+				LineTrace( angle, 256, pitch, flags: TRF_ALLACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
 				
 				if (RemoteRay.HitType == TRACE_HitActor) {
 					
@@ -221,23 +218,15 @@ class spookyspell : spookyspellbase {
 			AINZ A 1 {
 				
 				actor dark;
-				bool unused;
-				
+				bool unused2;
 				FLineTraceData RemoteRay;
-				LineTrace(
-				   angle,
-				   2048,
-				   pitch,
-				   flags: TRF_ALLACTORS,
-				   offsetz: height-invoker.shootingz,
-				   data: RemoteRay
-				);
+				LineTrace( angle, 2048, pitch, flags: TRF_ALLACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
 				
 				if (RemoteRay.HitType == TRACE_HitActor) {
 					
 					if (!RemoteRay.HitActor.bCorpse && RemoteRay.HitActor.bISMONSTER && RemoteRay.HitActor.SpawnHealth() > 0 && RemoteRay.HitActor.Health > 0) {
 						
-						[unused, dark] = RemoteRay.HitActor.A_SpawnItemEx("magictruedark");
+						[unused2, dark] = RemoteRay.HitActor.A_SpawnItemEx("magictruedark");
 						dark.target = RemoteRay.HitActor;
 					}
 				}
@@ -248,14 +237,7 @@ class spookyspell : spookyspellbase {
 			AINZ A 8 {
 				
 				FLineTraceData RemoteRay;
-				LineTrace(
-				   angle,
-				   256,
-				   pitch,
-				   flags: TRF_ALLACTORS,
-				   offsetz: height-invoker.shootingz,
-				   data: RemoteRay
-				);
+				LineTrace( angle, 256, pitch, flags: TRF_ALLACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
 				
 				if (RemoteRay.HitType == TRACE_HitActor) {
 					
@@ -275,6 +257,17 @@ class spookyspell : spookyspellbase {
 			AINZ A 1 { A_StartSound("Spell/TimeStopOn", -1, CHANF_OVERLAP|ATTN_NONE|CHANF_NOPAUSE); }
 			AINZ A 1;
 			AINZ A 1 A_GiveInventory("magictimestop", 1);
+			goto ready;
+		attackfallendown:
+			AINZ A 1 {
+				
+				FLineTraceData RemoteRay;
+				LineTrace( angle, 2800, pitch, flags: TRF_THRUACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
+				
+				let fallen = magicfallendown(Spawn("magicfallendown", RemoteRay.HitLocation));
+				if (fallen)
+					fallen.owner = self;
+			}
 			goto ready;
 	}
 }

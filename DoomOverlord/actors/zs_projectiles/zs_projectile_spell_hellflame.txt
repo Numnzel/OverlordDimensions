@@ -7,15 +7,13 @@ class magichellflame : Actor {
 		speed 4;
 		damage 0;
 		ProjectileKickBack 5;
-		RenderStyle "Add";
-		Alpha 0.9;
+		
 		SeeSound "imp/attack";
 		DeathSound "imp/shotx";
 		
 		PROJECTILE;
 		+RANDOMIZE;
 		+BLOODLESSIMPACT;
-		+ROLLSPRITE;
 		+FORCERADIUSDMG;
 	}
 
@@ -91,6 +89,7 @@ class effecthellfire : powerup {
 class magichellflameender : actor {
 	
 	default {
+		
 		radius 1;
 		height 2;
 		gravity 0.35;

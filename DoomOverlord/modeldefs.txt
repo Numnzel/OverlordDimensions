@@ -96,3 +96,15 @@ Model magiccutterspawner {
 	
 	FrameIndex BFS1 A 0 0
 }
+
+Model magicfallendown {
+	
+	Path "models/fallendown"
+	Model 0 "fallendown.obj"
+	USEACTORPITCH
+	USEACTORROLL
+	
+	//ZOffset 0.0
+	Scale 1.0 1.0 0.001
+	FrameIndex BFS1 A 0 0
+}

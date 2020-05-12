@@ -2,8 +2,10 @@
 #include "actors/zs_projectiles/zs_projectile_spell_magicarrow.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_acidarrow.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_fireball.txt"
+
 #include "actors/zs_projectiles/zs_projectile_spell_lightning.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_gravitymaelstrom.txt"
+
 #include "actors/zs_projectiles/zs_projectile_spell_antilifecocoon.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_astralsmite.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_chaindragonlightning.txt"
@@ -11,9 +13,13 @@
 #include "actors/zs_projectiles/zs_projectile_spell_negativeburst.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_blackhole.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_explodemine.txt"
+
 #include "actors/zs_projectiles/zs_projectile_spell_wallofskeleton.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_nuclearblast.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_detectmagica.txt"
+
 #include "actors/zs_projectiles/zs_projectile_spell_hellflame.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_truedark.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_realityslash.txt"
+
+#include "actors/zs_projectiles/zs_projectile_spell_fallendown.txt"
