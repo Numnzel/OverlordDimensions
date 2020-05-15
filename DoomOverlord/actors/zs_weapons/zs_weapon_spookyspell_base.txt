@@ -33,6 +33,7 @@ class spookyspellbase : Weapon abstract {
 		else if (spellid == 1400 && CountInv("spellkeysixCD2") == 0)	invoker.jumpstat = "attackhellflame";
 		else if (spellid == 1320 && CountInv("spellkeynineCD1") == 0)	invoker.jumpstat = "attacksummonundead10th";
 		else if (spellid == 1180 && CountInv("spellkeynineCD3") == 0)	invoker.jumpstat = "attacktimestop";
+		else if (spellid == 1100 && CountInv("spellkeyfiveCD3") == 0)	invoker.jumpstat = "attackundeadarmy";
 		else if (spellid == 1000 && CountInv("spellkeyeightCD1") == 0)	invoker.jumpstat = "attackgraspheart";
 		else if (spellid == 900 && CountInv("spellkeysixCD1") == 0)		invoker.jumpstat = "attackastralsmite";
 		else if (spellid == 650 && CountInv("spellkeysevenCD3") == 0)	invoker.jumpstat = "attacktruedark";

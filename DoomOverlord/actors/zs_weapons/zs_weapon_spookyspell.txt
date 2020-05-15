@@ -141,6 +141,15 @@ class spookyspell : spookyspellbase {
 			}
 			AINZ A 1;
 			goto ready;
+		attackundeadarmy:
+			AINZ A 1 {
+				
+				FLineTraceData RemoteRay;
+				LineTrace( angle, 256, pitch, flags: TRF_THRUACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
+				
+				Spawn("magic_skeleton_spawner", RemoteRay.HitLocation);
+			}
+			goto ready;
 		attackwallofskeleton:
 			AINZ A 0;
 			AINZ A 1 A_FireProjectile("magicwallofskeleton", 0, FALSE, invoker.shootingy, invoker.shootingz);

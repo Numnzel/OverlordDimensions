@@ -16,6 +16,7 @@
 
 #include "actors/zs_projectiles/zs_projectile_spell_wallofskeleton.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_nuclearblast.txt"
+#include "actors/zs_projectiles/zs_projectile_spell_undeadarmy.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_detectmagica.txt"
 
 #include "actors/zs_projectiles/zs_projectile_spell_hellflame.txt"
