@@ -120,6 +120,22 @@ class spookyspell : spookyspellbase {
 			AINZ A 0;
 			AINZ A 1 A_GiveInventory("magicfly", 1);
 			goto ready;
+		attackshockwave:
+			AINZ A 1 {
+				
+				actor shock;
+				bool unused3;
+				
+				A_FireProjectile("magic_shockwave", 0, FALSE, invoker.shootingy, invoker.shootingz);
+				/*
+				[unused3, shock] = A_SpawnItemEx("magic_shockwave", 8.0, 0, 0);
+				
+				let shock2 = magic_shockwave(shock);
+				
+				if (shock2)
+					shock2.prad = 512.0;*/
+			}
+			goto ready;
 		attackgreaterteleportation:
 			AINZ A 1 {
 				

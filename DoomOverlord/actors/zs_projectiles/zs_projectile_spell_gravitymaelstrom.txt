@@ -86,13 +86,16 @@ class effectgravitymaelstromforce : CustomInventory {
 				
 				CheckProximity("magicgravitymaelstrom", 512, 1, CPXF_CHECKSIGHT|CPXF_SETMASTER|CPXF_CLOSEST);
 				
-				if (master != null) {
+				if (master) {
 					
-					// XY Thrust
-					double dist = Distance2D(master);
-					double force = 90000.0/(dist*dist)+1; // Force increases when close to XY coords.
-					
-					Thrust(-force, AngleTo(master));
+					if (master.getClassName() == "magicgravitymaelstrom") {
+						
+						// XY Thrust
+						double dist = Distance2D(master);
+						double force = 90000.0/(dist*dist)+1; // Force increases when close to XY coords.
+						
+						Thrust(-force, AngleTo(master));
+					}
 				}
 			}
 			stop;
