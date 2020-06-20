@@ -1,8 +1,9 @@
 
 #include "actors/zs_projectiles/zs_projectile_spell_magicarrow.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_acidarrow.txt"
-#include "actors/zs_projectiles/zs_projectile_spell_fireball.txt"
+#include "actors/zs_projectiles/zs_projectile_spell_completevision.txt"
 
+#include "actors/zs_projectiles/zs_projectile_spell_fireball.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_lightning.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_gravitymaelstrom.txt"
 #include "actors/zs_projectiles/zs_projectile_spell_greaterteleportation.txt"

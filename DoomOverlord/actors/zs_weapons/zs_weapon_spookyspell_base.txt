@@ -49,6 +49,7 @@ class spookyspellbase : Weapon abstract {
 		else if (spellid == 130 && CountInv("spellkeytwoCD2") == 0)		invoker.jumpstat = "attacklightning";
 		else if (spellid == 110 && CountInv("spellkeytwoCD1") == 0)		invoker.jumpstat = "attackfireball";
 		else if (spellid == 100 && CountInv("spellkeytwoCD3") == 0)		invoker.jumpstat = "attackfly";
+		else if (spellid == 20 && CountInv("spellkeyoneCD3") == 0)		invoker.jumpstat = "attackcompletevision";
 		else if (spellid == 60 && CountInv("spellkeyoneCD2") == 0)		invoker.jumpstat = "attackacidarrow";
 		else if (spellid == 30 && CountInv("spellkeyoneCD1") == 0)		invoker.jumpstat = "attackmagicarrow";
 		
