@@ -1,92 +1,61 @@
 
+// Antilife
 Model magicantilifecocoon {
 	
 	Path "models/antilife"
-	Model 0 "antilife.md3"
-	Skin 0 "antilife.png"
-	Model 1 "antilife_inside.md3"
-	Skin 1 "antilife.png"
+	Model 0 "antilife.obj"
+	Model 1 "antilifeflip.obj"
 	
 	Scale 2.0 2.0 2.4
-	FrameIndex ALCN A 0 0
+	FrameIndex MODL A 0 0
 }
 
-Model magicantilifecocoonsfx {
-	
-	Path "models/antilife"
-	Model 0 "antilifesfx.md3"
-	Skin 0 "antilifesfx.png"
-	Model 1 "antilifesfx_inside.md3"
-	Skin 1 "antilifesfx.png"
-	
-	Scale 2.0 2.0 2.4
-	FrameIndex TFOG G 0 0
-}
-
-Model magicantilifecocoonsfx2 {
-	
-	Path "models/antilife"
-	Model 0 "antilifesfx.md3"
-	Skin 0 "antilifesfx.png"
-	Model 1 "antilifesfx_inside.md3"
-	Skin 1 "antilifesfx.png"
-	
-	Scale 2.0 2.0 2.4
-	FrameIndex TFOG G 0 0
-}
-
+// Black hole
 Model magicblackhole {
 	
-	Path "models/antilife"
-	Model 0 "antilife.md3"
-	Skin 0 "antilife.png"
-	Model 1 "antilife_inside.md3"
-	Skin 1 "antilife.png"
+	Path "models/blackhole"
+	Model 0 "blackhole.obj"
+	Model 1 "blackhole_inverted.obj"
 	
 	Scale 1.0 1.0 1.2
-	FrameIndex ALCN A 0 0
+	FrameIndex MODL A 0 0
 }
 
+// Negative burst
 Model magicnegativeburst {
 	
-	Path "models/antilife"
-	Model 0 "antilife.md3"
-	Skin 0 "antilife.png"
-	Model 1 "antilife_inside.md3"
-	Skin 1 "antilife.png"
+	Path "models/negativeburst"
+	Model 0 "negativeburst.obj"
+	Model 1 "negativeburst_inverted.obj"
 	
 	Scale 0.2 0.2 0.24
-	FrameIndex ALCN A 0 0
+	FrameIndex MODL A 0 0
 }
 
+// Astral smite
 Model magicastralsmite {
 	
-	Path "models/antilife"
-	Model 0 "antilife.md3"
-	Skin 0 "antilife.png"
-	Model 1 "antilife_inside.md3"
-	Skin 1 "antilife.png"
+	Path "models/astralsmite"
+	Model 0 "astralsmite.obj"
 	PITCHFROMMOMENTUM
 	
 	Scale 0.8 0.02 0.02
-	FrameIndex ASSM A 0 0
+	FrameIndex MODL A 0 0
 }
 
+// Magic arrow
 Model magicarrow {
 	
-	Path "models/antilife"
-	Model 0 "antilife.md3"
-	Skin 0 "antilife.png"
-	Model 1 "antilife_inside.md3"
-	Skin 1 "antilife.png"
+	Path "models/magicarrow"
+	Model 0 "magicarrow.obj"
 	PITCHFROMMOMENTUM
 	//USEACTORPITCH
 	
 	Scale 0.4 0.02 0.02
-	FrameIndex APBX E 0 0
-	
+	FrameIndex MODL A 0 0
 }
 
+// Reality slash
 Model magiccutterspawner {
 	
 	Path "models/realityslash"
@@ -97,6 +66,8 @@ Model magiccutterspawner {
 	FrameIndex BFS1 A 0 0
 }
 
+
+// Fallen down
 Model magicfallendown {
 	
 	Path "models/fallendown"

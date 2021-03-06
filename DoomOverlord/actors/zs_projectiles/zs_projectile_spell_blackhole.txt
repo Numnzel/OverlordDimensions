@@ -77,20 +77,20 @@ class magicblackhole : Actor {
 	States {
 		
 		Spawn:
-			ALCN A 0 NoDelay A_StartSound("Spell/BlackHole", -1, CHANF_OVERLAP|ATTN_NONE|CHANF_NOPAUSE);
+			MODL A 0 NoDelay A_StartSound("Spell/BlackHole", -1, CHANF_OVERLAP|ATTN_NONE|CHANF_NOPAUSE);
 		Increase:
-			ALCN A 0 A_RadiusThrust(-500*(scale.x*2), 16*8*scale.x*10, RTF_THRUSTZ|RTF_NOIMPACTDAMAGE, 16*8*scale.x);
-			ALCN A 0 A_RadiusGive("magicblackholedeath", 16*8*scale.x, RGF_MONSTERS|RGF_NOSIGHT|RGF_MISSILES|RGF_CORPSES);
-			ALCN A 0 A_RadiusGive("magicblackholespeed", 16*8*scale.x*10, RGF_MONSTERS|RGF_NOSIGHT|RGF_MISSILES|RGF_CORPSES);
-			ALCN AAAAAA 0 A_SpawnProjectile("magicblackholedebris", 0, 0, random(0.0,360.0), CMF_AIMDIRECTION|CMF_ABSOLUTEANGLE, random(90.0, -90.0));
-			ALCN A 1 A_Jump(ScaleAnimation(invoker.BHSS, 0.0005, invoker.ACCON, FALSE), "Inverse");
+			MODL A 0 A_RadiusThrust(-500*(scale.x*2), 16*8*scale.x*10, RTF_THRUSTZ|RTF_NOIMPACTDAMAGE, 16*8*scale.x);
+			MODL A 0 A_RadiusGive("magicblackholedeath", 16*8*scale.x, RGF_MONSTERS|RGF_NOSIGHT|RGF_MISSILES|RGF_CORPSES);
+			MODL A 0 A_RadiusGive("magicblackholespeed", 16*8*scale.x*10, RGF_MONSTERS|RGF_NOSIGHT|RGF_MISSILES|RGF_CORPSES);
+			MODL AAAAAA 0 A_SpawnProjectile("magicblackholedebris", 0, 0, random(0.0,360.0), CMF_AIMDIRECTION|CMF_ABSOLUTEANGLE, random(90.0, -90.0));
+			MODL A 1 A_Jump(ScaleAnimation(invoker.BHSS, 0.0005, invoker.ACCON, FALSE), "Inverse");
 			loop;
 		Inverse:
-			ALCN A 0 A_RadiusThrust(-600*(scale.x*2), 16*8*scale.x*10, RTF_THRUSTZ|RTF_NOIMPACTDAMAGE, 16*8*scale.x);//RTF_NOTMISSILE
-			ALCN A 0 A_RadiusGive("magicblackholedeath", 16*8*scale.x, RGF_MONSTERS|RGF_NOSIGHT|RGF_MISSILES|RGF_CORPSES);
-			ALCN A 0 A_RadiusGive("magicblackholespeed", 16*8*scale.x*10, RGF_MONSTERS|RGF_NOSIGHT|RGF_MISSILES|RGF_CORPSES);
-			ALCN AAAAAA 0 A_SpawnProjectile("magicblackholedebris", 0, 0, random(0.0,360.0), CMF_AIMDIRECTION|CMF_ABSOLUTEANGLE, random(90.0, -90.0));
-			ALCN A 1 A_Jump(ScaleAnimation(invoker.BHSS, 0, invoker.ACCOFF, TRUE), "Death");
+			MODL A 0 A_RadiusThrust(-600*(scale.x*2), 16*8*scale.x*10, RTF_THRUSTZ|RTF_NOIMPACTDAMAGE, 16*8*scale.x);//RTF_NOTMISSILE
+			MODL A 0 A_RadiusGive("magicblackholedeath", 16*8*scale.x, RGF_MONSTERS|RGF_NOSIGHT|RGF_MISSILES|RGF_CORPSES);
+			MODL A 0 A_RadiusGive("magicblackholespeed", 16*8*scale.x*10, RGF_MONSTERS|RGF_NOSIGHT|RGF_MISSILES|RGF_CORPSES);
+			MODL AAAAAA 0 A_SpawnProjectile("magicblackholedebris", 0, 0, random(0.0,360.0), CMF_AIMDIRECTION|CMF_ABSOLUTEANGLE, random(90.0, -90.0));
+			MODL A 1 A_Jump(ScaleAnimation(invoker.BHSS, 0, invoker.ACCOFF, TRUE), "Death");
 			loop;
 		Death:
 			TNT1 A 0 RemoveDebris(); //A_RemoveChildren(TRUE, RMVF_MISSILES|RMVF_NOMONSTERS);

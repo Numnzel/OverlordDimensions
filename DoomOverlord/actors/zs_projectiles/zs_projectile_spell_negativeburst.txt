@@ -20,8 +20,8 @@ class magicnegativeburst : Actor {
 	States {
 		
 		Spawn:
-			ALCN A 0 NoDelay; //A_StartSound("Spell/BlackHole");
-			ALCN A 1 {
+			MODL A 0 NoDelay; //A_StartSound("Spell/BlackHole");
+			MODL A 1 {
 				
 				if(scale.x < 30.0)
 					A_SetScale(scale.x*1.25);

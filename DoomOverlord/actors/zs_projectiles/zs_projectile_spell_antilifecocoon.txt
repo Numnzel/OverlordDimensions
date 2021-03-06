@@ -84,47 +84,13 @@ class magicantilifecocoon : Actor {
 	States {
 		
 		Spawn:
-			ALCN A 0 NoDelay A_SpawnItemEx("magicantilifecocoonsfx", 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER);
-			ALCN A 0 A_SpawnItemEx("magicantilifecocoonsfx2", 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER);
-			ALCN A 0 SpawnSphere("magicantilifecrystal", 256.0, 3, FALSE);
-			ALCN A 1; //SetShade("FF0000");//A_FadeIn(0.02);
+			MODL A 0 NoDelay SpawnSphere("magicantilifecrystal", 256.0, 3, FALSE);
+			MODL A 1; //SetShade("FF0000");//A_FadeIn(0.02);
 			wait;
 		Death:
-			ALCN A 0;
 			TNT1 A 1 A_KillChildren();
 			TNT1 A 1 A_RemoveChildren(TRUE, RMVF_EVERYTHING);
 			Stop;
-	}
-}
-
-class magicantilifecocoonsfx : Actor {
-
-	default {
-		
-		renderstyle "Add";
-		alpha 0.1;
-		
-		+NOGRAVITY;
-	}
-	
-	states {
-		spawn:
-			TFOG G 1 A_SetAngle(angle+3, SPF_INTERPOLATE);
-			TFOG G 0 { alpha = abs(sin(angle))*0.1; }
-			loop;
-		death:
-			TNT1 A 0;
-			stop;
-	}
-}
-
-class magicantilifecocoonsfx2 : magicantilifecocoonsfx {
-	
-	states {
-		spawn:
-			TFOG G 1 A_SetAngle(angle-3, SPF_INTERPOLATE);
-			TFOG G 0 { alpha = abs(sin(angle))*0.1; }
-			loop;
 	}
 }
 

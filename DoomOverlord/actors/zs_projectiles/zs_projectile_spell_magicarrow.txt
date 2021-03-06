@@ -17,21 +17,21 @@ class magicarrow : actor {
 	states {
 		
 		spawn:
-			APBX EEEEEEEEEEEEE 1 {
+			MODL AAAAAAAAAAAAA 1 {
 				A_SeekerMissile(0, 2, SMF_PRECISE|SMF_CURSPEED);
 				A_ScaleVelocity(0.75);
 			}
-			APBX EEEEEEEEEEEEE 1 {
+			MODL AAAAAAAAAAAAA 1 {
 				A_SeekerMissile(0, 2, SMF_PRECISE|SMF_CURSPEED);
 				A_ScaleVelocity(1.35);
 			}
-			APBX E 1 {
+			MODL A 1 {
 				A_SeekerMissile(0, 2, SMF_PRECISE|SMF_CURSPEED);
 				A_ScaleVelocity(1.05);
 			}
 			wait;
 		death:
-			APBX E 0;
-			stop;
+			MODL A 1 A_FadeOut(0.05);
+			wait;
 	}
 }
