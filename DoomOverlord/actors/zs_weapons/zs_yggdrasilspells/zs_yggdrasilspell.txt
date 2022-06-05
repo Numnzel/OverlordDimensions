@@ -1,6 +1,0 @@
-
-#include "actors/zs_weapons/zs_yggdrasilspells/zs_yggdrasilspell_spell.txt"
-
-#include "actors/zs_weapons/zs_yggdrasilspells/zs_yggdrasilspell_spellkeys.txt"
-
-#include "actors/zs_weapons/zs_yggdrasilspells/zs_yggdrasilspell_cooldowns.txt"

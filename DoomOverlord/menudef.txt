@@ -1,17 +1,24 @@
-AddOptionMenu "OptionsMenu"
-{
+AddOptionMenu "OptionsMenu" {
+
 	StaticText " "
-	Submenu "GZSHud Options", "GZSOptions"
+	Submenu "Doom Overlord Options", "DoomOverlordOptions"
 }
 
-OptionMenu "GZSOptions"
-{
+OptionMenu "DoomOverlordOptions" {
+
 	Position -15
-	Title       "GZSHud Options"
-	StaticText "General", 1
+	Title "Doom Overlord Options"
+
+	StaticText "HUD Options", 1
 	StaticText ""
-	Slider "HUD Box Alpha", "gzs_boxalpha", 0, 1, 0.1
-	Option "Draw Ammo Bar", "gzs_ammobar", "OnOff"
+	Option "Enable compact HUD (WIP)", "DMO_hud_smaller", "OnOff"
+	Option "HUD on top (WIP)", "DMO_hud_spells_top", "OnOff"
+	Option "Bars on top (WIP)", "DMO_hud_bar_top", "OnOff"
+	Option "Show spells name", "DMO_hud_spells_names", "OnOff"
+	Option "Always show spells", "DMO_hud_spells_always", "OnOff"
+	Option "Always show enhancements", "DMO_hud_enhanc_always", "OnOff"
+	Slider "Spells transparency multiplier", "DMO_hud_spells_alpha", 0, 1, 0.1
+
 	StaticText ""
 	StaticText "Level Stats", 1
 	StaticText ""

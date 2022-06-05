@@ -1,3 +1,0 @@
-
-#include "actors/zs_sfx/zs_sfx_gore.txt"
-#include "actors/zs_sfx/zs_sfx_smoothfire.txt"

@@ -2,9 +2,9 @@ CREDITS:
 
 Main Author: Numnzel
 
-This is a resources used list.
+This is a used resources list.
 Everything not specified here has been made by me.
-Let me know if I forgot something.
+But let me know if I forgot something.
 
 
 Sounds:
@@ -13,6 +13,12 @@ Sounds:
 	//shards-metal.ogg
 	//shards.ogg
 	//zawarudo.ogg
+	//fallendn.ogg
+	//fallends.ogg
+
+	"selector.wav" by Nightflame of Freesound.org
+	"enhance.wav" by jagadamba of Freesound.org
+	"enhanceoff.wav" by Numnzel
 
 Gore Blood:
 	Author: Nash
