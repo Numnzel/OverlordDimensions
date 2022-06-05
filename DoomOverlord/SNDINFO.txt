@@ -28,3 +28,18 @@
 	Spell/FallenDown 				sounds/snd_weapons/snd_yggdrasilspells/fallendn.ogg
 	$Volume Spell/FallenDown 		1.0
 	$limit Spell/FallenDown			0
+
+// HUD: Selector sound
+
+	HUD/Select 						sounds/snd_hud/selector.ogg
+	$Volume HUD/Select 				1.0
+
+// HUD: Enhance magica sound
+
+	HUD/Enhance 					sounds/snd_hud/enhance.ogg
+	$Volume HUD/Enhance 			0.2
+	$limit Spell/Enhance			0
+
+	HUD/EnhanceOff 					sounds/snd_hud/enhanceoff.ogg
+	$Volume HUD/EnhanceOff 			0.3
+	$limit Spell/EnhanceOff			0

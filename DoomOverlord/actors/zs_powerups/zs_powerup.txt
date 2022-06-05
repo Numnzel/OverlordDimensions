@@ -1,5 +1,0 @@
-#include "actors/zs_powerups/zs_powerup_spell_seethrough.txt"
-#include "actors/zs_powerups/zs_powerup_spell_fly.txt"
-#include "actors/zs_powerups/zs_powerup_spell_timestop.txt"
-#include "actors/zs_powerups/zs_powerup_spell_bodyofrefulgentberyl.txt"
-#include "actors/zs_powerups/zs_powerup_castingslow.txt"
