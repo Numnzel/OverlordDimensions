@@ -1,0 +1,11 @@
+pointlight smallmanaorblight {
+
+	color 0.02 0.0 1.0
+	size 16
+	dontlightactors 1
+}
+
+object smallmanaorb {
+
+	frame MANA { light smallmanaorblight }
+}

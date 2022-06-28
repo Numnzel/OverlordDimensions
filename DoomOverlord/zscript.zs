@@ -7,6 +7,7 @@ version "4.3.0"
 #include "actors/zs_others/zs_other.zs"
 #include "actors/zs_powerups/zs_powerup.zs"
 #include "zscript/zs_hud/zs_hud.zs"
+#include "zscript/zs_ehandlers/zs_ehandler.zs"
 
 /*
 class repa : inventory
