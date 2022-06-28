@@ -1,0 +1,11 @@
+pointlight healthspecklight {
+
+	color 1.0 0.0 0.0
+	size 12
+	dontlightactors 1
+}
+
+object healthspeck {
+
+	frame HEAL { light healthspecklight }
+}

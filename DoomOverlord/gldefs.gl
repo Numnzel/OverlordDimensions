@@ -1,5 +1,6 @@
 
 #include "actors/gl_projectiles/gl_projectile.gl"
+#include "actors/gl_items/gl_item.gl"
 
 
 HardwareShader PostProcess Scene

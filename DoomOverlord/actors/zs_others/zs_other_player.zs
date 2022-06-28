@@ -25,8 +25,8 @@ class momonga : PlayerPawn {
 		Player.WeaponSlot 9, "spellkeynine";
 		Player.WeaponSlot 0, "spellkeyzero";
 		
-		Player.StartItem "mana", 300;
-		Player.StartItem "maxmana", 600;
+		Player.StartItem "mana", 2000;
+		Player.StartItem "maxmana", 2000;
 		Player.StartItem "spookymelee", 1;
 		Player.StartItem "spellid", 0;
 		
@@ -55,14 +55,15 @@ class momonga : PlayerPawn {
 		
 		super.Tick();
 
+		if (self.getAge() % 35 == 0)
+			RegenerateMana();
+
 		if (self.bCORPSE) {
 
 			A_GiveInventory("playerdied", 1);
 		}
 		else if (self.getAge() % 70 == 0) {
 			
-			RegenerateMana();
-
 			switch(random(1,9)) {
 				case 1:
 					A_GiveInventory("playerleft1", 1);
@@ -86,7 +87,7 @@ class momonga : PlayerPawn {
 	action void RegenerateMana() {
 		
 		if (self.CountInv("mana") < self.CountInv("maxmana"))
-			A_GiveInventory("manaunit", 1);
+			A_GiveInventory("mana", 1);
 	}
 	
 	states {

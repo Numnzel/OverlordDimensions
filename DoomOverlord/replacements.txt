@@ -1,0 +1,26 @@
+[DOOM ITEMS]
+HealthBonus=healthspeck
+Clip=smallmanaorb
+Shell=smallmanaorb
+RocketAmmo=smallmanaorb
+Cell=smallmanaorb
+ClipBox=manaorb
+ShellBox=manaorb
+RocketBox=manaorb
+CellBox=manaorb
+Stimpack=smallhealthorb
+Medikit=healthorb
+
+[HERETIC ITEMS]
+CrossbowHefty=manaorb
+GoldWandHefty=manaorb
+MaceHefty=manaorb
+PhoenixRodHefty=manaorb
+SkullRodHefty=manaorb
+
+[HEXEN ITEMS]
+Mana1=manaorb
+Mana2=manaorb
+Mana3=manaorb
+
+[STRIFE ITEMS]
