@@ -143,8 +143,8 @@ class magicblackholespeed : CustomInventory {
 			TNT1 A 0;
 			TNT1 A 0 {
 				
-				if (!CheckClass("magicblackholedebris") && !CheckClass("magicblackholeshard")) {
-					if (A_CheckFlag("MISSILE", "Null")) {
+				if (invoker.owner && invoker.owner.getClassName() != "magicblackholedebris" && invoker.owner.getClassName() != "magicblackholeshard") {
+					if (invoker.bMISSILE) {
 					
 						CheckProximity("magicblackhole", 5000, 1, CPXF_CHECKSIGHT|CPXF_SETMASTER|CPXF_CLOSEST);
 						
@@ -153,7 +153,7 @@ class magicblackholespeed : CustomInventory {
 							// Z Thrust
 							double distz = Distance3D(master);
 							double finalspeed = 80000.0/(distz*distz)+1;
-							if (z > master.z) finalspeed = -finalspeed;
+							if (invoker.pos.z > master.pos.z) finalspeed = -finalspeed;
 							
 							AddZ(finalspeed);
 							
@@ -169,7 +169,7 @@ class magicblackholespeed : CustomInventory {
 					}
 					else {
 						
-						A_ChangeVelocity(clamp(velx, -4, 4), clamp(vely, -4, 4), clamp(velz, -4, 4), CVF_REPLACE);
+						A_ChangeVelocity(clamp(vel.x, -4, 4), clamp(vel.y, -4, 4), clamp(vel.z, -4, 4), CVF_REPLACE);
 					}
 				}
 			}
@@ -194,7 +194,7 @@ class magicblackholedeath : CustomInventory {
 				
 				//A_GiveInventory("magicblackholepowerup", 1);
 				//A_Explode(5, 2, XF_HURTSOURCE|XF_NOTMISSILE, FALSE, 0, 0, 0, "", "UltraDeath");
-				if (!CheckClass("magicblackholedebris")) {
+				if (invoker.getClassName() != "magicblackholedebris") {
 					A_Remove(AAPTR_DEFAULT, RMVF_EVERYTHING);
 				}
 			}

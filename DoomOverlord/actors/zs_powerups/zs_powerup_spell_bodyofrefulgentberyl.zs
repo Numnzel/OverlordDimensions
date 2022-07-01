@@ -31,7 +31,7 @@ class magicbodyofrefulgentberylexit : Powerup {
 			
 			owner.bGhost = FALSE;
 			
-			if(A_SpawnItemEx("magicbodyofrefulgentberylcheck", owner.x, owner.y, owner.z, 0.0, 0.0, 0.0, 0, SXF_ABSOLUTEPOSITION, 0) || owner.bThruactors == FALSE) {
+			if(A_SpawnItemEx("magicbodyofrefulgentberylcheck", owner.pos.x, owner.pos.y, owner.pos.z, 0.0, 0.0, 0.0, 0, SXF_ABSOLUTEPOSITION, 0) || owner.bThruactors == FALSE) {
 				
 				owner.bThruactors = FALSE;
 				

@@ -80,10 +80,6 @@ class momonga : PlayerPawn {
 		}
 	}
 	
-	override void CheckFOV() {
-		return;
-	}
-	
 	action void RegenerateMana() {
 		
 		if (self.CountInv("mana") < self.CountInv("maxmana"))

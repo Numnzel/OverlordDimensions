@@ -37,7 +37,7 @@ class magic_shock : custominventory {
 	states {
 		
 		pickup:
-			TNT1 A 1 NoDelay {
+			TNT1 A 0 {
 				
 				if (CountInv("magic_shock_disabled") == 0) {
 					

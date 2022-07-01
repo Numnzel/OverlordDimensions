@@ -32,7 +32,6 @@ class NashGore_FlyingBlood : actor {
 		+CORPSE;
 		+NOTELEPORT;
 		+NOBLOCKMAP;
-		-SOLID; // [Nash] so that it doesn't stick into other Actors
 	}
 	
 	states {
@@ -101,7 +100,7 @@ class NashGore_BloodSpot : actor {
 		
 		Spawn:
 			TNT1 A 0;
-			TNT1 A 0 A_PlaySound("bloodsplat");
+			TNT1 A 0 A_StartSound("bloodsplat");
 			TNT1 A 0 A_Jump(64,4);
 			TNT1 A 0 A_Jump(128,54);
 			TNT1 A 0 A_Jump(192,104);

@@ -91,9 +91,9 @@ class spookyspell : spookyspellbase {
 			AINZ A 1 {
 				
 				if (CountInv("magicatriplet") > 0)
-					FireMagicArrows(floor(CountInv("maxmana")/500), 1);
+					FireMagicArrows(max(1, floor(CountInv("maxmana")/500)), 3);
 				else
-					FireMagicArrows(floor(CountInv("maxmana")/500), 3);
+					FireMagicArrows(max(1, floor(CountInv("maxmana")/500)), 1);
 			}
 			goto ready;
 		attackacidarrow:

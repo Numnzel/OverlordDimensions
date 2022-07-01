@@ -64,26 +64,30 @@ class magic_lifeaurasfx : actor {
 				}
 			}
 			SEHT A 1 {
-				
-				// Update scale
-				double decrement = max(0.005, (0.05-(target.health/80000.0))/3.0);
-				
-				scale *= frandom(0.96, 0.99);
-				scale.x = max(0, scale.x-decrement);
-				scale.y = scale.x;
-				
-				// Update alpha
-				alpha -= 0.03;
-				
-				// Update speed
-				A_ScaleVelocity(0.98);
-				
-				// Roll
-				A_SetRoll(roll+random(0,32), SPF_INTERPOLATE);
-				
-				// Remove
-				if (alpha <= 0.0)
-					SetState(null);
+
+				if (target) {
+					
+					// Update scale
+					double decrement = max(0.005, (0.05-(target.health/80000.0))/3.0);
+					
+					scale *= frandom(0.96, 0.99);
+					scale.x = max(0, scale.x-decrement);
+					scale.y = scale.x;
+					
+					// Update alpha
+					alpha -= 0.03;
+					
+					// Update speed
+					A_ScaleVelocity(0.98);
+					
+					// Roll
+					A_SetRoll(roll+random(0,32), SPF_INTERPOLATE);
+					
+					// Remove
+					if (alpha <= 0.0)
+						SetState(null);
+					
+				} else SetState(null);
 			}
 			wait;
 	}

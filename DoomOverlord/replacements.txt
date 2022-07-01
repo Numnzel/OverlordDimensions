@@ -24,3 +24,6 @@ Mana2=manaorb
 Mana3=manaorb
 
 [STRIFE ITEMS]
+
+[COMMON CLASSES]
+Blood=NashGore_Blood

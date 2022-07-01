@@ -40,7 +40,7 @@ class magicaciddrop : actor {
 		
 		spawn:
 			BAL7 C 1 {
-				if(self.z <= floorz)
+				if(self.pos.z <= floorz)
 					setStateLabel("death");
 			}
 			loop;
@@ -56,7 +56,6 @@ class magicacidpool : actor {
 		
 		translation "FadeToGreen";
 		
-		-SOLID;
 		+LOOKALLAROUND;
 	}
 	
