@@ -57,24 +57,18 @@ class yggdrasilspell : weapon abstract {
 	}
 	
 	states {
-	
-		ready:
-			TNT1 A 0;
-			goto deselect;
+		
 		select:
 			TNT1 A 0 SetManaCost();
-			goto deselect;
 		fire:
-			TNT1 A 0;
-			goto deselect;
+		ready:
 		deselect:
 			TNT1 A 0 {
 				A_SelectWeapon("spookyspell");
 				A_SelectWeapon("spookymelee");
 			}
-		deselectloop:
 			TNT1 A 0 A_Lower;
-			loop;
+			wait;
 		spawn:
 			TNT1 A 0;
 			stop;

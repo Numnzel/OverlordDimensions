@@ -2,8 +2,6 @@ class spookyspell : spookyspellbase {
 	
 	default {
 		
-		spookyspellbase.shootz 20.0; //24.0 is screen center with A_FireProjectile
-		spookyspellbase.shooty 2.0;
 	}
 	
 	action void FireMagicArrows (int number = 1, int lines = 1) {
@@ -29,7 +27,7 @@ class spookyspell : spookyspellbase {
 				if (number == 1)
 					ang = 0;
 				
-				A_FireProjectile("magicarrow", ang, FALSE, invoker.shootingy, invoker.shootingz, 0, pit);
+				A_FireProjectile("magicarrow", ang, FALSE, invoker.shootY, invoker.shootZ, 0, pit);
 			}
 	}
 	
@@ -63,7 +61,7 @@ class spookyspell : spookyspellbase {
 			double aimingskyz = -sin(pitch)*(90.0-i);
 			double frontoffsx = cos(pitch)*(80.0-i);
 			
-			[unused, dragon] = A_SpawnItemEx("magicchaindragonlightning", frontoffsx, invoker.shootingy, aimingskyz+crosshairz, cos(pitch)*vel, 0, -sin(pitch)*vel, 0);
+			[unused, dragon] = A_SpawnItemEx("magicchaindragonlightning", frontoffsx, invoker.shootY, aimingskyz+crosshairz, cos(pitch)*vel, 0, -sin(pitch)*vel, 0);
 			
 			if (dragon) {
 				
@@ -97,15 +95,15 @@ class spookyspell : spookyspellbase {
 			}
 			goto ready;
 		attackacidarrow:
-			AINZ A 1 A_FireProjectile("magicacidarrow", 0, FALSE, invoker.shootingy, invoker.shootingz);
+			AINZ A 1 A_FireProjectile("magicacidarrow", 0, FALSE, invoker.shootY, invoker.shootZ);
 			goto ready;
 		attackfireball:
 			AINZ A 1 A_JumpIfInventory("magicatriplet", 1, 2);
-			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, invoker.shootingy, invoker.shootingz);
+			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, invoker.shootY, invoker.shootZ);
 			goto ready;
-			AINZ A 0 A_FireProjectile("magicfireball", 8, FALSE, invoker.shootingy, invoker.shootingz);
-			AINZ A 0 A_FireProjectile("magicfireball", -8, FALSE, invoker.shootingy, invoker.shootingz);
-			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, invoker.shootingy, invoker.shootingz);
+			AINZ A 0 A_FireProjectile("magicfireball", 8, FALSE, invoker.shootY, invoker.shootZ);
+			AINZ A 0 A_FireProjectile("magicfireball", -8, FALSE, invoker.shootY, invoker.shootZ);
+			AINZ A 1 A_FireProjectile("magicfireball", 0, FALSE, invoker.shootY, invoker.shootZ);
 			goto ready;
 		attacklightning:
 			AINZ A 0 A_Light(9);
@@ -126,7 +124,7 @@ class spookyspell : spookyspellbase {
 				actor shock;
 				bool unused3;
 				
-				A_FireProjectile("magic_shockwave", 0, FALSE, invoker.shootingy, invoker.shootingz);
+				A_FireProjectile("magic_shockwave", 0, FALSE, invoker.shootY, invoker.shootZ);
 				/*
 				[unused3, shock] = A_SpawnItemEx("magic_shockwave", 8.0, 0, 0);
 				
@@ -140,7 +138,7 @@ class spookyspell : spookyspellbase {
 			AINZ A 1 {
 				
 				FLineTraceData RemoteRay;
-				LineTrace( angle, 2048, pitch, flags: TRF_THRUACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
+				LineTrace( angle, 2048, pitch, flags: TRF_THRUACTORS, offsetz: height-invoker.shootZ, data: RemoteRay );
 				
 				Vector3 place;
 				place = RemoteRay.HitLocation;
@@ -159,7 +157,7 @@ class spookyspell : spookyspellbase {
 			}
 			goto ready;
 		attackgravitymaelstrom:
-			AINZ A 1 A_FireProjectile("magicgravitymaelstrom", 0, FALSE, invoker.shootingy, invoker.shootingz);
+			AINZ A 1 A_FireProjectile("magicgravitymaelstrom", 0, FALSE, invoker.shootY, invoker.shootZ);
 			goto ready;
 		attackantilifecocoon:
 			AINZ A 0;
@@ -181,26 +179,26 @@ class spookyspell : spookyspellbase {
 			AINZ A 1 {
 				
 				FLineTraceData RemoteRay;
-				LineTrace( angle, 256, pitch, flags: TRF_THRUACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
+				LineTrace( angle, 256, pitch, flags: TRF_THRUACTORS, offsetz: height-invoker.shootZ, data: RemoteRay );
 				
 				Spawn("magic_skeleton_spawner", RemoteRay.HitLocation);
 			}
 			goto ready;
 		attackwallofskeleton:
 			AINZ A 0;
-			AINZ A 1 A_FireProjectile("magicwallofskeleton", 0, FALSE, invoker.shootingy, invoker.shootingz);
+			AINZ A 1 A_FireProjectile("magicwallofskeleton", 0, FALSE, invoker.shootY, invoker.shootZ);
 			goto ready;
 		attackastralsmite:
 			AINZ A 0;
 			AINZ AA 0 A_GiveInventory("castingSpeedSlowWeak", 1);
 			AINZ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 {
 				
-				A_FireProjectile("magicastralsmite", 0, FALSE, invoker.shootingy+frandom(-10.0,10.0), invoker.shootingz+frandom(-10.0,10.0));
-				A_FireProjectile("magicastralsmite", 0, FALSE, invoker.shootingy+frandom(-10.0,10.0), invoker.shootingz+frandom(-10.0,10.0));
+				A_FireProjectile("magicastralsmite", 0, FALSE, invoker.shootY+frandom(-10.0,10.0), invoker.shootZ+frandom(-10.0,10.0));
+				A_FireProjectile("magicastralsmite", 0, FALSE, invoker.shootY+frandom(-10.0,10.0), invoker.shootZ+frandom(-10.0,10.0));
 			}
 			goto ready;
 		attackhellflame:
-			AINZ A 1 A_FireProjectile("magichellflame", 0, FALSE, invoker.shootingy, invoker.shootingz);
+			AINZ A 1 A_FireProjectile("magichellflame", 0, FALSE, invoker.shootY, invoker.shootZ);
 			goto ready;
 		attacknegativeburst:
 			AINZ A 0;
@@ -210,14 +208,14 @@ class spookyspell : spookyspellbase {
 			goto ready;
 		attackblackhole:
 			AINZ A 1;
-			AINZ A 8 A_FireProjectile("magicblackholelaunch", 0, FALSE, invoker.shootingy, invoker.shootingz);
+			AINZ A 8 A_FireProjectile("magicblackholelaunch", 0, FALSE, invoker.shootY, invoker.shootZ);
 			goto ready;
 		attacksummonundead10th:
 			AINZ A 1;
 			AINZ A 8 {
 				
 				FLineTraceData RemoteRay;
-				LineTrace( angle, 256, pitch, flags: TRF_ALLACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
+				LineTrace( angle, 256, pitch, flags: TRF_ALLACTORS, offsetz: height-invoker.shootZ, data: RemoteRay );
 				
 				if (RemoteRay.HitType == TRACE_HitActor) {
 					
@@ -250,11 +248,11 @@ class spookyspell : spookyspellbase {
 			goto ready;
 		attackexplodemine:
 			AINZ A 1 A_JumpIfInventory("magicatriplet", 1, 2);
-			AINZ A 1 A_FireProjectile("magicexplodemineproj", 0, FALSE, invoker.shootingy, invoker.shootingz, FPF_NOAUTOAIM, 0);
+			AINZ A 1 A_FireProjectile("magicexplodemineproj", 0, FALSE, invoker.shootY, invoker.shootZ, FPF_NOAUTOAIM, 0);
 			goto ready;
-			AINZ A 0 A_FireProjectile("magicexplodemineproj", 32, FALSE, invoker.shootingy, invoker.shootingz, FPF_NOAUTOAIM, 30);
-			AINZ A 0 A_FireProjectile("magicexplodemineproj", -32, FALSE, invoker.shootingy, invoker.shootingz, FPF_NOAUTOAIM, 30);
-			AINZ A 1 A_FireProjectile("magicexplodemineproj", 0, FALSE, invoker.shootingy, invoker.shootingz, FPF_NOAUTOAIM, 0);
+			AINZ A 0 A_FireProjectile("magicexplodemineproj", 32, FALSE, invoker.shootY, invoker.shootZ, FPF_NOAUTOAIM, 30);
+			AINZ A 0 A_FireProjectile("magicexplodemineproj", -32, FALSE, invoker.shootY, invoker.shootZ, FPF_NOAUTOAIM, 30);
+			AINZ A 1 A_FireProjectile("magicexplodemineproj", 0, FALSE, invoker.shootY, invoker.shootZ, FPF_NOAUTOAIM, 0);
 			goto ready;
 		attacknuclearblast:
 			AINZ A 1 A_RailAttack(0, 0, FALSE, "", "", RGF_SILENT|RGF_NORANDOMPUFFZ, 0, "magicnuclearblastspawn");
@@ -265,7 +263,7 @@ class spookyspell : spookyspellbase {
 				actor dark;
 				bool unused2;
 				FLineTraceData RemoteRay;
-				LineTrace( angle, 2048, pitch, flags: TRF_ALLACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
+				LineTrace( angle, 2048, pitch, flags: TRF_ALLACTORS, offsetz: height-invoker.shootZ, data: RemoteRay );
 				
 				if (RemoteRay.HitType == TRACE_HitActor) {
 					
@@ -282,7 +280,7 @@ class spookyspell : spookyspellbase {
 			AINZ A 8 {
 				
 				FLineTraceData RemoteRay;
-				LineTrace( angle, 256, pitch, flags: TRF_ALLACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
+				LineTrace( angle, 256, pitch, flags: TRF_ALLACTORS, offsetz: height-invoker.shootZ, data: RemoteRay );
 				
 				if (RemoteRay.HitType == TRACE_HitActor) {
 					
@@ -307,7 +305,7 @@ class spookyspell : spookyspellbase {
 			AINZ A 1 {
 				
 				FLineTraceData RemoteRay;
-				LineTrace( angle, 2800, pitch, flags: TRF_THRUACTORS, offsetz: height-invoker.shootingz, data: RemoteRay );
+				LineTrace( angle, 2800, pitch, flags: TRF_THRUACTORS, offsetz: height-invoker.shootZ, data: RemoteRay );
 				
 				let fallen = magicfallendown(Spawn("magicfallendown", RemoteRay.HitLocation));
 				if (fallen)

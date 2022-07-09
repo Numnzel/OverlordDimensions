@@ -28,6 +28,7 @@ class momonga : PlayerPawn {
 		Player.StartItem "mana", 2000;
 		Player.StartItem "maxmana", 2000;
 		Player.StartItem "spookymelee", 1;
+		Player.StartItem "makeanimation", 1;
 		Player.StartItem "spellid", 0;
 		
 		damagefactor "Fire", 1.0; // His divine gear gives him fire immunity.

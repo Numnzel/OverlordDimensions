@@ -1,7 +1,4 @@
-class spookymelee : Weapon {
-	
-	double SpriteOffs;
-	property Number: SpriteOffs;
+class spookymelee : momongaweapon {
 	
 	default {
 	
@@ -10,28 +7,44 @@ class spookymelee : Weapon {
 		weapon.kickBack 150;
 		
 		+WEAPON.MELEEWEAPON;
-		+WEAPON.AMMO_OPTIONAL;
 		+WEAPON.AXEBLOOD;
-		+WEAPON.NOALERT;
-		+WEAPON.NOAUTOFIRE;
-		
-		spookymelee.Number 52.0;
 	}
+	
 	states {
-		
-		ready:
-			AINZ B 0 A_TakeInventory("makeanimation");
-			AINZ B 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2);
-			wait;
+
+		enteranimation:
+			AINZ B 1 A_AnimationMove(20, (80.0, 0.0), false, (0.0, 120.0));
+			AINZ B 0 A_JumpIfInventory("doinganimation", 1, "enteranimation");
+			goto prepared;
+		exitanimation:
+			AINZ B 1 A_AnimationMove(20, (0.0, 120.0));
+			AINZ B 0 A_JumpIfInventory("doinganimation", 1, "exitanimation");
+			goto deselect+1;
 		select:
-			AINZ B 0 A_JumpIfInventory("makeanimation", 1, "animatedselect");
-			AINZ B 0 A_Raise;
+			AINZ B 0 A_TakeInventory("spookyspell");
+		ready:
+			AINZ B 0 A_JumpIfInventory("makeanimation", 1, "enteranimation");
+		prepared:
+			AINZ B 0 A_TakeInventory("doinganimation");
+			AINZ B 0 A_TakeInventory("makeanimation");
+			AINZ B 1 A_WeaponReady(WRF_ALLOWRELOAD);
 			wait;
-		animatedselect:
-			AINZ B 1 A_Raise;
-			loop;
+		deselect:
+			AINZ B 0 A_JumpIfInventory("makeanimation", 1, "exitanimation");
+			AINZ B 0 A_Lower;
+			wait;
+		fire:
+			AINZ BBBB 1 A_AnimationMove(4, (2.0, -6.0), true);
+			AINZ CCCC 1 A_AnimationMove(4, (6.0, -7.0), true);
+			AINZ DDDDDDDDD 1 A_AnimationMove(9, (1.0, -1.0), true);
+			AINZ EE 1 A_AnimationMove(2, (-34.0, 25.0), true);
+			TNT1 A 0 A_CustomPunch(random(40,110), TRUE, 0, "BulletPuff", 80, 0);
+			AINZ FF 1 A_AnimationMove(2, (-180.0, 70.0), true);
+			AINZ FFFF 1 A_AnimationMove(4, (0, 0), true);
+			TNT1 AA 0 A_AnimationSet((80.0, 0.0));
+			goto ready;
 		reload:
-			AINZ B 1 {
+			AINZ B 0 {
 				A_GiveInventory("spellkeyone", 1);
 				A_GiveInventory("spellkeytwo", 1);
 				A_GiveInventory("spellkeythree", 1);
@@ -44,22 +57,8 @@ class spookymelee : Weapon {
 				A_GiveInventory("spellkeyzero", 1);
 				A_GiveInventory("makeanimation", 1);
 				A_GiveInventory("spookyspell", 1);
-				A_TakeInventory("spookymelee", 1);
+				A_SelectWeapon("spookyspell");
 			}
-		deselect:
-			AINZ B 0 A_Lower;
-			loop;
-		fire:
-			AINZ BBBB 1 A_WeaponOffset(2.0,-6.0,WOF_ADD|WOF_INTERPOLATE);
-			AINZ CCCC 1 A_WeaponOffset(6.0,-7.0,WOF_ADD|WOF_INTERPOLATE);
-			AINZ DDDDDDDDDDDDD 1 A_WeaponOffset(1.0,-1.0,WOF_ADD|WOF_INTERPOLATE);//A_WeaponOffset(9.5,-9.1,WOF_ADD|WOF_INTERPOLATE);
-			AINZ EE 1 A_WeaponOffset(-34.0,25.0,WOF_ADD|WOF_INTERPOLATE);
-			AINZ F 0 A_CustomPunch(random(40,110), TRUE, 0, "BulletPuff", 80, 0);
-			AINZ FFFFFFFFFFFFFFF 1 A_WeaponOffset(-45.0,35.0,WOF_ADD|WOF_INTERPOLATE);
-			//AINZ FFEEDDCCBB 2 A_WeaponOffset(0.0, 0.0,WOF_INTERPOLATE);
-			goto ready;
-		spawn:
-			PIST A -1 nodelay;
-			stop;
+			goto deselect;
 	}
 }

@@ -1,28 +1,15 @@
-class spookyspellbase : Weapon abstract {
+class spookyspellbase : momongaweapon abstract {
 	
 	StateLabel jumpstat;
-	float shootingz;
-	float shootingy;
-	
-	property jumpstate: jumpstat;
-	property shootz: shootingz;
-	property shooty: shootingy;
 	
 	default {
-		
-		//spookyspell.jumpstate "ready";
-		spookyspellbase.shootz 0;
-		spookyspellbase.shooty 0;
 		
 		weapon.slotnumber 1;
 		weapon.ammouse 0;
 		weapon.ammotype "mana";
-		
-		+WEAPON.AMMO_OPTIONAL;
-		+WEAPON.NOAUTOFIRE;
 	}
 	
-	action int CheckSpell(int spellid) {
+	action int A_CheckSpell (int spellid) {
 		
 		invoker.jumpstat = "ready";
 		
@@ -57,21 +44,43 @@ class spookyspellbase : Weapon abstract {
 		return 0;
 	}
 
+	action void A_SwitchEnhancement (string enhancement, string delay) {
+
+		if (CountInv(delay) == 0) {
+
+			bool count = CountInv(enhancement);
+
+			if (count)
+				A_StartSound("HUD/EnhanceOff", CHAN_AUTO);
+			else
+				A_StartSound("HUD/Enhance", CHAN_AUTO);
+
+			A_SetInventory(enhancement, !count);
+		}
+		
+		A_GiveInventory(delay, 1);
+	}
+
 	states {
-	
+
+		enteranimation:
+			AINZ A 1 A_AnimationMove(20, (80.0, 0.0), false, (0.0, 120.0));
+			AINZ A 0 A_JumpIfInventory("doinganimation", 1, "enteranimation");
+			goto prepared;
+		exitanimation:
+			AINZ A 1 A_AnimationMove(20, (0.0, 120.0));
+			AINZ B 0 A_JumpIfInventory("doinganimation", 1, "exitanimation");
+			goto deselect+1;
+		select:
+			AINZ A 0 A_TakeInventory("spookymelee");
 		ready:
+			AINZ A 0 A_JumpIfInventory("makeanimation", 1, "enteranimation");
+		prepared:
 			AINZ A 0 A_TakeInventory("makeanimation");
 			AINZ A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3);
 			wait;
-		select:
-			AINZ A 0 A_JumpIfInventory("makeanimation", 1, "animatedselect");
-		selectlo:
-			AINZ A 0 A_Raise;
-			loop;
-		animatedselect:
-			AINZ A 1 A_Raise;
-			loop;
 		deselect:
+			AINZ A 0 A_JumpIfInventory("makeanimation", 1, "exitanimation");
 			AINZ A 0 A_Lower;
 			wait;
 		fire:
@@ -80,7 +89,7 @@ class spookyspellbase : Weapon abstract {
 			// If not enough mana or no spell is selected, return to ready.
 			AINZ A 0 A_JumpIf(CountInv("spellid") <= 0 || CountInv("mana") < CountInv("spellid"), "ready");
 			// Identify current selected spell and stores the specific fire state to jump. Skip fire if there's an active cooldown.
-			AINZ A 0 A_Jump(CheckSpell(CountInv("spellid")), "ready");
+			AINZ A 0 A_Jump(A_CheckSpell(CountInv("spellid")), "ready");
 			// Everything ok at this point; Take mana, apply (give) cooldown and jump to fire state. // TODO: This should be moved, is the spell code that has to check when to take mana and apply CD.
 			AINZ A 0 {
 				let ownr = momonga(invoker.owner);
@@ -90,9 +99,9 @@ class spookyspellbase : Weapon abstract {
 					A_TakeInventory("mana", CountInv("spellid"));
 			}
 			AINZ A 0 A_Jump(255, invoker.jumpstat);
-			goto ready;
+			goto prepared;
 		reload:
-			AINZ A 1 {
+			AINZ A 0 {
 				A_TakeInventory("spellkeyone");
 				A_TakeInventory("spellkeytwo");
 				A_TakeInventory("spellkeythree");
@@ -105,71 +114,17 @@ class spookyspellbase : Weapon abstract {
 				A_TakeInventory("spellkeyzero");
 				A_GiveInventory("makeanimation", 1);
 				A_GiveInventory("spookymelee", 1);
-				A_TakeInventory("spookyspell");
+				A_SelectWeapon("spookymelee");
 			}
-			goto ready;
+			goto deselect;
 		user1:
-			AINZ A 0 A_Overlay(2, "enhancementTriplet");
-			goto ready;
+			AINZ A 0 A_SwitchEnhancement("magicatriplet", "magicatripletdelay");
+			goto prepared+1;
 		user2:
-			AINZ A 0 A_Overlay(3, "enhancementMaximize");
-			goto ready;
+			AINZ A 0 A_SwitchEnhancement("magicamaximize", "magicamaximizedelay");
+			goto prepared+1;
 		user3:
-			AINZ A 0 A_Overlay(4, "enhancementWiden");
-			goto ready;
-		enhancementTriplet:
-			TNT1 A 0 {
-				
-				if (CountInv("magicatripletdelay") == 0) {
-					if (CountInv("magicatriplet") > 0) {
-						A_StartSound("HUD/EnhanceOff", CHAN_AUTO);
-						A_TakeInventory("magicatriplet");
-					}
-					else {
-						A_StartSound("HUD/Enhance", CHAN_AUTO);
-						A_GiveInventory("magicatriplet", 1);
-					}
-				}
-
-				A_GiveInventory("magicatripletdelay", 1);
-			}
-			stop;
-		enhancementMaximize:
-			TNT1 A 0 {
-				
-				if (CountInv("magicamaximizedelay") == 0) {
-					if (CountInv("magicamaximize") > 0) {
-						A_StartSound("HUD/EnhanceOff", CHAN_AUTO);
-						A_TakeInventory("magicamaximize");
-					}
-					else {
-						A_StartSound("HUD/Enhance", CHAN_AUTO);
-						A_GiveInventory("magicamaximize", 1);
-					}
-				}
-
-				A_GiveInventory("magicamaximizedelay", 1);
-			}
-			stop;
-		enhancementWiden:
-			TNT1 A 0 {
-				
-				if (CountInv("magicawidendelay") == 0) {
-					if (CountInv("magicawiden") > 0) {
-						A_StartSound("HUD/EnhanceOff", CHAN_AUTO);
-						A_TakeInventory("magicawiden");
-					}
-					else {
-						A_StartSound("HUD/Enhance", CHAN_AUTO);
-						A_GiveInventory("magicawiden", 1);
-					}
-				}
-
-				A_GiveInventory("magicawidendelay", 1);
-			}
-			stop;
-		spawn:
-			PIST A -1 nodelay;
-			stop;
+			AINZ A 0 A_SwitchEnhancement("magicawiden", "magicawidendelay");
+			goto prepared+1;
 	}
 }
