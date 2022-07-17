@@ -297,8 +297,7 @@ class spookyspell : spookyspellbase {
 			goto ready;
 		attacktimestop:
 			AINZ A 0;
-			AINZ A 1 { A_StartSound("Spell/TimeStopOn", -1, CHANF_OVERLAP|ATTN_NONE|CHANF_NOPAUSE); }
-			AINZ A 1;
+			AINZ A 0 A_StartSound("Spell/TimeStopOn", -1, CHANF_OVERLAP|CHANF_NOPAUSE, 1.0, ATTN_NONE);
 			AINZ A 1 A_GiveInventory("magictimestop", 1);
 			goto ready;
 		attackfallendown:

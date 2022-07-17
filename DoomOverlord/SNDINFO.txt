@@ -5,8 +5,11 @@
 	
 // Spell: Time Stop
 
-	Spell/TimeStopOn 				sounds/snd_weapons/snd_yggdrasilspells/zawarudo.ogg
+	Spell/TimeStopOn 				sounds/snd_weapons/snd_yggdrasilspells/timestop.ogg
 	$Volume Spell/TimeStopOn 		1.0
+
+	Spell/TimeStopLoop 				sounds/snd_weapons/snd_yggdrasilspells/timeloop.ogg
+	$Volume Spell/TimeStopLoop 		1.0
 	
 // Spell: Black Hole
 
