@@ -1,0 +1,2 @@
+startupTitle = "~ OVERLORD DIMENSIONS ~"
+startupColors = "FFFFFF", "000000"

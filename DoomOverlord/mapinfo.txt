@@ -1,8 +1,9 @@
 gameinfo {
 
-	statusbarclass = "MinimalStatusBar"
-	playerclasses = "momonga"
+	statusBarClass = "MinimalStatusBar"
+	playerClasses = "momonga"
 	eventHandlers = "ItemHandler"
+	titlepage = "OVLORDIM"
 }
 
 damagetype Death {

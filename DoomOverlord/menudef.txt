@@ -1,13 +1,13 @@
 AddOptionMenu "OptionsMenu" {
 
 	StaticText " "
-	Submenu "Doom Overlord Options", "DoomOverlordOptions"
+	Submenu "Overlord Dimensions Options", "OverlordOptions"
 }
 
-OptionMenu "DoomOverlordOptions" {
+OptionMenu "OverlordOptions" {
 
 	Position -15
-	Title "Doom Overlord Options"
+	Title "Overlord Dimensions Options"
 
 	StaticText "HUD Options", 1
 	StaticText ""
