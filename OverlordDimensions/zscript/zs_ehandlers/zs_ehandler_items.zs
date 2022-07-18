@@ -3,10 +3,8 @@ class ItemHandler : StaticEventHandler {
 
 	Dictionary replacements;
 
-	void CreateDictionary () {
-
-		replacements = Dictionary.Create();
-
+	void AddToDictionary (string lump) {
+		
 		int lump = -1;
 		while (-1 != (lump = Wads.FindLump("replacements", lump + 1))) {
 			
@@ -31,6 +29,22 @@ class ItemHandler : StaticEventHandler {
 		//console.printf(replacements.toString());
 	}
 
+	void CreateDictionary () {
+
+		replacements = Dictionary.Create();
+		
+		switch (gameinfo.gametype) {
+			case GAME_Doom:
+				AddToDictionary("replacements.doom"); break;
+			case GAME_Heretic:
+				AddToDictionary("replacements.heretic"); break;
+			case GAME_Hexen:
+				AddToDictionary("replacements.hexen"); break;
+		}
+		
+		AddToDictionary("replacements");
+	}
+
 	override void OnRegister () {
 		
 		CreateDictionary();
@@ -44,11 +58,11 @@ class ItemHandler : StaticEventHandler {
 
 	override void WorldThingSpawned (WorldEvent e) {
 
-		// This is deleting the smallmanaorb (clip) dropped by zombies
-		if (e.Thing.getClassName() == "smallmanaorb") {
+		// This is deleting the items dropped by enemies
+		if (e.Thing is "inventory") {
 
 			inventory i = inventory(e.Thing);
-			if (i.bTOSSED) i.setState(null);
+			if (e.Thing.getClassName() != "maxmanaspeckdrop" && i.bTOSSED) i.setState(null);
 		}
 		else if (e.Thing.bIsMonster) {
 
@@ -63,10 +77,7 @@ class ItemHandler : StaticEventHandler {
 
 	override void WorldThingRevived (WorldEvent e) {
 
-		if (e.Thing.bIsMonster) {
-
-			if (e.Thing.CountInv("maxmanaspeckdrop") > 0)
-				e.Thing.TakeInventory("maxmanaspeckdrop", 1);
-		}
+		if (e.Thing.bIsMonster && e.Thing.CountInv("maxmanaspeckdrop") > 0)
+			e.Thing.TakeInventory("maxmanaspeckdrop", 1);
 	}
 }
