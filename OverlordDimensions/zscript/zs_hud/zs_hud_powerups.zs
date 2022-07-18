@@ -7,7 +7,7 @@ mixin Class PowerupValues {
 		
 		PowerupNames[0] = "magicbodyofrefulgentberyleffect";
 		PowerupNames[1] = "magictimestop";
-		PowerupNames[2] = "magicflypower";
+		PowerupNames[2] = "magicfly";
 		PowerupNames[3] = "magic_completevision";
 		PowerupNames[4] = "effectacidpool";
 

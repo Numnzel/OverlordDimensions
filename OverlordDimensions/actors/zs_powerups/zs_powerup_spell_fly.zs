@@ -1,34 +1,32 @@
-/*class magicfly : PowerupGiver {
+class magicfly : powerup {
+
+	override void DoEffect () {
+
+		if (getAge() == 0)
+			owner.A_GiveInventory("magicflyeffect", 1);
+
+		if (getAge() >= 35 * 60)
+			owner.A_TakeInventory("magicfly");
+
+		super.DoEffect();
+	}
+
+	override void DetachFromOwner () {
+
+		owner.A_TakeInventory("magicflyeffect");
+
+		super.DetachFromOwner();
+	}
 
 	default {
-		inventory.Amount 1;
-		powerup.type Flight;
-		powerup.duration -40;
-	}
-	
-	states {
-		spawn:
-			TNT1 A 1;
-			loop;
-	}
-}*/
-
-class magicfly : PowerupGiver {
-
-	default {
-		
-		+INVENTORY.AUTOACTIVATE;
-		+INVENTORY.ALWAYSPICKUP;
-		+INVENTORY.NOSCREENBLINK;
-		inventory.maxamount 0;
-		powerup.type "magicflypower";
+		powerup.duration -60;
 	}
 }
 
-class magicflypower : PowerFlight {
+class magicflyeffect : PowerFlight {
 
 	default {
 		
-		powerup.duration -40;
+		powerup.duration -100;
 	}
 }
