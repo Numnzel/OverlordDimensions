@@ -3,13 +3,18 @@ class magicacidarrow : actor {
 	
 	default {
 		
-		speed 40;
+		height 16;
+		radius 8;
+		speed 30;
 		damage 16;
 		gravity 0.1;
+		scale 0.25;
+		LightLevel 64;
 		
 		PROJECTILE;
-		+BRIGHT;
 		+BLOODLESSIMPACT;
+		+ADDLIGHTLEVEL;
+
 		+HITMASTER;
 		-NOGRAVITY;
 	}
@@ -17,12 +22,12 @@ class magicacidarrow : actor {
 	states {
 		
 		spawn:
-			BAL7 AB 4;
+			ACID A 4;
 			loop;
 		death:
-			BAL7 C 0 A_GiveInventory("effectacid", 1, AAPTR_MASTER);
-			BAL7 CDE 6;
-			BAL7 E 0 A_SpawnItemEx("magicaciddrop");
+			TNT1 A 0 A_SpawnItemEx("magicaciddrop");
+			TNT1 A 0 A_GiveInventory("effectacid", 1, AAPTR_MASTER);
+			TNT1 AAA 6;
 			stop;
 	}
 }
@@ -30,6 +35,9 @@ class magicacidarrow : actor {
 class magicaciddrop : actor {
 
 	default {
+
+		height 16;
+		radius 8;
 		
 		+MISSILE;
 		+THRUACTORS;
@@ -39,13 +47,13 @@ class magicaciddrop : actor {
 	states {
 		
 		spawn:
-			BAL7 C 1 {
-				if(self.pos.z <= floorz)
+			TNT1 A 1 {
+				if (self.pos.z <= floorz)
 					setStateLabel("death");
 			}
 			loop;
 		death:
-			BAL7 C 35 A_SpawnItemEx("magicacidpool", 0, 0, floorz);
+			ACID C 0 A_SpawnItemEx("magicacidpool", 0, 0, floorz);
 			stop;
 	}
 }
@@ -54,21 +62,41 @@ class magicacidpool : actor {
 	
 	default {
 		
+		height 2;
+		radius 64;
+		scale 0.5;
+		LightLevel 16;
 		translation "FadeToGreen";
 		
 		+LOOKALLAROUND;
+		+FLATSPRITE;
+		+ROLLSPRITE;
+		+ADDLIGHTLEVEL;
+	}
+
+	override void Tick () {
+
+		if (getAge() % 3 == 0) {
+
+			A_RadiusGive("effectacidpool", 128, RGF_PLAYERS|RGF_NOSIGHT);
+			A_RadiusGive("effectacidpool", 128, RGF_MONSTERS|RGF_NOSIGHT);
+		}
+
+		if (self.pos.z > floorz)
+			SetZ(floorz);
+
+		super.Tick();
 	}
 	
 	states {
 		
 		spawn:
 		death:
-			POB2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 3 { A_RadiusGive("effectacidpool", 64, RGF_PLAYERS|RGF_NOSIGHT); A_RadiusGive("effectacidpool", 64, RGF_MONSTERS|RGF_NOSIGHT); }
-			POB2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 3 { A_RadiusGive("effectacidpool", 64, RGF_PLAYERS|RGF_NOSIGHT); A_RadiusGive("effectacidpool", 64, RGF_MONSTERS|RGF_NOSIGHT); }
-			POB2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 3 { A_RadiusGive("effectacidpool", 64, RGF_PLAYERS|RGF_NOSIGHT); A_RadiusGive("effectacidpool", 64, RGF_MONSTERS|RGF_NOSIGHT); }
-			POB2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 3 { A_RadiusGive("effectacidpool", 64, RGF_PLAYERS|RGF_NOSIGHT); A_RadiusGive("effectacidpool", 64, RGF_MONSTERS|RGF_NOSIGHT); }
-			POB2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 3 { A_RadiusGive("effectacidpool", 64, RGF_PLAYERS|RGF_NOSIGHT); A_RadiusGive("effectacidpool", 64, RGF_MONSTERS|RGF_NOSIGHT); }
-			stop;
+			ACID P 0;
+			ACID P 0 A_SetRoll(random(0,359));
+			ACID P 525;
+			ACID P 1 A_FadeOut(0.05);
+			wait;
 	}
 }
 
@@ -87,13 +115,11 @@ class effectacid : powerup {
 	
 	override void doEffect() {
 		
-		if (owner && getAge()%4 == 0) {
+		if (owner && getAge() % 4 == 0) {
 			
 			owner.A_SetTranslation("FadeToGreen");
+			owner.A_SpawnItemEx("effectacidsfx", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176); // that if is necessary, don't ask me why.
 			owner.A_DamageSelf(random(5,8), "Acid");
-			
-			if (owner)
-				owner.A_SpawnItemEx("effectacidsfx", 0, 0, 8, random(-4, 4), random(-4, 4), random(2, 5), 0, 143, 176); // that if is necessary, don't ask me why.
 		}
 	}
 	

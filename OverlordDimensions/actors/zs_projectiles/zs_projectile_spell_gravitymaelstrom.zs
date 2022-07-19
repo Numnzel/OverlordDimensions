@@ -6,11 +6,12 @@ class magicgravitymaelstrom : Actor {
 		height 12;
 		speed 60;
 		damage 140;
+		scale 0.2;
 		ProjectileKickBack 0;
-		RenderStyle "Add";
-		Alpha 0.8;
-		SeeSound "imp/attack";
-		DeathSound "imp/shotx";
+		RenderStyle "Translucent";
+		Alpha 1.0;
+		//SeeSound "";
+		//DeathSound "";
 		
 		PROJECTILE;
 		+RANDOMIZE;
@@ -40,15 +41,15 @@ class magicgravitymaelstrom : Actor {
 	states {
 		
 		spawn:
-			PLSE A 1 NoDelay {
+			GRAV A 1 NoDelay {
 				A_RadiusGive("effectgravitymaelstromforce", 512, RGF_MONSTERS); // A_RadiusThrust(100, 512, 16);
 				A_SetRoll(random(0,359),SPF_INTERPOLATE);
 			}
 			Loop;
 		death:
-			PLSE A 0 A_GiveInventory("effectgravitymaelstrom", 1, AAPTR_MASTER);
-			PLSE AAA 6 A_SetScale(1.2);
-			Stop;
+			GRAV A 0 A_GiveInventory("effectgravitymaelstrom", 1, AAPTR_MASTER);
+			GRAV A 1 { A_SetScale(1.15); A_FadeOut(0.05+(alpha*0.5)); }
+			Wait;
 	}
 }
 

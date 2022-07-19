@@ -9,8 +9,8 @@ class magicfireball : Actor {
 		ProjectileKickBack 20;
 		RenderStyle "Add";
 		Alpha 0.9;
-		SeeSound "imp/attack";
-		DeathSound "imp/shotx";
+		//SeeSound "";
+		//DeathSound "";
 		
 		PROJECTILE;
 		+RANDOMIZE;

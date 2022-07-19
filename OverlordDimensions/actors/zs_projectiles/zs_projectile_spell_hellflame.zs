@@ -8,8 +8,8 @@ class magichellflame : Actor {
 		damage 0;
 		ProjectileKickBack 5;
 		
-		SeeSound "imp/attack";
-		DeathSound "imp/shotx";
+		//SeeSound "";
+		//DeathSound "";
 		
 		PROJECTILE;
 		+RANDOMIZE;

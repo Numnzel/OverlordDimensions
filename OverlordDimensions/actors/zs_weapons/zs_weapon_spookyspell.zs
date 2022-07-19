@@ -221,15 +221,8 @@ class spookyspell : spookyspellbase {
 					
 					if (RemoteRay.HitActor.bCorpse) {
 						
-						RemoteRay.HitActor.SetState(Null);
-						Actor deathknight = Spawn("revenant", RemoteRay.HitLocation);
-						
-						if (deathknight) {
-							
-							deathknight.bFriendly = TRUE;
-							deathknight.health = 1000;
-							A_Log("A deathknight rises to your side.");
-						}
+						RemoteRay.HitActor.Destroy();
+						Actor deathknight = Spawn("deathknight", RemoteRay.HitLocation);
 					}
 				}
 			}

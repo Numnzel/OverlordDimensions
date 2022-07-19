@@ -2,11 +2,12 @@ class magicwallofskeleton : actor {
 	
 	Actor child;
 	bool unused;
+	const amount = 16;
 	
 	default {
 		
 		height 64;
-		radius 16;
+		radius 32;
 		speed 60;
 		
 		PROJECTILE;
@@ -20,8 +21,8 @@ class magicwallofskeleton : actor {
 			TNT1 A 8;
 		death:
 			TNT1 A 0 {
-				for(int i = 0; i < 16; i++) {
-					[unused, child] = A_SpawnItemEx("magicwallofskeletonpole", 0, (radius*i-(radius*8))*1, -32-(pos.z-floorz), 0.0, 0.0, 0, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY);
+				for (int i = 0; i < amount; i++) {
+					[unused, child] = A_SpawnItemEx("magicwallofskeletonpole", 0, (radius*i-(radius*(amount/2))), -32-(pos.z-floorz), 0.0, 0.0, 0, 0, SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY);
 					child.pitch = frandom(2.0,4.0);
 				}
 			}
@@ -49,9 +50,13 @@ class magicwallofskeletonpole : actor {
 		magicwallofskeletonpole.zspeed 1.0;
 		magicwallofskeletonpole.summons true;
 		
-		health 1000;
-		height 64;
+		health 5000;
+		height 72;
 		radius 16;
+
+		renderStyle "Translucent";
+		alpha 1.0;
+		scale 0.4;
 		
 		+SOLID;
 		+SHOOTABLE;
@@ -59,6 +64,8 @@ class magicwallofskeletonpole : actor {
 		+DONTTHRUST;
 		+FRIENDLY;
 		+NOBLOOD;
+		+WALLSPRITE;
+		+NOTARGET;
 		//+NOEXPLODEFLOOR;
 		//+MISSILE;
 	}
@@ -67,12 +74,13 @@ class magicwallofskeletonpole : actor {
 		
 		spawn:
 			TNT1 A 0 NoDelay {
+				
 				invoker.zspd = pitch; // Pitch is unused, so here works for transfering the speed to the childs.
 				iterations = 4;
 			}
 			goto spawn2+1;
 		halt:
-			POL2 A 0 {
+			SKWL B 0 {
 				
 				if (invoker.zspd > 0) {
 					invoker.zspd = 0;
@@ -80,11 +88,11 @@ class magicwallofskeletonpole : actor {
 				}
 			}
 		spawn2:
-			POL2 A 1 A_DamageSelf(3);
-			POL2 A 0 {
+			SKWL B 1; //A_DamageSelf(5);
+			SKWL B 0 {
 				
-				if(health%105 == 0.0)
-					A_Explode(40, 80, XF_NOSPLASH, FALSE, 0, 0, 0, "", "");
+				if (getAge() % random(70,140) == 0)
+					A_Explode(50, radius*1.5, XF_NOSPLASH, false, radius*1.5, 0, 0, "", "");
 				
 				if (invoker.zght >= (height*iterations)-invoker.zspd)
 					SetStateLabel("halt");
@@ -96,8 +104,8 @@ class magicwallofskeletonpole : actor {
 				else
 					AddZ(invoker.zspd);
 			}
-			POL2 A 0 A_CheckCeiling("halt");
-			POL2 A 0 {
+			SKWL B 0 A_CheckCeiling("halt");
+			SKWL B 0 {
 				
 				if (invoker.zght >= height+invoker.zspd && invoker.smms) {
 					invoker.smms = false;

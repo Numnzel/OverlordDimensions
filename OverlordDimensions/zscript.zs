@@ -1,5 +1,6 @@
 version "4.3.0"
 
+#include "actors/zs_monsters/zs_monster.zs"
 #include "actors/zs_weapons/zs_weapon.zs"
 #include "actors/zs_projectiles/zs_projectile.zs"
 #include "actors/zs_sfx/zs_sfx.zs"
