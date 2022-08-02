@@ -3,5 +3,3 @@
 #include "zscript/zs_hud/zs_hud_draw_functions.zs"
 #include "zscript/zs_hud/zs_hud_draw_fullscreen.zs"
 #include "zscript/zs_hud/zs_hud_fonts.zs"
-#include "zscript/zs_hud/zs_hud_powerups.zs"
-#include "zscript/zs_hud/zs_hud_spells.zs"

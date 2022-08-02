@@ -22,6 +22,9 @@ Please contact me if you find any error in this list.
 	
 	AntiLife Cocoon Model
 		Author: A.T.Montpart
+	
+	Momonga spell hands (spookyspell)
+		Author: Numnzel
 
 *** Sounds:
 
@@ -52,7 +55,7 @@ Please contact me if you find any error in this list.
 		Author: Belsel
 	
 	ItemHandler Read/Write files function:
-		Author: Belsel
+		Author: Belsel, Numnzel
 
 *** Other resources:
 

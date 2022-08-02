@@ -16,6 +16,9 @@ extend class MinimalStatusBar {
 		let pmo = CPlayer.mo;
 		// WIP compact hud
 		bool hudSM = CVar.GetCVar("DMO_hud_smaller", CPlayer).GetInt();
+		// Current selected spell
+		spell currSpell;
+		getSpellProperties(pmo.CountInv("spellid"), currSpell);
 
 		
 		// ================================================================================= HEALTH BAR =================================================================================
@@ -51,7 +54,7 @@ extend class MinimalStatusBar {
 		
 		// ================================================================================= MANA BAR =================================================================================
 		int manaAmount = pmo.FindInventory("mana").Amount;
-		int manaCost = pmo.FindInventory("spellid").Amount;
+		int manaCost = currSpell.mana;
 		int manaMax = pmo.FindInventory("maxmana").Amount;
 		int manaCap = 3000;
 		int manaDiff = manaAmount-manaCost;
@@ -175,8 +178,6 @@ extend class MinimalStatusBar {
 		
 		int spellsSize = 256;
 		int spellsYoffs = 30;
-		int spellColumns = 10;
-		int spellsColSlots = 3;
 		int spellsColXSpacing = 64;
 		int spellsColMidSpacing = 100;
 		int spellsColXoffs = -16;
@@ -191,12 +192,11 @@ extend class MinimalStatusBar {
 		int spellsEffectSize = 48;
 		int spellsEffectXYpos = 68*spellsScale;
 		int spellsEffectXYoffs = 40*spellsScale;
-		string spellName = "No spell selected.";
 
-		for (int k = 0; k < spellsColSlots; k++) {
-			for (int i = 0; i < spellColumns; i++) {
+		for (int k = 0; k < SPELLSLOTS; k++) {
+			for (int i = 0; i < SPELLKEYS; i++) {
 				
-				bool spellSelected = (manaCost == momongaSpells[i][k].id);
+				bool spellSelected = (currSpell.id == momongaSpells[i][k].id);
 
 				if (spellsAlways || CPlayer.ReadyWeapon && CPlayer.ReadyWeapon.getClassName() == "spookyspell") {
 
@@ -204,7 +204,7 @@ extend class MinimalStatusBar {
 					int spellYpos = -spellsColYoffs*k;
 					int spellXpos = spellsColXSpacing*i;
 					
-					if (i >= spellColumns/2) {
+					if (i >= SPELLKEYS/2) {
 						spellXpos += spellsColMidSpacing;
 						spellXpos -= spellsColXoffs*k;
 					} else {
@@ -212,7 +212,7 @@ extend class MinimalStatusBar {
 					}
 					
 					spellYpos -= spellsYoffs;
-					spellXpos -= (spellsColMidSpacing/2)+(spellsColXSpacing*(spellColumns-1)/2);
+					spellXpos -= (spellsColMidSpacing/2)+(spellsColXSpacing*(SPELLKEYS-1)/2);
 					
 					// Draw spells icons
 					if (spellSelected) {
@@ -224,7 +224,7 @@ extend class MinimalStatusBar {
 						DrawImageBar(momongaSpells[i][k].tx, spellsSize, spellsSize, spellXpos, spellYpos, 0, spellsIconAlpha, (-1,-1), (spellsScale,spellsScale));
 					}
 
-					if (momongaSpells[i][k].id < 10000 && momongaSpells[i][k].id > manaAmount)
+					if (momongaSpells[i][k].mana > manaAmount)
 						DrawImageBar("SPELLU0", spellsSize, spellsSize, spellXpos, spellYpos, 0, spellsScarceManaRedAlpha, (-1,-1), (spellsScale,spellsScale));
 					
 					// Draw cooldown icons

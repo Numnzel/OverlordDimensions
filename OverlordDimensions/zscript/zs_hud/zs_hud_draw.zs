@@ -7,12 +7,6 @@ extend class MinimalStatusBar {
 	
 	override void Draw (int state, double TicFrac) {
 		
-		if (CPlayer) {
-			
-			setPowerups();
-			setSpellProperties();
-		}
-		
 		Super.Draw(state, TicFrac);
 		
 		if (state == HUD_StatusBar) {

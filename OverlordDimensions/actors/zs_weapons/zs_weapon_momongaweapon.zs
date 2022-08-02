@@ -28,7 +28,7 @@ class momongaweapon : weapon abstract {
 	default {
 
 		momongaweapon.shootZoffs 20.0; //24.0 is screen center with A_FireProjectile
-		momongaweapon.shootYoffs 2.0;
+		momongaweapon.shootYoffs 4.0; //2.0;
 
 		+WEAPON.AMMO_OPTIONAL;
 		+WEAPON.NOAUTOFIRE;

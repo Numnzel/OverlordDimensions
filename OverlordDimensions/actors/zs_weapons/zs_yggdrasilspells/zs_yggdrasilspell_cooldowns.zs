@@ -1,4 +1,3 @@
-
 class cooldownTimer : Powerup abstract {
 	
 	default {

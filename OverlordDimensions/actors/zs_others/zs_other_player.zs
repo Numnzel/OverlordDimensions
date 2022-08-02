@@ -1,7 +1,5 @@
 class momonga : PlayerPawn {
 
-	Class<Inventory> cooldown;
-
 	default {
 		
 		health 300;
@@ -9,6 +7,7 @@ class momonga : PlayerPawn {
 		mass 500;
 		player.DisplayName "momonga";
 		player.ViewHeight 56;
+		player.ViewBob 0.7;
 		player.AirCapacity 0;
 		player.FallingScreamSpeed 100.0,110.0;
 		player.ForwardMove 1, 0.6;
@@ -51,7 +50,7 @@ class momonga : PlayerPawn {
 		+DONTGIB;
 		+PLAYERPAWN.NOTHRUSTWHENINVUL;
 	}
-
+	
 	override void Tick() {
 		
 		super.Tick();

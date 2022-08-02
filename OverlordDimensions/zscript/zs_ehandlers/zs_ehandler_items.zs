@@ -3,46 +3,44 @@ class ItemHandler : StaticEventHandler {
 
 	Dictionary replacements;
 
-	void AddToDictionary (string lump) {
+	void AddToDictionary (out Dictionary dict, string lump) {
 		
-		int lump = -1;
-		while (-1 != (lump = Wads.FindLump("replacements", lump + 1))) {
-			
-			Array<String> lines;
-			//console.printf("%s", Wads.ReadLump(lump));
-			string txt = Wads.ReadLump(lump);
-			txt.Split(lines, "\n");
+		int lumpID = Wads.CheckNumForFullName(lump);
 
-			for (int i = 0; i < lines.Size(); i++) {
+		if (lumpID == -1)
+			return;
+		
+		Array<String> fileContent;
+		Wads.ReadLump(lumpID).Split(fileContent, "\n");
 
-				Array<String> replacement;
-				lines[i].Split(replacement, "=");
+		for (int i = 0; i < fileContent.Size(); i++) {
 
-				if (replacement.Size() == 2) {
-					replacement[1].StripRight("\r");
-					replacements.Insert(replacement[0], replacement[1]);
-					//console.printf("replaced: %s replacee: %s", replacement[0], replacement[1]);
-				}
+			Array<String> serial;
+			fileContent[i].Split(serial, "=");
+
+			if (serial.Size() == 2) {
+				serial[1].StripRight("\r");
+				dict.Insert(serial[0], serial[1]);
 			}
 		}
-
-		//console.printf(replacements.toString());
 	}
 
 	void CreateDictionary () {
 
 		replacements = Dictionary.Create();
+
+		string rootdir = "databases/";
 		
 		switch (gameinfo.gametype) {
 			case GAME_Doom:
-				AddToDictionary("replacements.doom"); break;
+				AddToDictionary(replacements, rootdir .. "replacements.doom.txt"); break;
 			case GAME_Heretic:
-				AddToDictionary("replacements.heretic"); break;
+				AddToDictionary(replacements, rootdir .. "replacements.heretic.txt"); break;
 			case GAME_Hexen:
-				AddToDictionary("replacements.hexen"); break;
+				AddToDictionary(replacements, rootdir .. "replacements.hexen.txt"); break;
 		}
 		
-		AddToDictionary("replacements");
+		AddToDictionary(replacements, rootdir .. "replacements.txt");
 	}
 
 	override void OnRegister () {

@@ -4,6 +4,7 @@ gameinfo {
 	playerClasses = "momonga"
 	eventHandlers = "ItemHandler"
 	titlepage = "OVLORDIM"
+	PrecacheClasses = "spookyspell"
 }
 
 damagetype Death {

@@ -20,6 +20,9 @@ class MinimalStatusBar : BaseStatusBar {
 		// the small font is monospace because it helps with centering and positioning
 		mMM2SmallFont = HUDFont.Create(fnt, fnt.GetCharWidth("0"), true);
 		diparms = InventoryBarState.Create(null, Font.CR_UNTRANSLATED, 1, "ITEMBOX");
+		
+		setPowerups();
+		setSpellProperties();
 	}
 	
 	// makes my life easier
