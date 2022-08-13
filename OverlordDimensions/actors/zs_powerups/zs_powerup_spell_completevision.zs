@@ -4,6 +4,8 @@ class magic_completevision : powertorch {
 	default {
 		powerup.duration -120;
 		+INVENTORY.NOSCREENBLINK;
+		+INVENTORY.AUTOACTIVATE;
+		+INVENTORY.ALWAYSPICKUP;
 	}
 	
 	override void doEffect () {

@@ -69,6 +69,7 @@ class speck : inventory abstract {
 		
 		toucher.GiveInventory(resource, amount);
 		
+		self.destroy();
 		return true;
 	}
 

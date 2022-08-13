@@ -23,6 +23,8 @@ class magictimestop : powerup {
 
 	default {
 		powerup.duration -15;
+		+INVENTORY.AUTOACTIVATE;
+		+INVENTORY.ALWAYSPICKUP;
 	}
 }
 

@@ -121,6 +121,7 @@ class orbsfx : Actor abstract {
 		+NOSPRITESHADOW;
 		+FORCEXYBILLBOARD;
 		+NOTONAUTOMAP;
+		+DONTSPLASH;
 
 		+NOGRAVITY;
 		+NOCLIP;

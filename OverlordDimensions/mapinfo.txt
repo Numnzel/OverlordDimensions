@@ -3,7 +3,7 @@ gameinfo {
 	statusBarClass = "MinimalStatusBar"
 	playerClasses = "momonga"
 	eventHandlers = "ItemHandler"
-	titlepage = "OVLORDIM"
+	titlepage = "TITLEPIC"
 	PrecacheClasses = "spookyspell"
 }
 

@@ -28,7 +28,7 @@ PlasmaRifle=manaorb
 BFG9000=manaorb
 
 [POWERUPS]
-BackPack=manaorb
+Backpack=manaorb
 //Allmap
 Berserk=healthorb
 //BlurSphere

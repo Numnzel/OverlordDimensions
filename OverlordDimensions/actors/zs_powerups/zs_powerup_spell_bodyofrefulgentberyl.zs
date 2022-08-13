@@ -5,6 +5,8 @@ class magicbodyofrefulgentberyleffect : PowerInvulnerable {
 		powerup.duration -5;
 		powerup.color "GoldMap";//"FFAA00";
 		+INVENTORY.NOSCREENBLINK;
+		+INVENTORY.AUTOACTIVATE;
+		+INVENTORY.ALWAYSPICKUP;
 	}
 	
 	override void DoEffect() {

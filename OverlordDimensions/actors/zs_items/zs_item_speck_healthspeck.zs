@@ -8,6 +8,8 @@ class healthspeck : speck {
 		speck.searchRadius 256;
 		speck.isHealth true;
 		scale 0.08;
+		+INVENTORY.ALWAYSPICKUP;
+		+COUNTITEM;
 	}
 
 	states {
