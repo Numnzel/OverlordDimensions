@@ -1,6 +1,3 @@
-
-
-
 class magicslash : actor {
 	
 	int timer;
@@ -8,8 +5,9 @@ class magicslash : actor {
 	double ang;
 	double ratio;
 	double offs;
-	double pi;
 	PlayerInfo p;
+	
+	const pi = 3.14159;
 	
 	default {
 		
@@ -22,7 +20,6 @@ class magicslash : actor {
 			TNT1 A 0 {
 				timer = 0;
 				animation = 0;
-				pi = 3.14159;
 				p = players[consoleplayer];
 				
 				ratio = Cvar.GetCVar("vid_defwidth", p).GetFloat() / Cvar.GetCVar("vid_defheight", p).GetFloat();
@@ -34,10 +31,10 @@ class magicslash : actor {
 			TNT1 A 1 {
 				Shader.SetEnabled(p, "realityslash", true);
 				Shader.SetUniform1f(p, "realityslash", "timer", timer++);
-				Shader.SetUniform1f(p, "realityslash", "angle", ((ang*pi)/180) );
+				Shader.SetUniform1f(p, "realityslash", "angle", ((ang*pi)/180));
 				Shader.SetUniform1f(p, "realityslash", "offsy", offs);
 				
-				if(++animation > 3)
+				if (++animation > 3)
 					SetStateLabel("death");
 			}
 			wait;
@@ -51,32 +48,32 @@ class magicslash : actor {
 	}
 }
 
-
-
 class magiccutterspawner : actor {
 	
-	double cutangle;
-	int cutlength;
-	int cutn;
-	int ttl;
-	bool slashenabled;
+	int cutlength; property pcutlength: cutlength;
+	int cutp; property pcutparticles: cutp;
+	bool slashenabled; property pslashen: slashenabled;
 	bool unused;
+	double cutangle;
+	double pitchmem;
 	actor slash;
 	
-	property slashe: slashenabled;
 	
 	default {
 		
-		radius 2;
-		height 1;
+		radius 3;
+		height 2;
 		speed 180;
 		renderstyle "add";
 		alpha 1.0;
-		magiccutterspawner.slashe true;
-		
+		reactiontime 10;
+
+		magiccutterspawner.pcutlength 100;
+		magiccutterspawner.pcutparticles 20; // TODO: particle quantity should not affect curvature! 80 is accurate. 160 too much.
+		magiccutterspawner.pslashen true;
+
 		PROJECTILE;
 		+RIPPER;
-		+NOGRAVITY;
 		+BRIGHT;
 		+ROLLSPRITE;
 	}
@@ -87,12 +84,6 @@ class magiccutterspawner : actor {
 		compz = cos(crosshairpitch)*compz; //-sin(crosshairpitch) + cos(crosshairpitch)*compz;
 	}
 	
-	/*
-	override void Die(Actor source, Actor inflictor, int dmgflags, Name MeansOfDeath) {
-		
-		SetStateLabel("dissapear");
-	}*/
-	
 	override int SpecialMissileHit (actor victim) {
 		
 		RealitySlash();
@@ -100,6 +91,7 @@ class magiccutterspawner : actor {
 		return -1;
 	}
 	
+	// Start reality slash shader
 	void RealitySlash () {
 		
 		if (slashenabled) {
@@ -114,18 +106,13 @@ class magiccutterspawner : actor {
 	}
 	
 	states {
+
 		spawn:
-			
 			TNT1 A 0 NoDelay {
 				
-				// store initial values
-				pitch = target.pitch;
+				if (target) pitch = target.pitch;
+				pitchmem = pitch;
 				cutangle = frandom(-36.0, 36.0);
-				cutlength = 100;
-				cutn = 80;
-				ttl = 0;
-				slashenabled = true;
-				
 				A_SetRoll(-cutangle/2.0); // TODO: Does not match the cut perfectly...
 			}
 			BFS1 A 1 {
@@ -133,11 +120,11 @@ class magiccutterspawner : actor {
 				cutlength += 60;
 				scale.x *= 1.05;
 				
-				double spacey = cutlength/cutn;
+				double spacey = cutlength/double(cutp);
 				double spacez = sin(cutangle)*spacey;
 				actor cut;
 				
-				for (int ray = 0; ray < cutn/2.0; ray++) {
+				for (int ray = 0; ray < cutp/2; ray++) {
 					
 					double valy = cos(cutangle)*spacey*ray;
 					double valz = sin(cutangle)*spacez*ray;
@@ -159,36 +146,35 @@ class magiccutterspawner : actor {
 						
 					} else {
 						
-						[unused, cut] = A_SpawnItemEx("magiccutter", compx, compy, compz, 0, 0, 0, cos(min(90,abs(pitch)*4))*(-ray/2.0), SXF_TRANSFERPITCH );
-						if(cut)
+						[unused, cut] = A_SpawnItemEx("magiccutter", compx, compy, compz, 0, 0, 0, cos(min(90,abs(pitch)*4))*(-ray/2.0), SXF_TRANSFERPITCH);
+						if (cut) {
+							if (target) cut.target = target; // source of damage is target
 							if (cutangle < 0) cut.pitch += ray*0.3;
 							else cut.pitch -= ray*0.2;
-						
-						[unused, cut] = A_SpawnItemEx("magiccutter", -compx, -compy, -compz, 0, 0, 0, cos(min(90,abs(pitch)*4))*(ray/2.0), SXF_TRANSFERPITCH );
-						if(cut)
+						}
+
+						[unused, cut] = A_SpawnItemEx("magiccutter", -compx, -compy, -compz, 0, 0, 0, cos(min(90,abs(pitch)*4))*(ray/2.0), SXF_TRANSFERPITCH);
+						if (cut) {
+							if (target) cut.target = target; // source of damage is target
 							if (cutangle < 0) cut.pitch -= ray*0.3;
 							else cut.pitch += ray*0.2;
+						}
 					}
 				}
 				
-				if (++ttl > 9)
-					SetStateLabel("death");
+				A_Countdown();
 			}
 			wait;
 		death:
 			BFS1 A 0 {
-				// TODO: Pitch resets when dead.
-				A_ScaleVelocity(0);
+				pitch = pitchmem;
 				RealitySlash();
 			}
 			BFS1 AAAAAAA 1 {
-				
 				scale.x *= 1.005;
 				scale.y *= 1.2;
 			}
 			BFS1 A 1 {
-				
-				
 				scale.x *= 1.01;
 				scale.y *= 0.5;
 				A_FadeOut(0.03);
@@ -199,21 +185,53 @@ class magiccutterspawner : actor {
 
 class magiccutter : actor {
 	
+	class<Inventory> dmg; property pdmg: dmg;
+
 	default {
 		
 		radius 1;
 		height 1;
+
+		magiccutter.pdmg "slashdamage";
 		
+		+INVISIBLE;
+		+NOBLOCKMAP;
+		+NOSECTOR;
 		+NOGRAVITY;
-		+NODAMAGETHRUST;
-		+FORCERADIUSDMG;
 	}
 	
 	states {
 		spawn:
-			TNT1 A 0;
-		death:
-			TNT1 A 1 A_Explode(112, 96, XF_NOSPLASH, false, 96);
+			TNT1 A 0 NoDelay {
+				A_RadiusGive(dmg, 160, RGF_MONSTERS);
+				A_RadiusGive(dmg, 160, RGF_OBJECTS);
+			}
 			stop;
+	}
+}
+
+class slashdamage : powerup {
+
+	override void InitEffect () {
+
+		if (owner && owner.CountInv(self.getClassName()) == 0) {
+			
+			master = players[consoleplayer].mo;
+
+			int dmg = (master && master.CountInv("magicamaximize") > 0) ? 2800*1.5 : 2800;
+
+			owner.A_DamageSelf(dmg, "None", DMSS_NOPROTECT, null, "None", AAPTR_MASTER);
+		}
+
+		super.InitEffect();
+	}
+
+	default {
+
+		inventory.amount 1;
+		inventory.maxamount 1;
+		powerup.duration 4;
+		
+		+INVENTORY.AUTOACTIVATE;
 	}
 }

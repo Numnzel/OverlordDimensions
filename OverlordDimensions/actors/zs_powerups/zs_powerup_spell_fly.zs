@@ -1,26 +1,35 @@
 class magicfly : powerup {
 
-	override void DoEffect () {
-
-		if (owner && getAge() == 0)
+	override void InitEffect () {
+		
+		if (owner)
 			owner.A_GiveInventory("magicflyeffect", 1);
-
-		super.DoEffect();
+		
+		super.InitEffect();
 	}
 
 	override void DetachFromOwner () {
 
-		if (owner && owner.CountInv("magicfly") == 0)
+		if (owner && owner.CountInv("magicfly") == 0 && owner.CountInv("magicflymax") == 0)
 			owner.A_TakeInventory("magicflyeffect");
 
 		super.DetachFromOwner();
 	}
 
 	default {
+		
 		powerup.duration -60;
 		inventory.maxamount 2;
 		+INVENTORY.AUTOACTIVATE;
 		+INVENTORY.ALWAYSPICKUP;
+	}
+}
+
+class magicflymax : magicfly {
+
+	default {
+		
+		powerup.duration -120;
 	}
 }
 

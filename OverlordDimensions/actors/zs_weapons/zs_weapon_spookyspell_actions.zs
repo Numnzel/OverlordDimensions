@@ -1,7 +1,9 @@
 extend class spookyspell {
 	
-	action void FireMagicArrows (int number = 1, int lines = 1) {
+	action void A_FireMagicArrows (int number = 1, int lines = 1, bool maximized = false) {
 		
+		Class<Actor> projectile = maximized ? "magicarrowmax" : "magicarrow";
+
 		for (int t = 1; t <= lines; t++)
 			for (float a = -180.0; a <= 180.0; a+=(360.0/(number-1))) {
 				
@@ -23,11 +25,11 @@ extend class spookyspell {
 				if (number == 1)
 					ang = 0;
 				
-				A_FireProjectile("magicarrow", ang, FALSE, invoker.shootY, invoker.shootZ, 0, pit);
+				A_FireProjectile(projectile, ang, FALSE, invoker.shootY, invoker.shootZ, 0, pit);
 			}
 	}
 	
-	action int FireSuperRailgun (int raysused = 3, double vel = 80.0, int enabledrays = 0) {
+	action int A_FireSuperRailgun (int raysused = 3, double vel = 80.0, int enabledrays = 0) {
 		
 		// - How to use the enabledrays parameter -
 		

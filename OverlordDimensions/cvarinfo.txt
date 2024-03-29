@@ -1,10 +1,13 @@
-user float DMO_hud_spells_alpha = 1;
-user bool DMO_hud_smaller = false;
-user bool DMO_hud_bar_top = false;
-user bool DMO_hud_spells_top = false;
-user bool DMO_hud_spells_names = true;
-user bool DMO_hud_spells_always = false;
-user bool DMO_hud_enhanc_always = true;
+user float OD_hud_spells_alpha = 1;
+user bool OD_hud_smaller = false;
+user bool OD_hud_bar_top = false;
+user bool OD_hud_spells_top = false;
+user bool OD_hud_spells_names = true;
+user bool OD_hud_spells_always = false;
+user bool OD_hud_enhanc_always = true;
+
+user bool OD_dev_nomana = false;
+user bool OD_dev_nocd = false;
 
 user bool gzs_stats_secrets = false;
 user bool gzs_stats_monsters = false;

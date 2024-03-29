@@ -43,8 +43,29 @@ Model magicastralsmite {
 	FrameIndex MODL A 0 0
 }
 
+Model magicastralsmitemax {
+	
+	Path "models/astralsmite"
+	Model 0 "astralsmite.obj"
+	PITCHFROMMOMENTUM
+	
+	Scale 0.8 0.02 0.02
+	FrameIndex MODL A 0 0
+}
+
 // Magic arrow
 Model magicarrow {
+	
+	Path "models/magicarrow"
+	Model 0 "magicarrow.obj"
+	PITCHFROMMOMENTUM
+	//USEACTORPITCH
+	
+	Scale 0.4 0.02 0.02
+	FrameIndex MODL A 0 0
+}
+
+Model magicarrowmax {
 	
 	Path "models/magicarrow"
 	Model 0 "magicarrow.obj"
@@ -60,7 +81,7 @@ Model magiccutterspawner {
 	
 	Path "models/realityslash"
 	Model 0 "slash.obj"
-	PITCHFROMMOMENTUM
+	USEACTORPITCH
 	USEACTORROLL
 	
 	FrameIndex BFS1 A 0 0

@@ -13,11 +13,11 @@ class spookymelee : momongaweapon {
 	states {
 
 		enteranimation:
-			AINZ B 1 A_AnimationMove(20, (80.0, 0.0), false, (0.0, 120.0));
+			AINZ B 1 A_AnimationMove(10, (80.0, 0.0), false, (0.0, 120.0));
 			AINZ B 0 A_JumpIfInventory("doinganimation", 1, "enteranimation");
 			goto prepared;
 		exitanimation:
-			AINZ B 1 A_AnimationMove(20, (0.0, 120.0));
+			AINZ B 1 A_AnimationMove(10, (0.0, 120.0));
 			AINZ B 0 A_JumpIfInventory("doinganimation", 1, "exitanimation");
 			goto deselect+1;
 		select:
@@ -38,7 +38,7 @@ class spookymelee : momongaweapon {
 			AINZ CCCC 1 A_AnimationMove(4, (6.0, -7.0), true);
 			AINZ DDDDDDDDD 1 A_AnimationMove(9, (1.0, -1.0), true);
 			AINZ EE 1 A_AnimationMove(2, (-34.0, 25.0), true);
-			TNT1 A 0 A_CustomPunch(random(40,110), TRUE, 0, "BulletPuff", 80, 0);
+			TNT1 A 0 A_CustomPunch(random(80,150), TRUE, 0, "BulletPuff", 80, 0);
 			AINZ FF 1 A_AnimationMove(2, (-180.0, 70.0), true);
 			AINZ FFFF 1 A_AnimationMove(4, (0, 0), true);
 			TNT1 AA 0 A_AnimationSet((80.0, 0.0));

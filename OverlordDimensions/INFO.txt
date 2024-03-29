@@ -1,0 +1,75 @@
+===========================================================================
+Advanced engine needed  : GZDoom 4.3.0 or higher
+Primary purpose         : No levels included
+===========================================================================
+Title                   : Overlord Dimensions
+Filename                : OverlordDimensions-v0.5.0-alpha.pk3
+Release date            : 07/08/2022
+Author                  : Numnzel
+Email Address           : numnzel@protonmail.com
+Other Files By Author   : Nothing finished.
+Misc. Author Info       : 
+
+Description             : A GZDoom gameplay addon based on the Overlord anime series.
+
+It can run alongside whatever iwad you like!
+But it has optional support for Doom, Heretic and Hexen iwads.
+
+NOTE: This is an alpha release. Everything is subject to change.
+Version: v0.5.0
+
+Join my discord server for more information and development updates:
+https://discord.gg/BGkKFdjE7W
+
+This addon is free of costs, and is not, nor will ever be monetized or commercialized.
+
+
+Additional Credits to   : (See credits lump)
+===========================================================================
+* What is included *
+
+New levels              : 0
+Sounds                  : No
+Music                   : No
+Graphics                : No
+Dehacked/BEX Patch      : No
+Demos                   : No
+Other                   : Yes
+Other files required    : N/A
+
+
+* Play Information *
+
+Game                    : N/A
+Map #                   : N/A
+Single Player           : Designed for
+Cooperative 2-4 Player  : No
+Deathmatch 2-4 Player   : No
+Other game styles       : No
+Difficulty Settings     : No
+
+
+* Construction *
+
+Base                    : New from scratch
+Build Time              : ~5 months (WIP)
+Editor(s) used          : Photoshop, Blender, Visual Studio Code
+Known Bugs              : 
+May Not Run With        : Hand controller unsupported
+Tested With             : GZDoom
+
+
+
+* Copyright / Permissions *
+
+You may NOT modify the contents of this file or use them as a base for
+modification or reuse. You can contact me for specifics.
+
+Checksum: 
+
+You may distribute this file without ANY modifications.
+You may distribute this file in any electronic format (BBS, Diskette, CD, etc).
+
+* Where to get the file that this text file describes *
+
+GitHub: https://github.com/Numnzel/OverlordDimensions

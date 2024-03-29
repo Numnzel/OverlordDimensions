@@ -1,66 +1,79 @@
-class magic_shockwave : actor {
+class magicshockwave : actor {
 	
 	double cube; property pcube: cube;
-	
+	string force; property pforce: force;
 	
 	default {
 		
-		magic_shockwave.pcube 4.0;
+		magicshockwave.pcube 4.0;
+		magicshockwave.pforce "shockwaveforce";
 		radius 4;
-		height 8;
+		height 4;
 		speed 40;
 		reactiontime 13;
 		
 		PROJECTILE;
-		+ISMONSTER;
-		+NOCLIP;
+		+THRUACTORS;
 	}
 	
 	states {
 		spawn:
 			TNT1 A 1 NoDelay {
 				
-				//A_RadiusThrust(10000, radius);
-				A_RadiusGive("magic_shock", cube, RGF_MONSTERS);
+				A_RadiusGive(force, cube, RGF_MONSTERS);
+				A_RadiusGive(force, cube, RGF_OBJECTS);
+				A_RadiusGive(force, cube, RGF_CORPSES);
 				cube += 46;
-				A_SetSize(radius+6, height+12, FALSE);
+				//A_SetSize(radius+6, height+12, FALSE);
 				A_CountDown();
-				//A_LogInt(radius);
-				//A_Log(target.getClassName());
 			}
 			loop;
 	}
 }
 
-class magic_shock : custominventory {
-	
-	states {
-		
-		pickup:
-			TNT1 A 0 {
-				
-				if (CountInv("magic_shock_disabled") == 0) {
-					
-					A_GiveInventory("magic_shock_disabled", 1);
-					CheckProximity("momonga", 2048.0, 1, CPXF_CHECKSIGHT|CPXF_SETMASTER|CPXF_CLOSEST);
-					
-					if (master) {
-						
-						if (master.getClassName() == "momonga") {
-							
-							Thrust(10000.0/Distance3D(master), AngleTo(master)-180);
-							A_DamageSelf(max(0.0, 600.0-Distance3D(master)), "None", 0, null, "None", AAPTR_MASTER);
-						}
-					}
-				}
-			}
-			stop;
+class magicshockwavemax : magicshockwave {
+
+	default {
+
+		magicshockwave.pforce "shockwaveforcemax";
 	}
 }
 
-class magic_shock_disabled : powerup {
+class shockwaveforce : powerup {
+
+	double powerM; property pPowerMult: powerM;
+
+	override void InitEffect () {
+
+		if (owner && owner.CountInv(self.getClassName()) == 0) {
+			
+			master = players[consoleplayer].mo;
+
+			if (master) {
+				owner.Thrust((powerM*10000)/owner.Distance3D(master), owner.AngleTo(master)-180);
+				owner.A_DamageSelf(max(0, (powerM*600)-owner.Distance3D(master)), "None", 0, null, "None", AAPTR_MASTER);
+			}
+		}
+
+		super.InitEffect();
+	}
 
 	default {
-		powerup.duration -5;
+
+		shockwaveforce.pPowerMult 1.0;
+
+		inventory.amount 1;
+		inventory.maxamount 1;
+		powerup.duration 15;
+		
+		+INVENTORY.AUTOACTIVATE;
+	}
+}
+
+class shockwaveforcemax : shockwaveforce {
+
+	default {
+
+		shockwaveforce.pPowerMult 1.5;
 	}
 }

@@ -1,5 +1,7 @@
 class magichellflame : Actor {
 
+	mk_BaseFire fire;
+
 	default {
 		
 		radius 6;
@@ -15,41 +17,42 @@ class magichellflame : Actor {
 		+RANDOMIZE;
 		+BLOODLESSIMPACT;
 		+FORCERADIUSDMG;
+		+SEEKERMISSILE;
 	}
 
 	override void postBeginPlay () {
 		
 		super.postBeginPlay();
 		
-		let fire = mk_BaseFire(spawn("mk_BigFire"));
+		fire = mk_BaseFire(spawn("mk_BigFire"));
 		
 		if (fire) {
 			double firescale = 0.35;
 			fire.A_SetScale(firescale*0.7, firescale);
 			fire.follower = true;
 			fire.master = self;
-			fire.setShade("4400FF"); //5522FF
+			fire.setShade("440000"); //5522FF
 			fire.style = 1;
 		}
 	}
 
 	states {
 		spawn:
-			TNT1 A 1;
+			TNT1 A 1 A_SeekerMissile(0, 2, SMF_PRECISE|SMF_CURSPEED);
 			loop;
 		death:
-			TNT1 A 40; // Dramatic pause
+			TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_Warp(AAPTR_TRACER); // Dramatic pause
 			TNT1 A 0 {
+				if (fire) fire.destroy();
+				if (tracer) tracer.A_GiveInventory("effecthellfire");
+			}
+			TNT1 AAAAAAAAAAAA 5 {
 				
-				A_Explode(4100, 600, XF_HURTSOURCE, TRUE, 200, 0, 0, "", "HellFire");
-				
-				A_RadiusGive("effecthellfire", 400, RGF_MONSTERS);
-				A_RadiusGive("effecthellfire", 400, RGF_PLAYERS);
-				A_RadiusGive("effecthellfire", 400, RGF_CORPSES);
-				A_RadiusGive("effecthellfire", 400, RGF_KILLED);
-				
-				for (int i = random(0,30); i < 700; i++)
-					A_SpawnItemEx("magichellflameender", 0, 0, 0, frandom(0.1,6.0), 0, frandom(0.0, 10.0), random(0,359));
+				if (tracer) {
+					tracer.A_DamageSelf((min(max(1,(tracer.Default.Health/12)+1), 375)), "Fire", DMSS_NOFACTOR);
+					tracer.TriggerPainChance('Fire', true);
+					tracer.A_SpawnItemEx("magichellflameender", 0, 0, 0, frandom(0.1,3.0), 0, frandom(0.0, 5.0), random(1,360));
+				}
 			}
 			Stop;
 	}
@@ -106,7 +109,7 @@ class magichellflameender : actor {
 			fire.A_SetScale(firescale, firescale*0.5);
 			fire.follower = true;
 			fire.master = self;
-			fire.setShade("150055");
+			fire.setShade("440000");
 			fire.style = 1;
 		}
 	}

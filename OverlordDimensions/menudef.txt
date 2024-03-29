@@ -11,13 +11,19 @@ OptionMenu "OverlordOptions" {
 
 	StaticText "HUD Options", 1
 	StaticText ""
-	Option "Enable compact HUD (WIP)", "DMO_hud_smaller", "OnOff"
-	Option "HUD on top (WIP)", "DMO_hud_spells_top", "OnOff"
-	Option "Bars on top (WIP)", "DMO_hud_bar_top", "OnOff"
-	Option "Show spells name", "DMO_hud_spells_names", "OnOff"
-	Option "Always show spells", "DMO_hud_spells_always", "OnOff"
-	Option "Always show enhancements", "DMO_hud_enhanc_always", "OnOff"
-	Slider "Spells transparency multiplier", "DMO_hud_spells_alpha", 0, 1, 0.1
+	Option "Enable compact HUD (WIP)", "OD_hud_smaller", "OnOff"
+	Option "HUD on top (WIP)", "OD_hud_spells_top", "OnOff"
+	Option "Bars on top (WIP)", "OD_hud_bar_top", "OnOff"
+	Option "Show spells name", "OD_hud_spells_names", "OnOff"
+	Option "Always show spells", "OD_hud_spells_always", "OnOff"
+	Option "Always show enhancements", "OD_hud_enhanc_always", "OnOff"
+	Slider "Spells transparency multiplier", "OD_hud_spells_alpha", 0, 1, 0.1
+
+	StaticText ""
+	StaticText "Debugging/Cheats Options", 1
+	StaticText ""
+	Option "Disable mana costs", "OD_dev_nomana", "OnOff"
+	Option "Disable cooldowns", "OD_dev_nocd", "OnOff"
 
 	StaticText ""
 	StaticText "Level Stats", 1

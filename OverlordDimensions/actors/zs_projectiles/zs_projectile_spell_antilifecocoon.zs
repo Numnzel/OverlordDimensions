@@ -18,7 +18,7 @@ class magicantilifecocoon : Actor {
 	
 	default {
 		
-		Health 1000;
+		Health 8000;
 		RenderStyle "Add";
 		Alpha 0.4;
 		
@@ -98,7 +98,7 @@ class magicantilifecrystal : Actor {
 
 	default {
 		
-		Health 1000;
+		Health 8000;
 		Radius 4;
 		Height 8;
 		RenderStyle "Add";

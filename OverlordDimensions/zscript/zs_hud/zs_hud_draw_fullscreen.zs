@@ -15,7 +15,7 @@ extend class MinimalStatusBar {
 		// player data
 		let pmo = CPlayer.mo;
 		// WIP compact hud
-		bool hudSM = CVar.GetCVar("DMO_hud_smaller", CPlayer).GetInt();
+		bool hudSM = CVar.GetCVar("OD_hud_smaller", CPlayer).GetInt();
 		// Current selected spell
 		spell currSpell;
 		getSpellProperties(pmo.CountInv("spellid"), currSpell);
@@ -23,6 +23,7 @@ extend class MinimalStatusBar {
 		
 		// ================================================================================= HEALTH BAR =================================================================================
 		int healthCurrent = pmo.health;
+		int healthMax = pmo.GetMaxHealth(TRUE);
 		int healthXoffs = 32;
 		int healthYoffs = 0;
 		int healthBarXSz = 300;
@@ -36,28 +37,30 @@ extend class MinimalStatusBar {
 		color colBarHealth1Fade = color(255, 64, 0, 0);
 		color colBarHealth2Base = color(128, 255, 255, 255);
 		color colBarHealth2Fade = color(128, 0, 0, 0);
+		color colBarHealthCount = Font.CR_UNTRANSLATED;
 		
-		InterpolateValue(healthCurrent, healthInterpolated, healthInterpolationPile); // [numnzel] added interpolation
+		if (healthInterpolated >= healthMax) colBarHealthCount = Font.CR_GOLD;
+
+		InterpolateValue(healthCurrent, healthInterpolated, healthInterpolationPile);
 		
 		//DrawHudBoxCol("HBCORN", "HBEDGE", color(128, 0, 0, 0), (healthBarXpos, -72), (healthBarXSz, 64), DI_SCREEN_CENTER_BOTTOM, alphaSetting);
 		
 		// Health texts
 		//DrawString(mMM2SmallFont, "HEALTH", (-99, -64), tAlign);
-		DrawString(mMM2BigFont, FormatNumber(healthInterpolated, 0, 9), (healthStrXpos, healthStrYpos), DI_TEXT_ALIGN_RIGHT | DI_SCREEN_CENTER_BOTTOM); 
+		DrawString(mMM2BigFont, FormatNumber(healthInterpolated, 0, 9), (healthStrXpos, healthStrYpos), DI_TEXT_ALIGN_RIGHT | DI_SCREEN_CENTER_BOTTOM, colBarHealthCount);
 		
 		// Bar outline
 		DrawHudBoxCol("SBCORN", "SBEDGE", colBarHealthBackg, (healthBarXpos, healthBarYpos), (healthBarXSz, healthBarYSz), DI_SCREEN_CENTER_BOTTOM);
 		// Bar
-		DrawUnitBarGrad(colBarHealth1Base, colBarHealth1Fade,	healthInterpolated, pmo.GetMaxHealth(TRUE), (healthBarXpos+1, healthBarYpos+1), (healthBarXSz-2, healthBarYSz-2), DI_SCREEN_CENTER_BOTTOM, TRUE);
-		DrawUnitBarGrad(colBarHealth2Base, colBarHealth2Fade,	healthInterpolated-pmo.GetMaxHealth(TRUE), pmo.GetMaxHealth(TRUE), (healthBarXpos+1, healthBarYpos+1), (healthBarXSz-2, healthBarYSz-2), DI_SCREEN_CENTER_BOTTOM, TRUE);
+		DrawUnitBarGrad(colBarHealth1Base, colBarHealth1Fade,	healthInterpolated, healthMax, (healthBarXpos+1, healthBarYpos+1), (healthBarXSz-2, healthBarYSz-2), DI_SCREEN_CENTER_BOTTOM, TRUE);
+		DrawUnitBarGrad(colBarHealth2Base, colBarHealth2Fade,	healthInterpolated-healthMax, healthMax, (healthBarXpos+1, healthBarYpos+1), (healthBarXSz-2, healthBarYSz-2), DI_SCREEN_CENTER_BOTTOM, TRUE);
 		
 		
 		// ================================================================================= MANA BAR =================================================================================
-		int manaAmount = pmo.FindInventory("mana").Amount;
+		int manaAmount = pmo.CountInv("mana");
 		int manaCost = currSpell.mana;
-		int manaMax = pmo.FindInventory("maxmana").Amount;
+		int manaMax = pmo.CountInv("maxmana");
 		int manaCap = 3000;
-		int manaDiff = manaAmount-manaCost;
 		int manaXoffs = 32;
 		int manaYoffs = 0;
 		int manaBarXsiz = 300;
@@ -76,9 +79,15 @@ extend class MinimalStatusBar {
 		color colBarCost2Base = color(255, 0, 128, 128);
 		color colBarCost2Fade = color(255, 0, 32, 32);
 		color colBarCostError = color(255, 48, 0, 96);
+		color colBarManaCount = Font.CR_UNTRANSLATED;
+
+		if (manaInterpolated >= manaMax) colBarManaCount = Font.CR_GOLD;
+		getSpellManaCostEnhanced(currSpell.id, pmo.CountInv("magicamaximize"), pmo.CountInv("magicatriplet"), pmo.CountInv("magicawiden"), manaCost);
+		
+		int manaDiff = manaAmount-manaCost;
 		
 		// Bar
-		if (manaDiff < 0 && manaCost < 10000) {
+		if (manaDiff < 0) {
 			
 			colBarCost1Base = colBarCostError;
 			colBarCost2Base = colBarCostError;
@@ -88,7 +97,7 @@ extend class MinimalStatusBar {
 		
 		// Mana texts
 		//DrawString(mMM2SmallFont, "MANA", (99, -64), tAlign);
-		DrawString(mMM2BigFont, FormatNumber(manaInterpolated, 0, 9), (manaStrXpos, manaStrYpos), DI_TEXT_ALIGN_LEFT | DI_SCREEN_CENTER_BOTTOM);
+		DrawString(mMM2BigFont, FormatNumber(manaInterpolated, 0, 9), (manaStrXpos, manaStrYpos), DI_TEXT_ALIGN_LEFT | DI_SCREEN_CENTER_BOTTOM, colBarManaCount);
 		
 		// Bar outline
 		DrawHudBoxCol("SBCORN", "SBEDGE", colBarManaBackg, (manaBarXpos, manaBarYpos), (manaBarXsiz, manaBarYsiz), DI_SCREEN_CENTER_BOTTOM);
@@ -172,9 +181,9 @@ extend class MinimalStatusBar {
 		
 		
 		// ================================================================================= SPELLS =================================================================================
-		double spellsAlpha = Clamp(CVar.GetCVar("DMO_hud_spells_alpha", CPlayer).GetFloat(), 0, 1);
-		bool enhancementsAlways = CVar.GetCVar("DMO_hud_enhanc_always", CPlayer).GetInt();
-		bool spellsAlways = CVar.GetCVar("DMO_hud_spells_always", CPlayer).GetInt();
+		double spellsAlpha = Clamp(CVar.GetCVar("OD_hud_spells_alpha", CPlayer).GetFloat(), 0, 1);
+		bool enhancementsAlways = CVar.GetCVar("OD_hud_enhanc_always", CPlayer).GetInt();
+		bool spellsAlways = CVar.GetCVar("OD_hud_spells_always", CPlayer).GetInt();
 		
 		int spellsSize = 256;
 		int spellsYoffs = 30;
@@ -318,7 +327,7 @@ extend class MinimalStatusBar {
 				}
 
 				// Draw spell text name
-				if (spellSelected && CVar.GetCVar("DMO_hud_spells_names", CPlayer).GetInt() && CPlayer.ReadyWeapon && CPlayer.ReadyWeapon.getClassName() == "spookyspell")
+				if (spellSelected && CVar.GetCVar("OD_hud_spells_names", CPlayer).GetInt() && CPlayer.ReadyWeapon && CPlayer.ReadyWeapon.getClassName() == "spookyspell")
 					DrawString(mMM2SmallFont, momongaSpells[i][k].name, (0, -faceYpos*2.1), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER);
 			}
 		}

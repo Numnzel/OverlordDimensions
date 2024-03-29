@@ -29,9 +29,9 @@ class magicfireball : Actor {
 		death:
 			BAL1 C 0 {
 				A_SetTranslation("FadeToOrange");
-				A_Explode(130, 80, XF_HURTSOURCE, TRUE, 0, 0, 0, "", "Fire");
-				for (int i = random(0,2); i < 6; i++)
-					A_SpawnItemEx("magicfireballender", 0, 0, 0, frandom(0.5,5.0), 0, frandom(0.0,2.0), random(0,359));
+				A_Explode(160, 200, XF_HURTSOURCE, TRUE, 0, 0, 0, "", "Fire");
+				for (int i = random(0,2); i < 16; i++)
+					A_SpawnItemEx("magicfireballender", 0, 0, 0, frandom(0.5,8.0), 0, frandom(0.0,6.0), random(0,359));
 			}
 			BAL1 CDE 6 Bright A_SetScale(1.2);
 			Stop;

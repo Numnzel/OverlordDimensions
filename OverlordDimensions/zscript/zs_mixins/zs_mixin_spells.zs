@@ -53,36 +53,36 @@ mixin Class SpellPropertiesList {
 			momongaSpells[9][0].id = 28; // fallen down
 			momongaSpells[9][1].id = 29; // TBD - Iä Shub-Niggurath (?)
 			momongaSpells[9][2].id = 30; // TBD - Wish Upon A Star (?)
-			momongaSpells[0][0].mana = 30; // magic arrow
-			momongaSpells[0][1].mana = 60; // acmana arrow
-			momongaSpells[0][2].mana = 20; // life essence
-			momongaSpells[1][0].mana = 110; // fireball
-			momongaSpells[1][1].mana = 130; // lightning
+			momongaSpells[0][0].mana = 80; // magic arrow
+			momongaSpells[0][1].mana = 100; // acid arrow
+			momongaSpells[0][2].mana = 40; // life essence
+			momongaSpells[1][0].mana = 130; // fireball
+			momongaSpells[1][1].mana = 150; // lightning
 			momongaSpells[1][2].mana = 100; // fly
-			momongaSpells[2][0].mana = 210; // shockwave
-			momongaSpells[2][1].mana = 350; // explode mine
+			momongaSpells[2][0].mana = 160; // shockwave
+			momongaSpells[2][1].mana = 220; // explode mine
 			momongaSpells[2][2].mana = 200; // anti-life cocoon
-			momongaSpells[3][0].mana = 250; // gravity maelstrom
-			momongaSpells[3][1].mana = 400; // wall of skeleton
-			momongaSpells[3][2].mana = 240; // greater teleportation
+			momongaSpells[3][0].mana = 120; // gravity maelstrom
+			momongaSpells[3][1].mana = 250; // wall of skeleton
+			momongaSpells[3][2].mana = 100; // greater teleportation
 			momongaSpells[4][0].mana = 180; // TBD
-			momongaSpells[4][1].mana = 480; // chain dragon lightning
-			momongaSpells[4][2].mana = 1100; // undead army
-			momongaSpells[5][0].mana = 900; // astral smite
-			momongaSpells[5][1].mana = 1400; // hell flame
-			momongaSpells[5][2].mana = 500; // negative burst
-			momongaSpells[6][0].mana = 690; // TBD - Hold of ribs (?)
-			momongaSpells[6][1].mana = 1550; // black hole
-			momongaSpells[6][2].mana = 650; // true dark
-			momongaSpells[7][0].mana = 1000; // grasp hearth
-			momongaSpells[7][1].mana = 1600; // nuclear blast
-			momongaSpells[7][2].mana = 380; // body of refulgent beryl
-			momongaSpells[8][0].mana = 1320; // summon undead 10th
-			momongaSpells[8][1].mana = 1700; // reality slash
-			momongaSpells[8][2].mana = 1180; // time stop
-			momongaSpells[9][0].mana = 10001; // fallen down
-			momongaSpells[9][1].mana = 10002; // TBD - Iä Shub-Niggurath (?)
-			momongaSpells[9][2].mana = 10003; // TBD - Wish Upon A Star (?)
+			momongaSpells[4][1].mana = 350; // chain dragon lightning
+			momongaSpells[4][2].mana = 320; // undead army
+			momongaSpells[5][0].mana = 380; // astral smite
+			momongaSpells[5][1].mana = 500; // hell flame
+			momongaSpells[5][2].mana = 260; // negative burst
+			momongaSpells[6][0].mana = 200; // TBD - Hold of ribs (?)
+			momongaSpells[6][1].mana = 550; // black hole
+			momongaSpells[6][2].mana = 300; // true dark
+			momongaSpells[7][0].mana = 440; // grasp hearth
+			momongaSpells[7][1].mana = 700; // nuclear blast
+			momongaSpells[7][2].mana = 220; // body of refulgent beryl
+			momongaSpells[8][0].mana = 600; // summon undead 10th
+			momongaSpells[8][1].mana = 650; // reality slash
+			momongaSpells[8][2].mana = 400; // time stop
+			momongaSpells[9][0].mana = 0; // fallen down
+			momongaSpells[9][1].mana = 0; // TBD - Iä Shub-Niggurath (?)
+			momongaSpells[9][2].mana = 0; // TBD - Wish Upon A Star (?)
 			momongaSpells[0][0].tx = "SPELL00";
 			momongaSpells[0][1].tx = "SPELL01";
 			momongaSpells[0][2].tx = "SPELL02";
@@ -283,6 +283,29 @@ mixin Class SpellPropertiesList {
 					//sp.ypos = momongaSpells[i][k].ypos;
 					sp.eff = momongaSpells[i][k].eff;
 					sp.name = momongaSpells[i][k].name;
+				}
+	}
+
+	void getSpellManaCostEnhanced (int spid, bool maximize, bool triplet, bool widen, out int cost) {
+
+		for (int k = 0; k < SPELLSLOTS; k++)
+			for (int i = 0; i < SPELLKEYS; i++)
+				if (momongaSpells[i][k].id == spid) {
+					
+					int manaCost = momongaSpells[i][k].mana;
+					int tmpEffectVal = momongaSpells[i][k].eff;
+					bool bitEffects[3];
+					
+					for (int b = 0; b < 3; b++) {
+						bitEffects[b] = tmpEffectVal % 2 == 1;
+						tmpEffectVal /= 2;
+					}
+					
+					if (maximize && bitEffects[0]) manaCost *= 1.5;
+					if (triplet && bitEffects[1]) manaCost *= 2;
+					if (widen && bitEffects[2]) manaCost *= 1.5;
+
+					cost = manaCost;
 				}
 	}
 }

@@ -28,8 +28,21 @@ class spookyspell : momongaweapon {
 	
 	action bool A_CheckSpellConditions (int spellid) {
 
-		// If spell is not selected, or not enough mana, or it is on CD, return to ready.
-		if (!invoker || spellid == 0 || CountInv("mana") < invoker.selectedSpell.mana || CountInv(invoker.selectedSpell.cd) > 0)
+		// If spell is not selected or it is on CD, return to ready.
+		if (!invoker || !invoker.owner || spellid == 0 || (CountInv(invoker.selectedSpell.cd) > 0 && !CVar.GetCVar("OD_dev_nocd", players[consoleplayer]).GetInt()))
+			return false;
+
+		// Apply enhancements mana cost additions
+		int manaCost;
+		invoker.getSpellManaCostEnhanced(
+			spellid,
+			invoker.owner.CountInv("magicamaximize"),
+			invoker.owner.CountInv("magicatriplet"),
+			invoker.owner.CountInv("magicawiden"),
+			manaCost);
+		
+		// If not enough mana, return to ready.
+		if (invoker.CountInv("mana") < manaCost && !CVar.GetCVar("OD_dev_nomana", players[consoleplayer]).GetInt())
 			return false;
 
 		//yggdrasilSpell currentSpell;
@@ -54,7 +67,7 @@ class spookyspell : momongaweapon {
 			A_SetInventory(enhancement, !count);
 		}
 		
-		A_GiveInventory(delay, 1);
+		A_GiveInventory(delay);
 	}
 
 	states {
@@ -85,8 +98,16 @@ class spookyspell : momongaweapon {
 			// Take mana, apply (give) cooldown and jump to fire state. // TODO: This should be moved, is the spell code that has to check when to take mana and apply CD.
 			TNT1 A 0 {
 				A_GiveInventory(invoker.selectedSpell.cd);
-				A_TakeInventory("mana", invoker.selectedSpell.mana);
+				
+				int spellManaCost = invoker.selectedSpell.mana;
+				if (CountInv("magicatriplet")) spellManaCost *= 2;
+				if (CountInv("magicamaximize")) spellManaCost *= 1.5;
+				if (CountInv("magicawiden")) spellManaCost *= 1.5;
+
+				if (spellManaCost > 0)
+					A_TakeInventory("mana", spellManaCost);
 			}
+			TNT1 A 0 A_AlertMonsters();
 			TNT1 A 0 A_Jump(255, invoker.selectedSpell.astate);
 		reload:
 			TNT1 A 0 {

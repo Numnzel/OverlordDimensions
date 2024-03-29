@@ -24,9 +24,19 @@ class momonga : PlayerPawn {
 		Player.WeaponSlot 9, "spellkeynine";
 		Player.WeaponSlot 0, "spellkeyzero";
 		
-		Player.StartItem "mana", 2000;
+		Player.StartItem "mana", 1500;
 		Player.StartItem "maxmana", 2000;
-		Player.StartItem "spookymelee", 1;
+		Player.StartItem "spookyspell", 1;
+		Player.StartItem "spellkeyone", 1;
+		Player.StartItem "spellkeytwo", 1;
+		Player.StartItem "spellkeythree", 1;
+		Player.StartItem "spellkeyfour", 1;
+		Player.StartItem "spellkeyfive", 1;
+		Player.StartItem "spellkeysix", 1;
+		Player.StartItem "spellkeyseven", 1;
+		Player.StartItem "spellkeyeight", 1;
+		Player.StartItem "spellkeynine", 1;
+		Player.StartItem "spellkeyzero", 1;
 		Player.StartItem "makeanimation", 1;
 		Player.StartItem "spellid", 0;
 		
@@ -55,7 +65,7 @@ class momonga : PlayerPawn {
 		
 		super.Tick();
 
-		if (self.getAge() % 35 == 0)
+		if (self.getAge() % 17 == 0)
 			RegenerateMana();
 
 		if (self.bCORPSE) {
@@ -82,7 +92,7 @@ class momonga : PlayerPawn {
 	
 	action void RegenerateMana() {
 		
-		if (self.CountInv("mana") < self.CountInv("maxmana"))
+		if (CountInv("mana") < CountInv("maxmana"))
 			A_GiveInventory("mana", 1);
 	}
 	

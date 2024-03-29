@@ -5,19 +5,20 @@ class magicastralsmite : Actor {
 		radius 8;
 		height 16;
 		speed 75;
-		damage 40;
+		damage 8;
 		damagetype "Holy";
 		ProjectileKickBack 1;
 		Scale 0.2;
-		SeeSound "Spell/AstralSmite";
-		DeathSound "imp/shotx";
 		Translation "112:127=196:198";
+		SeeSound "Spell/AstralSmite";
+		//DeathSound "";
 		
 		PROJECTILE;
 		+BRIGHT;
 		+SEEKERMISSILE;
 		+SCREENSEEKER;
 		+SPECTRAL;
+		+STRIFEDAMAGE;
 	}
 
 	states {
@@ -32,5 +33,13 @@ class magicastralsmite : Actor {
 				scale *= 1.1;
 			}
 			wait;
+	}
+}
+
+class magicastralsmitemax : magicastralsmite {
+
+	default {
+
+		damage 12;
 	}
 }

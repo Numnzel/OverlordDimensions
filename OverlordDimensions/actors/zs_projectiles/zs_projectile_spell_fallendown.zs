@@ -15,6 +15,7 @@ class magicfallendown : actor {
 		height 1;
 		renderstyle "add";
 		alpha 1.0;
+		RenderRadius 65536;
 		
 		+NOGRAVITY;
 		+BRIGHT;

@@ -1,4 +1,3 @@
-
 class magicexplodemine : actor {
 
 	default {
@@ -6,22 +5,31 @@ class magicexplodemine : actor {
 		radius 2;
 		height 2;
 		scale 0.25;
-		gravity 10000;
 		renderstyle "Add";
 		alpha 0.1;
 		
 		+FLATSPRITE;
 		+BRIGHT;
 		+VISIBILITYPULSE;
+
+		+THRUACTORS;
+		+NOBLOCKMAP;
+		+MOVEWITHSECTOR;
+	}
+
+	override void PostBeginPlay () {
+
+		SetZ(floorz);
+
+		super.PostBeginPlay();
 	}
 	
-	int checkMonsters(int area) {
+	int checkMonsters (int area) {
 		
 		Actor monst = RoughMonsterSearch(area);
 		
-		if(monst != Null)
-			if(monst.bIsMonster == TRUE && monst.bFriendly == FALSE)
-				return 256;
+		if (monst && monst.bIsMonster && !monst.bFriendly && abs(monst.pos.z-self.pos.z) <= 16.0)
+			return 256;
 		
 		return 0;
 	}
@@ -29,34 +37,55 @@ class magicexplodemine : actor {
 	states {
 		
 		spawn:
-			EXMI A 0;
-			EXMI A 3 A_Jump(checkMonsters(0), "death");
+			EXMI A 5 NoDelay A_Jump(checkMonsters(32), "death");
 			loop;
 		death:
-			EXMI A 1 A_Explode(550, 350);
+			EXMI A 1 A_Explode(800, 350);
+			stop;
+	}
+}
+
+class magicexplodeminemax : magicexplodemine {
+
+	default {
+
+		translation "FadeToRed";
+	}
+
+	states {
+		death:
+			EXMI A 1 A_Explode(800*1.5, 350);
 			stop;
 	}
 }
 
 class magicexplodemineproj : actor {
 
+	string mine; property pmine: mine;
+
 	default {
+
+		magicexplodemineproj.pmine "magicexplodemine";
 		
 		radius 40;
 		height 4;
 		speed 120;
-		
-		+THRUACTORS;
 	}
 	
 	states {
 		
 		spawn:
 			TNT1 A 4;
-		death:
-			TNT1 A 0;
-			TNT1 A 0 A_SpawnItemEx("magicexplodemine", 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER);
+			TNT1 A 0 A_SpawnItemEx(mine, 0, 0, 0, 0, 0, 0, 0, SXF_SETMASTER);
 			stop;
 	}
 
+}
+
+class magicexplodemineprojmax : magicexplodemineproj {
+
+	default {
+
+		magicexplodemineproj.pmine "magicexplodeminemax";
+	}
 }

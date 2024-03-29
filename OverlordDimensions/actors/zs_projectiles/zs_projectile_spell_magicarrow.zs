@@ -3,9 +3,11 @@ class magicarrow : actor {
 	
 	default {
 		
+		height 4;
+		radius 16;
 		speed 35;
 		vspeed 100;
-		damage 20;
+		damage 30;
 		scale 0.25;
 		Translation "FadeToYellow";
 		
@@ -33,5 +35,14 @@ class magicarrow : actor {
 		death:
 			MODL A 1 A_FadeOut(0.05);
 			wait;
+	}
+}
+
+class magicarrowmax : magicarrow {
+
+	default {
+
+		damage 45;
+		Translation "FadeToWhite";
 	}
 }

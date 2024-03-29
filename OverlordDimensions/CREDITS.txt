@@ -2,14 +2,15 @@ OVERLORD DIMENSIONS CREDITS:
 
 Main Author: Numnzel
 Contact: numnzel@protonmail.com
+GitHub: https://github.com/Numnzel/OverlordDimensions
 
-This GZDoom addon is based artistically on the Overlord work, which I have no rights over.
+This GZDoom addon is based artistically on the Overlord anime series work, which I have no rights over.
 Ainz Ooal Gown, Momonga, Momon and the rest of the artistic content based on Overlord belongs to their rightful owner/owners.
 This addon is free of costs, and is not, nor will ever be monetized or commercialized.
 
 Below there is a credit list.
 In the next cases, the absence of the author refers to the Main Author.
-Everything not specified here, can be considered in practicality to be made by me.
+Everything not specified here, can be considered *in practicality* to be made by me.
 Please contact me if you find any error in this list.
 
 *** Graphics:
@@ -24,7 +25,7 @@ Please contact me if you find any error in this list.
 		Author: A.T.Montpart
 	
 	Momonga spell hands (spookyspell)
-		Author: Numnzel
+		Author: Belsel, Numnzel
 
 *** Sounds:
 

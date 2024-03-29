@@ -35,8 +35,8 @@ class speck : inventory abstract {
 		// Acquire a target, and then check if it has space
 		if (target)
 			space = CheckSpace(target, resource, isHP);
-		else if (getAge() % 15 == 0)
-			CheckProximity("momonga", search, 1, CPXF_SETTARGET);
+		else
+			target = players[consoleplayer].mo;
 		
 		// If it has space, move to it, else do not move
 		if (space) {
