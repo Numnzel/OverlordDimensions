@@ -1,0 +1,4 @@
+
+#include "actors/gl_projectiles/gl_projectile_spellfireball.gl"
+#include "actors/gl_projectiles/gl_projectile_spellblackhole.gl"
+#include "actors/gl_projectiles/gl_projectile_spellastralsmite.gl"

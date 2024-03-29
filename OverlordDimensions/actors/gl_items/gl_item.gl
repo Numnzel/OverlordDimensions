@@ -1,0 +1,7 @@
+
+#include "actors/gl_items/gl_item_smallmanaorb.gl"
+#include "actors/gl_items/gl_item_manaorb.gl"
+#include "actors/gl_items/gl_item_smallhealthorb.gl"
+#include "actors/gl_items/gl_item_healthorb.gl"
+#include "actors/gl_items/gl_item_maxmanaspeck.gl"
+#include "actors/gl_items/gl_item_healthspeck.gl"

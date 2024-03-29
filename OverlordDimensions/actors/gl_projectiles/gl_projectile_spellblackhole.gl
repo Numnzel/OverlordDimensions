@@ -1,0 +1,13 @@
+pulselight spellblackhole {
+
+	color 0.3 0.3 0.3
+	size 16
+	secondarySize 1024
+	interval 5
+	subtractive 1
+}
+
+object magicblackhole {
+
+	frame ALCN { light spellblackhole }
+}

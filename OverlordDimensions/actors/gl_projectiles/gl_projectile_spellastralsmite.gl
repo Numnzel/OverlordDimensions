@@ -1,0 +1,10 @@
+pointlight spellastralsmite {
+
+	color 0.0 0.8 1.0
+	size 64
+}
+
+object magicastralsmite {
+
+	frame ASSM { light spellastralsmite }
+}

@@ -1,0 +1,1 @@
+texture CDWN00 range CDWN31 tics 1

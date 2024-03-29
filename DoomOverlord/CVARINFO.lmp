@@ -1,7 +1,0 @@
-user float gzs_boxalpha = 1;
-user bool gzs_ammobar = true;
-user bool gzs_stats_secrets = false;
-user bool gzs_stats_monsters = false;
-user bool gzs_stats_items = false;
-user bool gzs_stats_timer = false;
-user bool gzs_stats_gametimer = false;

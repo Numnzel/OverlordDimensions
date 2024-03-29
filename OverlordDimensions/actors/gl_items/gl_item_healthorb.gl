@@ -1,0 +1,11 @@
+pointlight healthorblight {
+
+	color 1.0 0.0 0.0
+	size 22
+	dontlightactors 1
+}
+
+object healthorb {
+
+	frame HEAL { light healthorblight }
+}

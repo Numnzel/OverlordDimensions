@@ -1,3 +1,0 @@
-
-#include "actors/zs_projectiles/zs_projectile_spellfireball.txt"
-#include "actors/zs_projectiles/zs_projectile_spellgravitymaelstrom.txt"

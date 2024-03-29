@@ -1,0 +1,20 @@
+
+#include "actors/gl_projectiles/gl_projectile.gl"
+#include "actors/gl_items/gl_item.gl"
+
+
+HardwareShader PostProcess Scene
+{
+	Shader	"GLSL/shader_realityslash.gl" 330
+	Name	"realityslash"
+	Uniform float timer
+	Uniform float offsy
+	Uniform float angle
+}
+
+HardwareShader PostProcess Scene
+{
+	Shader	"GLSL/shader_fallendown.gl" 330
+	Name	"fallendown"
+	Uniform float timer
+}

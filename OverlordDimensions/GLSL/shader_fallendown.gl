@@ -1,0 +1,9 @@
+
+void main()
+{
+	vec3 Color = texture(InputTexture, TexCoord.st).rgb;
+	
+	Color += 0.01 * timer;
+	
+	FragColor = vec4(Color, 1.0);
+}

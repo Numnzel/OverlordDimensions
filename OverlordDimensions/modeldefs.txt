@@ -1,0 +1,102 @@
+
+// Antilife
+Model magicantilifecocoon {
+	
+	Path "models/antilife"
+	Model 0 "antilife.obj"
+	Model 1 "antilifeflip.obj"
+	
+	Scale 2.0 2.0 2.4
+	FrameIndex MODL A 0 0
+}
+
+// Black hole
+Model magicblackhole {
+	
+	Path "models/blackhole"
+	Model 0 "blackhole.obj"
+	Model 1 "blackhole_inverted.obj"
+	
+	Scale 1.0 1.0 1.2
+	FrameIndex MODL A 0 0
+}
+
+// Negative burst
+Model magicnegativeburst {
+	
+	Path "models/negativeburst"
+	Model 0 "negativeburst.obj"
+	Model 1 "negativeburst_inverted.obj"
+	
+	Scale 0.2 0.2 0.24
+	FrameIndex MODL A 0 0
+}
+
+// Astral smite
+Model magicastralsmite {
+	
+	Path "models/astralsmite"
+	Model 0 "astralsmite.obj"
+	PITCHFROMMOMENTUM
+	
+	Scale 0.8 0.02 0.02
+	FrameIndex MODL A 0 0
+}
+
+Model magicastralsmitemax {
+	
+	Path "models/astralsmite"
+	Model 0 "astralsmite.obj"
+	PITCHFROMMOMENTUM
+	
+	Scale 0.8 0.02 0.02
+	FrameIndex MODL A 0 0
+}
+
+// Magic arrow
+Model magicarrow {
+	
+	Path "models/magicarrow"
+	Model 0 "magicarrow.obj"
+	PITCHFROMMOMENTUM
+	//USEACTORPITCH
+	
+	Scale 0.4 0.02 0.02
+	FrameIndex MODL A 0 0
+}
+
+Model magicarrowmax {
+	
+	Path "models/magicarrow"
+	Model 0 "magicarrow.obj"
+	PITCHFROMMOMENTUM
+	//USEACTORPITCH
+	
+	Scale 0.4 0.02 0.02
+	FrameIndex MODL A 0 0
+}
+
+// Reality slash
+Model magiccutterspawner {
+	
+	Path "models/realityslash"
+	Model 0 "slash.obj"
+	USEACTORPITCH
+	USEACTORROLL
+	
+	FrameIndex BFS1 A 0 0
+}
+
+
+// Fallen down
+Model magicfallendown {
+	
+	Path "models/fallendown"
+	Model 0 "fallendown.obj"
+	USEACTORPITCH
+	USEACTORROLL
+	
+	//ZOffset 0.0
+	Scale 1.0 1.0 0.001
+	FrameIndex BFS1 A 0 0
+}

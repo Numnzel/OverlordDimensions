@@ -1,0 +1,22 @@
+gameinfo {
+
+	statusBarClass = "MinimalStatusBar"
+	playerClasses = "momonga"
+	eventHandlers = "ItemHandler"
+	titlepage = "TITLEPIC"
+	PrecacheClasses = "spookyspell"
+}
+
+damagetype Death {
+
+	Factor = 1.0
+	NoArmor
+	ReplaceFactor
+}
+
+damagetype Radiation {
+
+	Factor = 0.2
+	NoArmor
+	ReplaceFactor
+}

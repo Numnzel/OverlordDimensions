@@ -1,0 +1,5 @@
+#include "actors/zs_powerups/zs_powerup_spell_fly.zs"
+#include "actors/zs_powerups/zs_powerup_spell_timestop.zs"
+#include "actors/zs_powerups/zs_powerup_spell_bodyofrefulgentberyl.zs"
+#include "actors/zs_powerups/zs_powerup_spell_completevision.zs"
+#include "actors/zs_powerups/zs_powerup_castingslow.zs"

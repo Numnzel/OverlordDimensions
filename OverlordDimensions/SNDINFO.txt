@@ -1,0 +1,48 @@
+// Spell: Lightning
+
+	Spell/Lightning1 				sounds/snd_weapons/snd_yggdrasilspells/lightning.ogg
+	$Volume Spell/Lightning1 		1.0
+	
+// Spell: Time Stop
+
+	Spell/TimeStopOn 				sounds/snd_weapons/snd_yggdrasilspells/timestop.ogg
+	$Volume Spell/TimeStopOn 		1.0
+
+	Spell/TimeStopLoop 				sounds/snd_weapons/snd_yggdrasilspells/timeloop.ogg
+	$Volume Spell/TimeStopLoop 		1.0
+	
+// Spell: Black Hole
+
+	Spell/BlackHole 				sounds/snd_weapons/snd_yggdrasilspells/blackhole.ogg
+	$Volume Spell/BlackHole 		1.0
+	
+// Spell: Astral Smite
+
+	Spell/AstralSmite 				sounds/snd_weapons/snd_yggdrasilspells/shards.ogg
+	$Volume Spell/AstralSmite 		1.0
+	$limit Spell/AstralSmite		0
+	
+// Spell: Fallen Down
+
+	Spell/FallenDownStart 			sounds/snd_weapons/snd_yggdrasilspells/fallends.ogg
+	$Volume Spell/FallenDownStart 	1.0
+	$limit Spell/FallenDownStart	0
+
+	Spell/FallenDown 				sounds/snd_weapons/snd_yggdrasilspells/fallendn.ogg
+	$Volume Spell/FallenDown 		1.0
+	$limit Spell/FallenDown			0
+
+// HUD: Selector sound
+
+	HUD/Select 						sounds/snd_hud/selector.ogg
+	$Volume HUD/Select 				1.0
+
+// HUD: Enhance magica sound
+
+	HUD/Enhance 					sounds/snd_hud/enhance.ogg
+	$Volume HUD/Enhance 			0.2
+	$limit Spell/Enhance			0
+
+	HUD/EnhanceOff 					sounds/snd_hud/enhanceoff.ogg
+	$Volume HUD/EnhanceOff 			0.3
+	$limit Spell/EnhanceOff			0

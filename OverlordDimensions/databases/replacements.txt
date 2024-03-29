@@ -1,0 +1,2 @@
+[COMMON CLASSES]
+Blood=NashGore_Blood

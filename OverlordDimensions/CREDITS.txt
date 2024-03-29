@@ -1,0 +1,81 @@
+OVERLORD DIMENSIONS CREDITS:
+
+Main Author: Numnzel
+Contact: numnzel@protonmail.com
+GitHub: https://github.com/Numnzel/OverlordDimensions
+
+This GZDoom addon is based artistically on the Overlord anime series work, which I have no rights over.
+Ainz Ooal Gown, Momonga, Momon and the rest of the artistic content based on Overlord belongs to their rightful owner/owners.
+This addon is free of costs, and is not, nor will ever be monetized or commercialized.
+
+Below there is a credit list.
+In the next cases, the absence of the author refers to the Main Author.
+Everything not specified here, can be considered *in practicality* to be made by me.
+Please contact me if you find any error in this list.
+
+*** Graphics:
+
+	"OVLORDIM.png" / TITLEPIC
+		Ainz face and title font artwork is taken from the Overlord anime.
+		Dark background is made by me.
+		Dimensions text font used: CAT Childs [Public Domain / SIL OFL]
+		Small text font used: Ubuntu [Copy Left / SIL OFL]
+	
+	AntiLife Cocoon Model
+		Author: A.T.Montpart
+	
+	Momonga spell hands (spookyspell)
+		Author: Belsel, Numnzel
+
+*** Sounds:
+
+	"blackhole.ogg" Edited. Original by InspectorJ (www.jshaw.co.uk) from freesound.org
+	"lightning.ogg" Edited. Original by jnelson871 from soundcloud.com
+	"shards.ogg" Edited. Unknown source.
+	"timestop.ogg" by Overlord Anime Series.
+	"timeloop.ogg" by Overlord Anime Series.
+	"fallendn.ogg" Edited. Original by Zapsplat from zapsplat.com
+	"fallends.ogg" Edited. Original by Zapsplat from zapsplat.com
+	"selector.ogg" Edited. Original by Nightflame from freesound.org
+	"enhance.ogg" Edited. Original by jagadamba from freesound.org
+	"enhanceoff.ogg" by Numnzel
+
+*** ZScript:
+
+	OverlordDimensions HUD:
+		Author: Numnzel
+		Notes: Code originally based on GZSHud. Heavily modified.
+	
+	RealitySlash GLSL shader:
+		Author: Belsel
+	
+	SuperRailgun Class and function:
+		Author: Numnzel, Belsel
+	
+	AntiLife Cocoon SpawnSphere function:
+		Author: Belsel
+	
+	ItemHandler Read/Write files function:
+		Author: Belsel, Numnzel
+
+*** Other resources:
+
+	Gore Blood:
+		Author: Nash
+		Notes: Extracted from Stronghold : Edge of Chaos and modified.
+
+	GZSHud:
+		MememTwo Font: Jimmy, Memento Mori 2 team
+		MememTwo Monospace Edit: Jimmy
+		Optimisation in Ammo Bar code: argv
+		Everything Else: Gutawer
+
+	Smooth fire 2.0:
+		Author: Mikk
+		Notes: Made some edits.
+
+*** Other:
+
+	Special thanks to Belsel, without whom this project would be a lot more dull.
+
+	And special thanks to all the people involved with Overlord, for giving us this awesome world.

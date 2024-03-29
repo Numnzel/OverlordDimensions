@@ -1,0 +1,22 @@
+
+void main()
+{
+	vec2 texCoord = TexCoord.st;
+	vec2 offset = vec2(0,0);
+	
+	
+	if ( texCoord.y > (texCoord.x*sin(angle)+offsy) ) {
+		
+		offset.x = cos(angle/2.0);
+		offset.y = sin(angle/2.0);
+	}
+	else {
+		
+		offset.x = -cos(angle/2.0);
+		offset.y = -sin(angle/2.0);
+	}
+	
+	texCoord += offset * 0.02 * timer;
+	
+	FragColor = texture(InputTexture, texCoord);
+}
